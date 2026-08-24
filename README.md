@@ -11,7 +11,7 @@ A **12-week curriculum** delivered as a progressive web app that runs directly i
 ### Option 1: Open Directly (Simplest)
 ```bash
 # Clone or copy the folder, then open in browser:
-open space-academy-rust/index.html
+open space-academy/index.html
 # Or on Android: copy the folder to the tablet and open index.html in Chrome
 ```
 Note: opening via `file://` works for browsing lessons, but the service
@@ -26,7 +26,7 @@ python3 -m http.server 8080
 ```
 
 ### Option 3: Deploy Anywhere
-Upload the entire `space-academy-rust/` folder to any static host:
+Upload the entire `space-academy/` folder to any static host:
 - **GitHub Pages**: push to a repo, enable Pages
 - **Netlify Drop**: drag-and-drop deploy at netlify.com/drop
 - **Cloudflare Pages**: connect repo or upload directly
@@ -37,7 +37,7 @@ The app is fully offline-capable once loaded (service worker caches all assets).
 ## Project Structure
 
 ```
-space-academy-rust/
+space-academy/
 ├── index.html              # App shell (entry point)
 ├── manifest.json           # PWA manifest (with icons — installable)
 ├── sw.js                   # Service worker (offline support)
