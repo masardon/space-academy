@@ -1,0 +1,10 @@
+{
+  "name": "Space Academy — Rust for Kids",
+  "short_name": "Space Academy",
+  "description": "Learn computational thinking through Rust. A 12-week curriculum for kids ages 9+.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f0e17",
+  "theme_color": "#0f0e17",
+  "orientation": "any"
+}
