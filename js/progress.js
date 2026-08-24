@@ -12,9 +12,31 @@ class ProgressTracker {
   _load() {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) return JSON.parse(stored);
+      if (stored) {
+        const data = JSON.parse(stored);
+        this._migrate(data);
+        return data;
+      }
     } catch (e) { /* ignore corrupt data */ }
     return { pilots: {}, settings: {} };
+  }
+
+  // Fill in fields added by newer versions so old saved data keeps working.
+  _migrate(data) {
+    if (!data || typeof data !== "object") return;
+    if (!data.pilots || typeof data.pilots !== "object") data.pilots = {};
+    if (!data.settings || typeof data.settings !== "object") data.settings = {};
+    for (const p of Object.values(data.pilots)) {
+      if (!p || typeof p !== "object") continue;
+      if (!Array.isArray(p.weeksCompleted)) p.weeksCompleted = [];
+      if (!p.checklists || typeof p.checklists !== "object") p.checklists = {};
+      if (!p.quizzes || typeof p.quizzes !== "object") p.quizzes = {};
+      if (!p.reflections || typeof p.reflections !== "object") p.reflections = {};
+      if (typeof p.rank !== "string") p.rank = "New Recruit";
+      if (!Number.isInteger(p.checkpoint)) p.checkpoint = 0;
+      if (!Number.isInteger(p.streak)) p.streak = 0;
+      if (!Number.isInteger(p.totalStars)) p.totalStars = 0;
+    }
   }
 
   _save() {
@@ -45,6 +67,8 @@ class ProgressTracker {
         checkpoint: 0, // Which week they're on
         streak: 0,
         totalStars: 0,
+        quizzes: {},     // week -> { score, total, at }
+        reflections: {}, // week -> [answers]
         createdAt: Date.now(),
       };
       this._save();
@@ -105,6 +129,52 @@ class ProgressTracker {
     const key = `week_${weekNum}_checklist`;
     if (!pilot.checklists[key]) pilot.checklists[key] = {};
     pilot.checklists[key][item] = checked;
+    this._save();
+  }
+
+  // Quiz results (best score kept; stars awarded only for improvement)
+  recordQuiz(weekNum, score, total) {
+    const pilot = this._getCurrentData();
+    if (!pilot) return { gained: 0 };
+    if (!pilot.quizzes) pilot.quizzes = {};
+    const prev = pilot.quizzes[weekNum];
+    const best = prev ? Math.max(prev.score, score) : score;
+    const gained = prev ? Math.max(0, best - prev.score) : score;
+    pilot.quizzes[weekNum] = { score: best, total, at: Date.now() };
+    pilot.totalStars += gained;
+    this._save();
+    return { gained, best };
+  }
+
+  getQuizScore(weekNum) {
+    const pilot = this._getCurrentData();
+    if (!pilot || !pilot.quizzes) return null;
+    return pilot.quizzes[weekNum] || null;
+  }
+
+  // Reflections ("Flight Log")
+  saveReflections(weekNum, answers) {
+    const pilot = this._getCurrentData();
+    if (!pilot) return;
+    if (!pilot.reflections) pilot.reflections = {};
+    pilot.reflections[weekNum] = answers;
+    this._save();
+  }
+
+  getReflections(weekNum) {
+    const pilot = this._getCurrentData();
+    if (!pilot || !pilot.reflections) return [];
+    return pilot.reflections[weekNum] || [];
+  }
+
+  // Language preference ("en" | "id")
+  getLang() {
+    return this.data.settings?.lang || "en";
+  }
+
+  setLang(lang) {
+    if (!this.data.settings) this.data.settings = {};
+    this.data.settings.lang = lang === "id" ? "id" : "en";
     this._save();
   }
 
@@ -179,12 +249,24 @@ class ProgressTracker {
         checklists: p.checklists && typeof p.checklists === "object" && !Array.isArray(p.checklists)
           ? p.checklists
           : {},
+        quizzes: p.quizzes && typeof p.quizzes === "object" && !Array.isArray(p.quizzes)
+          ? p.quizzes
+          : {},
+        reflections: p.reflections && typeof p.reflections === "object" && !Array.isArray(p.reflections)
+          ? p.reflections
+          : {},
       };
     }
     const current = typeof data.currentPilot === "string" && pilots[data.currentPilot]
       ? data.currentPilot
       : Object.keys(pilots)[0] || null;
-    this.data = { pilots, settings: {}, currentPilot: current };
+    this.data = {
+      pilots,
+      settings: data.settings && typeof data.settings === "object" && !Array.isArray(data.settings)
+        ? data.settings
+        : {},
+      currentPilot: current,
+    };
     this._save();
   }
 

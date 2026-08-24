@@ -1,152 +1,354 @@
 // ============================================
-// SPACE ACADEMY — Week Detail View
+// SPACE ACADEMY — Week Detail View (lesson)
 // ============================================
+// Renders a full guided lesson when LESSONS[week] exists, and falls back to
+// the classic mission view otherwise (used while content is being authored).
+
+const QuizState = {};
 
 Views.weekDetail = (params) => {
   const weekNum = parseInt(params.id);
   const week = ACADEMY.weeks.find(w => w.week === weekNum);
   const main = document.getElementById("mainContent");
-  const arc = getWeekArc(weekNum);
-  const color = getWeekColor(weekNum);
-  const pilotName = progress.getCurrentPilot();
-  const pilotData = progress.getPilots()[pilotName];
-  const isCompleted = pilotData?.weeksCompleted?.includes(weekNum);
 
   if (!week) {
     Router.navigate("missions");
     return;
   }
 
-  // Build objectives HTML
-  const objectivesHtml = week.objectives.map(o => `
-    <div class="objective-item">
-      <div class="objective-icon">${o.icon}</div>
-      <div class="objective-content">
-        <h4>${o.title}</h4>
-        <p>${o.desc}</p>
+  const lesson = (typeof LESSONS !== "undefined") ? LESSONS[weekNum] : null;
+  const t = (x) => I18N.t(x);
+  const color = getWeekColor(weekNum);
+  const arc = getWeekArc(weekNum);
+  const pilotName = progress.getCurrentPilot();
+  const pilotData = progress.getPilots()[pilotName];
+  const isCompleted = pilotData?.weeksCompleted?.includes(weekNum);
+
+  if (lesson && !QuizState[weekNum]) {
+    QuizState[weekNum] = { answered: {}, correct: 0 };
+  }
+
+  let html = `<div class="view slide-in">`;
+
+  // ---- Story ----
+  html += `
+    <div class="week-hero" style="--week-glow:${color}33;" id="sec-story">
+      <div class="week-arc-badge">
+        <span>${arc?.emoji || "🚀"}</span>
+        <span>${arc?.name || "Mission"}</span>
+      </div>
+      <div style="font-size:3rem;margin-bottom:8px;">${week.emoji}</div>
+      <h1 class="week-hero-title" style="--week-color:${color};">
+        Week ${String(week.week).padStart(2, '0')}: ${week.title}
+      </h1>
+      <p class="week-hero-desc">${week.mission}</p>
+      <div style="display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;">
+        <span class="tag tag-concept">${week.badge}</span>
+        <span class="tag tag-thinking">${week.thinking}</span>
+        <span class="tag tag-output">⏱ ${week.time}</span>
+        ${isCompleted ? '<span class="tag" style="background:var(--success-bg);color:var(--success);border-color:rgba(44,182,125,0.3);">✓ Completed</span>' : ''}
       </div>
     </div>
-  `).join("");
 
-  // Build challenges HTML with checkboxes
-  const checklistKey = `week_${weekNum}_checklist`;
-  const checkData = progress.getChecklist(weekNum);
-  const challengesHtml = week.challenges.map((c, i) => {
-    const checked = checkData[i] || false;
-    return `
-      <li class="${checked ? 'done' : ''}">
-        <input type="checkbox" ${checked ? 'checked' : ''}
-          onchange="Views.toggleChallenge(${weekNum}, ${i}, this)"
-          aria-label="Mark challenge complete">
-        <span>${c}</span>
-      </li>
+    <div class="mission-brief" style="--week-color:${color};--week-glow:${color}22;">
+      <div class="mission-brief-title">📋 Mission Briefing</div>
+      <div class="mission-brief-text">${week.hero}</div>
+    </div>
+  `;
+
+  if (lesson) {
+    // ---- You will learn (compact objectives) ----
+    html += `
+      <div class="lesson-section" id="sec-learn" style="padding-top:16px;">
+        <div class="lesson-title">🎓 ${t(I18N.ui.youWillLearn)}</div>
+        <div class="objectives-list" style="border-top:none;">
+          ${week.objectives.map(o => `
+            <div class="objective-item">
+              <div class="objective-icon">${o.icon}</div>
+              <div class="objective-content">
+                <h4>${o.title}</h4>
+                <p>${o.desc}</p>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      </div>
     `;
-  }).join("");
 
-  // Syntax highlight the code
-  const highlightedCode = syntaxHighlight(week.code);
+    html += chipsHtml();
 
-  main.innerHTML = `
-    <div class="view slide-in">
-      <!-- Hero -->
-      <div class="week-hero" style="--week-glow:${color}33;">
-        <div class="week-arc-badge">
-          <span>${arc?.emoji || "🚀"}</span>
-          <span>${arc?.name || "Mission"}</span>
-        </div>
-        <div style="font-size:3rem;margin-bottom:8px;">${week.emoji}</div>
-        <h1 class="week-hero-title" style="--week-color:${color};">
-          Week ${String(week.week).padStart(2, '0')}: ${week.title}
-        </h1>
-        <p class="week-hero-desc">${week.mission}</p>
-        <div style="display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;">
-          <span class="tag tag-concept">${week.badge}</span>
-          <span class="tag tag-thinking">${week.thinking}</span>
-          <span class="tag tag-output">⏱ ${week.time}</span>
-          ${isCompleted ? '<span class="tag" style="background:var(--success-bg);color:var(--success);border-color:rgba(44,182,125,0.3);">✓ Completed</span>' : ''}
-        </div>
+    // ---- Big Idea ----
+    html += section("bigidea", "💡", t(I18N.ui.sec_bigidea), t(I18N.ui.bigIdeaIntro), `
+      <div class="card bigidea-card" style="--week-color:${color};">
+        <h3 class="bigidea-title">${t(lesson.bigIdea.title)}</h3>
+        ${t(lesson.bigIdea.body).split("\n\n").map(p => `<p class="lesson-body">${p}</p>`).join("")}
       </div>
+    `);
 
-      <!-- Mission Brief -->
-      <div class="mission-brief" style="--week-color:${color};--week-glow:${color}22;">
-        <div class="mission-brief-title">📋 Mission Briefing</div>
-        <div class="mission-brief-text">${week.hero}</div>
+    // ---- Word Wall ----
+    html += section("words", "🔤", t(I18N.ui.sec_words), "", `
+      <div class="wordwall-grid">
+        ${lesson.wordWall.map(w => `
+          <div class="word-card">
+            <div class="word-term">${escapeHtml(w.term)}</div>
+            <div class="word-def">${t(w)}</div>
+          </div>
+        `).join("")}
       </div>
+    `);
 
-      <!-- Learning Objectives -->
+    // ---- Think Like a Coder ----
+    html += section("think", "🧠", t(I18N.ui.sec_think), "", `
+      <div class="card think-card" style="--week-color:${color};">
+        <div class="think-badge">${week.thinking}</div>
+        <p class="lesson-body think-hook">${t(lesson.thinkSkill.hook)}</p>
+        <p class="lesson-body">${t(lesson.thinkSkill.realLife)}</p>
+        <p class="lesson-body">${t(lesson.thinkSkill.codeLink)}</p>
+        <div class="think-try">🙌 ${t(lesson.thinkSkill.tryIt)}</div>
+      </div>
+    `);
+
+    // ---- Read the Code Together ----
+    html += section("code", "💻", t(I18N.ui.sec_code), t(I18N.ui.readCodeTitle), `
+      <p class="section-intro">${t(I18N.ui.walkIntro)}</p>
+      ${codeBlockHtml(week)}
+      <div class="walkthrough">
+        ${lesson.codeWalkthrough.map(w => `
+          <div class="walk-row">
+            <code class="walk-code">${syntaxHighlight(w.line)}</code>
+            <p class="walk-def">${t(w)}</p>
+          </div>
+        `).join("")}
+      </div>
+    `);
+
+    // ---- Predict & Run ----
+    html += section("predict", "🔮", t(I18N.ui.sec_predict), t(I18N.ui.predictTitle), `
+      <p class="section-intro">${t(I18N.ui.predictIntro)}</p>
+      <div class="predict-list">
+        ${lesson.predictions.map(p => `
+          <div class="card predict-card">
+            <p class="predict-q">🤔 ${t(p.q)}</p>
+            <button class="reveal-btn" data-show-label="👀 ${escapeHtml(t(I18N.ui.showAnswer))}" data-hide-label="🙈 ${escapeHtml(t(I18N.ui.hideAnswer))}" onclick="Views.toggleReveal(this)">👀 ${t(I18N.ui.showAnswer)}</button>
+            <div class="reveal-body" hidden>${t(p.a)}</div>
+          </div>
+        `).join("")}
+      </div>
+    `);
+  } else {
+    // Legacy objectives while lesson content is being authored
+    html += `
       <div style="padding:0 var(--space-6);">
         <h3 style="font-size:1rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Learning Objectives</h3>
       </div>
       <div class="objectives-list" style="border-top:1px solid rgba(127,90,240,0.08);">
-        ${objectivesHtml}
+        ${week.objectives.map(o => `
+          <div class="objective-item">
+            <div class="objective-icon">${o.icon}</div>
+            <div class="objective-content">
+              <h4>${o.title}</h4>
+              <p>${o.desc}</p>
+            </div>
+          </div>
+        `).join("")}
       </div>
+    `;
+  }
 
-      <!-- Code Example -->
-      <div style="padding:var(--space-6) var(--space-6) 0;">
-        <h3 style="font-size:1rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">💻 Starter Code</h3>
-        <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:12px;">
-          This is the starting program. Parent types changes while kids predict what will happen.
-        </p>
-        <div class="code-block">
-          <div class="code-header">
-            <div class="code-dots"><span></span><span></span><span></span></div>
-            <span class="code-lang">Rust</span>
-            <button class="code-copy" onclick="Views.copyCode(this)">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              Copy
-            </button>
+  // ---- Challenges (both modes) ----
+  html += challengesSection(week, weekNum, lesson);
+
+  if (lesson) {
+    // ---- Bug Hunt ----
+    html += section("bugs", "🐛", t(I18N.ui.sec_bugs), "", `
+      <div class="predict-list">
+        ${lesson.bugHunt.map(b => `
+          <div class="card predict-card">
+            <div class="bug-line"><span class="bug-tag">BUG</span><code class="bug-code">${escapeHtml(t(b.bug))}</code></div>
+            <button class="reveal-btn" data-show-label="🔧 ${escapeHtml(t(I18N.ui.showAnswer))}" data-hide-label="🙈 ${escapeHtml(t(I18N.ui.hideAnswer))}" onclick="Views.toggleReveal(this)">🔧 ${t(I18N.ui.showAnswer)}</button>
+            <div class="reveal-body" hidden>${t(b.fix)}</div>
           </div>
-          <div class="code-body">
-            <pre><code>${highlightedCode}</code></pre>
+        `).join("")}
+      </div>
+    `);
+
+    // ---- Quiz ----
+    const best = progress.getQuizScore(weekNum);
+    html += section("quiz", "📝", t(I18N.ui.sec_quiz), t(I18N.ui.quizIntro), `
+      ${best ? `<div class="quiz-best">🏅 ${t(I18N.ui.quizBest)}: ${best.score}/${best.total || lesson.quiz.length}</div>` : ""}
+      ${lesson.quiz.map((q, qi) => `
+        <div class="quiz-q">
+          <p class="quiz-q-text">${qi + 1}. ${t(q.q)}</p>
+          ${q.options.map((opt, oi) => `
+            <button class="quiz-option" onclick="Views.quizAnswer(${weekNum}, ${qi}, ${oi}, this)">${escapeHtml(t(opt))}</button>
+          `).join("")}
+          <div class="quiz-explain" hidden></div>
+        </div>
+      `).join("")}
+      <div class="quiz-score" id="quizScore-${weekNum}" hidden></div>
+    `);
+
+    // ---- Reflect ----
+    const saved = progress.getReflections(weekNum);
+    html += section("reflect", "🪞", t(I18N.ui.sec_reflect), t(I18N.ui.reflectIntro), `
+      <div class="reflect-list">
+        ${lesson.reflect.map((r, ri) => `
+          <div class="card reflect-card">
+            <p class="reflect-prompt">${t(r.prompt)}</p>
+            <textarea class="reflect-box" data-reflect="${weekNum}" rows="3" placeholder="${escapeHtml(t(r.prompt))}">${escapeHtml(saved[ri] || "")}</textarea>
           </div>
+        `).join("")}
+        <button class="btn btn-ghost btn-full" onclick="Views.saveReflection(${weekNum})">💾 ${t(I18N.ui.reflectSave)}</button>
+      </div>
+    `);
+
+    // ---- Parent Corner ----
+    html += section("parent", "👪", t(I18N.ui.sec_parent), t(I18N.ui.parentIntro), `
+      <div class="parent-corner">
+        <div class="parent-block">
+          <div class="parent-block-title">✅ ${t(I18N.ui.parentPrep)}</div>
+          <ul class="parent-list">
+            ${lesson.parentCorner.prep.map(p => `<li>${t(p)}</li>`).join("")}
+          </ul>
+        </div>
+        <div class="parent-block">
+          <div class="parent-block-title">💬 ${t(I18N.ui.parentSay)}</div>
+          <ul class="parent-list">
+            ${lesson.parentCorner.say.map(s => `<li>${t(s)}</li>`).join("")}
+          </ul>
+        </div>
+        <div class="parent-block">
+          <div class="parent-block-title">🧭 ${t(I18N.ui.parentStuck)}</div>
+          <p class="lesson-body">${t(lesson.parentCorner.ifStuck)}</p>
         </div>
       </div>
-
-      <!-- Challenges -->
-      <div style="padding:var(--space-6);">
-        <h3 style="font-size:1rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">🎯 Your Challenges</h3>
-        <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:16px;">
-          Complete these to earn your mission star. Check each off as you go!
-        </p>
-        <ul class="checklist">
-          ${challengesHtml}
-        </ul>
+    `);
+  } else {
+    html += `
+      <div style="padding:0 var(--space-6) 8px;">
+        <div class="info-box tip">${t(I18N.ui.comingSoon)}</div>
       </div>
+    `;
+  }
 
-      <!-- Hint -->
-      <div style="padding:0 var(--space-6) var(--space-6);">
-        <div class="info-box hint">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          <div><strong>Pro Tip:</strong> ${week.hint}</div>
-        </div>
-      </div>
-
-      <!-- Next Week Tease -->
-      ${week.nextTease ? `
+  // ---- Next tease ----
+  if (week.nextTease) {
+    html += `
       <div style="padding:0 var(--space-6) var(--space-6);">
         <div class="info-box tip" style="border-color:${color}44;background:${color}11;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           <div><strong>Next Mission:</strong> ${week.nextTease}</div>
         </div>
       </div>
-      ` : ''}
+    `;
+  }
 
-      <!-- Action Buttons -->
-      <div class="complete-section" style="padding-top:8px;">
-        <button class="btn btn-primary btn-large ${isCompleted ? '' : 'btn-complete'}"
-                onclick="Views.completeWeek(${weekNum})"
-                ${isCompleted ? 'disabled style="opacity:0.5;"' : ''}>
-          ${isCompleted ? '✓ Mission Complete' : '🏁 Complete Mission'}
-        </button>
-        <div style="margin-top:16px;">
-          ${weekNum > 1 ? `<button class="btn btn-ghost" onclick="Router.navigate('week',{id:'${weekNum - 1}'})" style="font-size:0.875rem;">← Previous Week</button>` : ''}
-          ${weekNum < 12 ? `<button class="btn btn-ghost" onclick="Router.navigate('week',{id:'${weekNum + 1}'})" style="font-size:0.875rem;">Next Week →</button>` : ''}
-        </div>
+  // ---- Actions ----
+  html += `
+    <div class="complete-section" style="padding-top:8px;">
+      <button class="btn btn-primary btn-large ${isCompleted ? '' : 'btn-complete'}"
+              onclick="Views.completeWeek(${weekNum})"
+              ${isCompleted ? 'disabled style="opacity:0.5;"' : ''}>
+        ${isCompleted ? '✓ Mission Complete' : '🏁 Complete Mission'}
+      </button>
+      <div style="margin-top:16px;">
+        ${weekNum > 1 ? `<button class="btn btn-ghost" onclick="Router.navigate('week',{id:'${weekNum - 1}'})" style="font-size:0.875rem;">← Previous Week</button>` : ''}
+        ${weekNum < 12 ? `<button class="btn btn-ghost" onclick="Router.navigate('week',{id:'${weekNum + 1}'})" style="font-size:0.875rem;">Next Week →</button>` : ''}
       </div>
+    </div>
+    <div style="height:24px;"></div>
+  `;
 
-      <div style="height:24px;"></div>
+  html += `</div>`;
+  main.innerHTML = html;
+};
+
+// ---------- section helpers ----------
+
+function chipsHtml() {
+  const items = [
+    ["learn", "🎓"], ["story", "📖"], ["bigidea", "💡"], ["words", "🔤"], ["think", "🧠"],
+    ["code", "💻"], ["predict", "🔮"], ["challenges", "🎯"], ["bugs", "🐛"], ["quiz", "📝"],
+    ["reflect", "🪞"], ["parent", "👪"],
+  ];
+  return `<div class="section-chips">` + items.map(([id, icon]) =>
+    `<button class="chip" onclick="document.getElementById('sec-${id}').scrollIntoView({behavior:'smooth'})">${icon} ${I18N.t(I18N.ui["sec_" + id])}</button>`
+  ).join("") + `</div>`;
+}
+
+function section(id, icon, title, intro, body) {
+  return `
+    <div class="lesson-section" id="sec-${id}">
+      <div class="lesson-title">${icon} ${title}</div>
+      ${intro ? `<p class="section-intro">${intro}</p>` : ""}
+      ${body}
     </div>
   `;
+}
+
+function codeBlockHtml(week) {
+  return `
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang">Rust</span>
+        <button class="code-copy" onclick="Views.copyCode(this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy
+        </button>
+      </div>
+      <div class="code-body">
+        <pre><code>${syntaxHighlight(week.code)}</code></pre>
+      </div>
+    </div>
+  `;
+}
+
+function challengesSection(week, weekNum, lesson) {
+  const t = (x) => I18N.t(x);
+  const checkData = progress.getChecklist(weekNum);
+  const color = getWeekColor(weekNum);
+
+  const items = (lesson ? lesson.challenges : week.challenges.map(c => ({ text: c }))).map((c, i) => {
+    const checked = checkData[i] || false;
+    const hintBtn = c.hint ? `
+      <button class="reveal-btn" data-show-label="💡 ${escapeHtml(t(I18N.ui.hintLabel))}" data-hide-label="🙈 ${escapeHtml(t(I18N.ui.hideAnswer))}" onclick="event.stopPropagation(); Views.toggleReveal(this)">💡 ${t(I18N.ui.hintLabel)}</button>
+      <div class="reveal-body" hidden>${t(c.hint)}</div>` : "";
+    const success = c.success ? `<div class="success-criteria">✅ ${t(I18N.ui.successLooks)}: ${t(c.success)}</div>` : "";
+    return `
+      <li class="${checked ? 'done' : ''}">
+        <input type="checkbox" ${checked ? 'checked' : ''}
+          onchange="Views.toggleChallenge(${weekNum}, ${i}, this)"
+          aria-label="Mark challenge complete">
+        <div class="challenge-body">
+          <span class="challenge-text">${t(c.text)}</span>
+          ${hintBtn}
+          ${success}
+        </div>
+      </li>
+    `;
+  }).join("");
+
+  return `
+    <div class="lesson-section" id="sec-challenges" style="padding-top:var(--space-6);">
+      <div class="lesson-title">🎯 ${t(I18N.ui.sec_challenges)}</div>
+      ${lesson ? "" : `<p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:16px;">Complete these to earn your mission star. Check each off as you go!</p>`}
+      <ul class="checklist">${items}</ul>
+      <div class="info-box hint" style="margin-top:12px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div><strong>Pro Tip:</strong> ${week.hint}</div>
+      </div>
+    </div>
+  `;
+}
+
+// ---------- interactions ----------
+
+Views.toggleReveal = (btn) => {
+  const body = btn.parentElement.querySelector(".reveal-body");
+  const opening = body.hidden;
+  body.hidden = !opening;
+  btn.textContent = opening ? btn.dataset.hideLabel : btn.dataset.showLabel;
 };
 
 Views.toggleChallenge = (weekNum, index, checkbox) => {
@@ -170,6 +372,54 @@ Views.completeWeek = (weekNum) => {
   showToast(`🏆 Mission ${weekNum} completed! +10 stars!`, "success");
   // Refresh the view
   Views.weekDetail({ id: String(weekNum) });
+};
+
+Views.quizAnswer = (weekNum, qi, oi, btn) => {
+  const lesson = LESSONS[weekNum];
+  const state = QuizState[weekNum];
+  if (!lesson || state.answered[qi] !== undefined) return;
+
+  const q = lesson.quiz[qi];
+  const ok = oi === q.answer;
+  state.answered[qi] = oi;
+  if (ok) state.correct++;
+
+  const wrap = btn.closest(".quiz-q");
+  wrap.querySelectorAll(".quiz-option").forEach((b, idx) => {
+    b.classList.add("locked");
+    if (idx === q.answer) b.classList.add("correct");
+    else if (idx === oi) b.classList.add("wrong");
+  });
+
+  const exp = wrap.querySelector(".quiz-explain");
+  exp.hidden = false;
+  exp.innerHTML = `<strong>${ok ? I18N.t(I18N.ui.correct) : I18N.t(I18N.ui.notQuite)}</strong> ${I18N.t(q.explain)}`;
+
+  if (Object.keys(state.answered).length === lesson.quiz.length) {
+    finishQuiz(weekNum, lesson, state);
+  }
+};
+
+function finishQuiz(weekNum, lesson, state) {
+  const t = (x) => I18N.t(x);
+  const total = lesson.quiz.length;
+  const res = progress.recordQuiz(weekNum, state.correct, total);
+  const scoreEl = document.getElementById(`quizScore-${weekNum}`);
+  if (scoreEl) {
+    scoreEl.hidden = false;
+    scoreEl.innerHTML = `🏅 ${t(I18N.ui.yourScore)}: ${state.correct}/${total}` +
+      (res.gained > 0 ? ` · ⭐ +${res.gained}` : "");
+  }
+  if (res.gained > 0) {
+    showToast(`⭐ +${res.gained} ${t(I18N.ui.starsToast)}`, "success");
+  }
+}
+
+Views.saveReflection = (weekNum) => {
+  const boxes = document.querySelectorAll(`textarea[data-reflect="${weekNum}"]`);
+  const answers = Array.from(boxes).map(b => b.value.trim()).filter(Boolean);
+  progress.saveReflections(weekNum, answers);
+  showToast(I18N.t(I18N.ui.reflectSaved), "success");
 };
 
 Views.copyCode = (btn) => {

@@ -72,6 +72,14 @@ Views.settings = () => {
       </div>
 
       <div class="settings-group" style="padding-top:0;">
+        <div class="settings-group-title">Language · Bahasa</div>
+        <div class="lang-switch">
+          <button class="lang-btn ${progress.getLang() === "en" ? "active" : ""}" onclick="Views.setLanguage('en')">🇬🇧 English</button>
+          <button class="lang-btn ${progress.getLang() === "id" ? "active" : ""}" onclick="Views.setLanguage('id')">🇮🇩 Bahasa Indonesia</button>
+        </div>
+      </div>
+
+      <div class="settings-group" style="padding-top:0;">
         <div class="settings-group-title">About</div>
         <div class="settings-item" style="border-radius:var(--radius-lg) var(--radius-lg) 0 0;">
           <div class="settings-item-left">
@@ -122,6 +130,12 @@ Views.settings = () => {
 Views.switchPilot = (name) => {
   progress.setCurrentPilot(name);
   Router.navigate("missions");
+};
+
+Views.setLanguage = (lang) => {
+  progress.setLang(lang);
+  Views.settings();
+  showToast(lang === "id" ? "Bahasa diubah ke Indonesia" : "Language set to English", "success");
 };
 
 Views.exportData = () => {
