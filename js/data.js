@@ -506,7 +506,7 @@ void loop() {
       badge: "Servo & State",
       thinking: "Algorithm Design",
       time: "45 min",
-      hero: "Sparky's head can now scan left and right! A servo motor rotates to不同角度 while the ultrasonic sensor reads distance at each angle. Your robot is scanning for obstacles.",
+      hero: "Sparky's head can now scan left and right! A servo motor rotates to different angles while the ultrasonic sensor reads distance at each angle. Your robot is scanning for obstacles.",
       mission: "Add a servo motor to create a scanning robot. Combine sensor + servo + LED + buzzer into one system. Introduce the concept of state machines: scanning vs. alarming.",
       objectives: [
         { icon: "🔄", title: "Servo Motors Rotate", desc: "The SG90 servo turns to any angle (0–180°). servo.write(angle) positions it." },

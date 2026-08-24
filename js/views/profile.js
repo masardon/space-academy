@@ -33,7 +33,7 @@ Views.profile = () => {
     <div class="view">
       <div class="profile-header">
         <div class="profile-avatar">${pilot.avatar}</div>
-        <div class="profile-name">${pilot.name}</div>
+        <div class="profile-name">${escapeHtml(pilot.name)}</div>
         <div class="profile-rank">${stats.rank}</div>
       </div>
 

@@ -161,6 +161,47 @@ class ProgressTracker {
     this._save();
   }
 
+  // Replace all state from imported JSON. Throws on invalid shape.
+  importData(data) {
+    if (
+      !data || typeof data !== "object" || Array.isArray(data) ||
+      !data.pilots || typeof data.pilots !== "object" || Array.isArray(data.pilots)
+    ) {
+      throw new Error("Invalid progress data");
+    }
+    const pilots = {};
+    for (const [name, p] of Object.entries(data.pilots)) {
+      if (!p || typeof p !== "object") continue;
+      pilots[name] = {
+        name: typeof p.name === "string" && p.name ? p.name : name,
+        avatar: typeof p.avatar === "string" ? p.avatar : this._defaultAvatar(name),
+        rank: typeof p.rank === "string" ? p.rank : "New Recruit",
+        weeksCompleted: Array.isArray(p.weeksCompleted)
+          ? [...new Set(p.weeksCompleted.filter(n => Number.isInteger(n) && n >= 1 && n <= 12))].sort((a, b) => a - b)
+          : [],
+        checkpoint: Number.isInteger(p.checkpoint) ? Math.min(Math.max(p.checkpoint, 0), 12) : 0,
+        streak: Number.isInteger(p.streak) ? p.streak : 0,
+        totalStars: Number.isInteger(p.totalStars) ? p.totalStars : 0,
+        createdAt: Number.isFinite(p.createdAt) ? p.createdAt : Date.now(),
+        checklists: p.checklists && typeof p.checklists === "object" && !Array.isArray(p.checklists)
+          ? p.checklists
+          : {},
+      };
+    }
+    const current = typeof data.currentPilot === "string" && pilots[data.currentPilot]
+      ? data.currentPilot
+      : Object.keys(pilots)[0] || null;
+    this.data = { pilots, settings: {}, currentPilot: current };
+    this._save();
+  }
+
+  // Wipe everything (storage AND in-memory state).
+  resetAll() {
+    this.data = { pilots: {}, settings: {} };
+    localStorage.removeItem(STORAGE_KEY);
+    this._save();
+  }
+
   deletePilot(name) {
     delete this.data.pilots[name];
     if (this.data.currentPilot === name) {

@@ -7,11 +7,11 @@ Views.settings = () => {
   const main = document.getElementById("mainContent");
 
   const pilotItems = Object.values(pilots).map(p => `
-    <div class="settings-item" onclick="Views.switchPilot('${p.name}')">
+    <div class="settings-item" data-pilot="${escapeHtml(p.name)}">
       <div class="settings-item-left">
         <div class="settings-item-icon">${p.avatar}</div>
         <div class="settings-item-text">
-          <h4>${p.name}</h4>
+          <h4>${escapeHtml(p.name)}</h4>
           <p>${p.rank} · ${p.weeksCompleted.length} missions</p>
         </div>
       </div>
@@ -97,8 +97,7 @@ Views.settings = () => {
     </div>
 
     <!-- Import modal -->
-    <div id="importModal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal">
+    <div id="importModal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)this.style.display='none'">      <div class="modal">
         <div class="modal-header">
           <h3>Import Progress</h3>
           <button class="btn-icon" onclick="document.getElementById('importModal').style.display='none'">
@@ -116,6 +115,10 @@ Views.settings = () => {
 
     <input type="file" id="fileInput" accept=".json" style="display:none;" onchange="Views.importFile(event)">
   `;
+
+  main.querySelectorAll(".settings-item[data-pilot]").forEach(item => {
+    item.addEventListener("click", () => Views.switchPilot(item.dataset.pilot));
+  });
 };
 
 Views.switchPilot = (name) => {
@@ -146,13 +149,12 @@ Views.importDataPrompt = () => {
 Views.importData = () => {
   try {
     const text = document.getElementById("importData").value.trim();
-    JSON.parse(text); // Validate
-    localStorage.setItem("space_academy_progress", text);
+    progress.importData(JSON.parse(text));
     document.getElementById("importModal").style.display = "none";
     showToast("Progress imported successfully!", "success");
     Router.navigate("missions");
   } catch (e) {
-    showToast("Invalid JSON data", "error");
+    showToast("Invalid progress data", "error");
   }
 };
 
@@ -162,8 +164,7 @@ Views.importFile = (event) => {
   const reader = new FileReader();
   reader.onload = (e) => {
     try {
-      JSON.parse(e.target.result);
-      localStorage.setItem("space_academy_progress", e.target.result);
+      progress.importData(JSON.parse(e.target.result));
       showToast("Progress imported!", "success");
       Router.navigate("missions");
     } catch {
@@ -176,7 +177,7 @@ Views.importFile = (event) => {
 Views.resetAllData = () => {
   if (confirm("Are you sure? This will delete ALL pilot progress. This cannot be undone.")) {
     if (confirm("Really? All missions, stars, and pilots will be erased.")) {
-      localStorage.removeItem("space_academy_progress");
+      progress.resetAll();
       showToast("All data reset", "success");
       Router.navigate("welcome");
     }

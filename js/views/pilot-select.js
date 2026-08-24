@@ -7,9 +7,9 @@ Views.pilotSelect = () => {
   const main = document.getElementById("mainContent");
 
   const pilotCards = Object.values(pilots).map(p => `
-    <div class="pilot-card" onclick="Views.selectPilot('${p.name}')">
+    <div class="pilot-card" data-pilot="${escapeHtml(p.name)}">
       <div class="pilot-avatar">${p.avatar}</div>
-      <div class="pilot-name">${p.name}</div>
+      <div class="pilot-name">${escapeHtml(p.name)}</div>
       <div class="pilot-rank">${p.rank}</div>
       <div class="pilot-stats">
         <span><span class="pilot-stat-value">${p.weeksCompleted.length}</span> missions</span>
@@ -56,6 +56,10 @@ Views.pilotSelect = () => {
       </div>
     </div>
   `;
+
+  main.querySelectorAll(".pilot-card[data-pilot]").forEach(card => {
+    card.addEventListener("click", () => Views.selectPilot(card.dataset.pilot));
+  });
 };
 
 Views.selectPilot = (name) => {

@@ -23,7 +23,7 @@ Views.missions = () => {
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
           <span style="font-size:2rem;">${progress.getPilots()[pilot]?.avatar || "👩‍🚀"}</span>
           <div>
-            <h2 style="margin:0;">Cadet ${pilot}</h2>
+            <h2 style="margin:0;">Cadet ${escapeHtml(pilot)}</h2>
             <p style="margin:0;font-size:0.875rem;color:var(--text-muted);">${progress.getPilots()[pilot]?.rank || "New Recruit"}</p>
           </div>
         </div>

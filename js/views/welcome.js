@@ -15,7 +15,7 @@ Views.welcome = () => {
         <div class="welcome-logo">🚀</div>
         <h1 class="welcome-title">Space Academy</h1>
         <p class="welcome-subtitle">
-          Welcome back, <strong>${pilot}</strong>!<br>
+          Welcome back, <strong>${escapeHtml(pilot)}</strong>!<br>
           Your missions await in the stars.
         </p>
         <button class="btn btn-primary btn-large" onclick="Router.navigate('missions')">

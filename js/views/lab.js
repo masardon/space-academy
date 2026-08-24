@@ -196,7 +196,7 @@ cadet.introduce();</code></div>
         </div>
 
         <div class="card" style="margin-bottom:16px;">
-          <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;">常见错误类型</h3>
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;">Common Error Types</h3>
           <div style="display:flex;flex-direction:column;gap:12px;">
             <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--error);">
               <strong style="color:var(--error);">Missing semicolon</strong>
