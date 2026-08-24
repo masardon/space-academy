@@ -20,7 +20,7 @@ or `https://` — use Option 2 or 3 for those.
 
 ### Option 2: Local Server (Recommended)
 ```bash
-cd space-academy-rust
+cd space-academy
 python3 -m http.server 8080
 # Open http://localhost:8080 in your browser
 ```
