@@ -212,6 +212,11 @@ Create a 3-branch story together. Each child picks a branch. Parent types it. Ru
 
 **Pre-Written Code (Option A — Number Guessing Game):**
 
+> **Parent note:** this program needs the `rand` crate, which requires a
+> `Cargo.toml` dependency — but Cargo isn't introduced until Week 8. Save
+> this one for after Week 8, or run it as a parent-led demo from a prepared
+> Cargo project (`cargo new guessing && cd guessing && cargo add rand`).
+> Option B below needs no dependencies and is the safer in-class choice.
 ```rust
 use rand::Rng;  // We'll talk about this line later — it's how we get random numbers
 
@@ -858,7 +863,7 @@ Kids observe the robot scanning. They describe what they see. Parent asks: "What
 ║   ✅ Systematic Problem Solving          ║
 ║                                          ║
 ║   Date: ___________                      ║
-║   Instructor: ___________:               ║
+║   Instructor: ___________                ║
 ║                                          ║
 ╚══════════════════════════════════════════╝
 ```

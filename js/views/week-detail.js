@@ -36,7 +36,7 @@ Views.weekDetail = (params) => {
     return `
       <li class="${checked ? 'done' : ''}">
         <input type="checkbox" ${checked ? 'checked' : ''}
-          onchange="Views.toggleChallenge(${weekNum}, ${i}, this.checked)"
+          onchange="Views.toggleChallenge(${weekNum}, ${i}, this)"
           aria-label="Mark challenge complete">
         <span>${c}</span>
       </li>
@@ -149,15 +149,16 @@ Views.weekDetail = (params) => {
   `;
 };
 
-Views.toggleChallenge = (weekNum, index, checked) => {
+Views.toggleChallenge = (weekNum, index, checkbox) => {
+  const checked = !!checkbox.checked;
   progress.setCheckItem(weekNum, index, checked);
-  const li = event.target.closest('li');
+  const li = checkbox.closest('li');
   if (li) li.classList.toggle('done', checked);
 
   // Check if all challenges are done
   const week = ACADEMY.weeks.find(w => w.week === weekNum);
   const allDone = week.challenges.every((_, i) => progress.getChecklist(weekNum)[i]);
-  if (allDone && !progress.getProgress().weeksCompleted?.includes(weekNum)) {
+  if (allDone && !progress.getProgress().weeksCompleted.includes(weekNum)) {
     setTimeout(() => {
       showToast(`🎉 All challenges complete! Mission ${weekNum} unlocked!`, "success");
     }, 300);
@@ -184,7 +185,9 @@ Views.copyCode = (btn) => {
   });
 };
 
-// Simple syntax highlighter for Rust
+// Simple syntax highlighter for Rust.
+// Comments and strings are masked with placeholders first so later passes
+// (keywords, numbers, macros, types) can never match inside them.
 function syntaxHighlight(code) {
   // Escape HTML first
   let html = code
@@ -192,11 +195,18 @@ function syntaxHighlight(code) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
-  // Comments
-  html = html.replace(/(\/\/.*)/g, '<span class="cm">$1</span>');
+  const store = [];
+  const mask = (wrapped) => {
+    store.push(wrapped);
+    // Index is wrapped in word chars so later \b-anchored passes
+    // can't match the digits inside the placeholder.
+    return `\x00M${store.length - 1}M\x00`;
+  };
 
-  // Strings
-  html = html.replace(/(".*?")/g, '<span class="str">$1</span>');
+  // Comments and strings (order matters: comments before strings so
+  // quote characters inside comments don't start a bogus string)
+  html = html.replace(/\/\/[^\n]*/g, (m) => mask(`<span class="cm">${m}</span>`));
+  html = html.replace(/"(?:[^"\\\n]|\\.)*"/g, (m) => mask(`<span class="str">${m}</span>`));
 
   // Keywords
   const keywords = ['fn', 'let', 'mut', 'if', 'else', 'for', 'while', 'in', 'return', 'struct', 'impl', 'enum', 'use', 'mod', 'pub', 'self', 'Self', 'true', 'false'];
@@ -207,15 +217,16 @@ function syntaxHighlight(code) {
   html = html.replace(/\b(\d+)\b/g, '<span class="num">$1</span>');
 
   // Macros (println!, format!, vec! etc.)
-  html = html.replace(/\b([a-z_!]+\!) /g, '<span class="macro">$1</span> ');
-  html = html.replace(/\b([a-z_!]+)\!/g, '<span class="macro">$1!</span>');
+  html = html.replace(/\b([a-z_][a-z0-9_]*)!/g, '<span class="macro">$1!</span>');
 
-  // Type names
-  html = html.replace(/\b(String|Vec|i32|u32|i64|f64|bool|char)&lt;/g, '<span class="ty">$1</span>&lt;');
+  // Type names (including generics)
   html = html.replace(/\b(String|Vec|i32|u32|i64|f64|bool|char)\b/g, '<span class="ty">$1</span>');
 
   // Function calls
   html = html.replace(/\b([a-z_][a-z0-9_]*)\(/g, '<span class="fn">$1</span>(');
+
+  // Restore masked comments/strings
+  html = html.replace(/\x00M(\d+)M\x00/g, (_, i) => store[Number(i)]);
 
   return html;
 }

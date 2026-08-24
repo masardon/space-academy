@@ -7,7 +7,7 @@ Views.settings = () => {
   const main = document.getElementById("mainContent");
 
   const pilotItems = Object.values(pilots).map(p => `
-    <div class="settings-item" data-pilot="${escapeHtml(p.name)}">
+    <div class="settings-item" role="button" tabindex="0" data-pilot="${escapeHtml(p.name)}">
       <div class="settings-item-left">
         <div class="settings-item-icon">${p.avatar}</div>
         <div class="settings-item-text">
@@ -112,8 +112,6 @@ Views.settings = () => {
         </div>
       </div>
     </div>
-
-    <input type="file" id="fileInput" accept=".json" style="display:none;" onchange="Views.importFile(event)">
   `;
 
   main.querySelectorAll(".settings-item[data-pilot]").forEach(item => {
@@ -156,22 +154,6 @@ Views.importData = () => {
   } catch (e) {
     showToast("Invalid progress data", "error");
   }
-};
-
-Views.importFile = (event) => {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      progress.importData(JSON.parse(e.target.result));
-      showToast("Progress imported!", "success");
-      Router.navigate("missions");
-    } catch {
-      showToast("Invalid file", "error");
-    }
-  };
-  reader.readAsText(file);
 };
 
 Views.resetAllData = () => {

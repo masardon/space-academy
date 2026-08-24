@@ -55,6 +55,14 @@ document.querySelectorAll(".nav-item").forEach(btn => {
   });
 });
 
+// Keyboard support for card-style buttons rendered by views
+document.getElementById("mainContent").addEventListener("keydown", (e) => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.matches('[role="button"]')) {
+    e.preventDefault();
+    e.target.click();
+  }
+});
+
 // Profile button in header
 document.getElementById("btnProfile").addEventListener("click", () => {
   Router.navigate("profile");

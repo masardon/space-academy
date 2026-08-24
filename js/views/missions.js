@@ -11,9 +11,10 @@ Views.missions = () => {
     return;
   }
 
-  const completedWeeks = progress.getProgress().completed;
-  const checkpoint = progress.getProgress().checkpoint;
-  const stars = progress.getProgress().stars;
+  const stats = progress.getProgress();
+  const completedWeeks = stats.completed;
+  const checkpoint = stats.checkpoint;
+  const stars = stats.stars;
 
   // Build week cards grouped by arc
   let html = `
@@ -45,13 +46,7 @@ Views.missions = () => {
   `;
 
   // Group weeks by arc
-  const arcs = [
-    { id: "foundations", name: "Arc 1: Foundations", subtitle: "The Code Academy Begins", color: "#7f5af0" },
-    { id: "systems", name: "Arc 2: Systems Thinking", subtitle: "Building Your Tools", color: "#2cb67d" },
-    { id: "capstone", name: "Arc 3: The Final Mission", subtitle: "Build a Robot to Defend the Academy", color: "#ff8906" },
-  ];
-
-  for (const arc of arcs) {
+  for (const arc of ACADEMY.arcs) {
     const arcWeeks = ACADEMY.weeks.filter(w => w.arc === arc.id);
     html += `
       <div style="padding:24px 24px 8px;display:flex;align-items:center;gap:12px;">
@@ -74,7 +69,7 @@ Views.missions = () => {
       html += `
         <div class="week-card ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}"
              style="--week-color:${color};--week-bg:${color}22;"
-             ${isLocked ? '' : `onclick="Router.navigate('week',{id:'${week.week}'})"`}>
+             ${isLocked ? '' : `role="button" tabindex="0" aria-label="Open Week ${week.week}: ${week.title}" onclick="Router.navigate('week',{id:'${week.week}'})"`}>
           <div class="week-number">Week ${String(week.week).padStart(2, '0')}</div>
           <div style="font-size:1.5rem;margin-bottom:4px;">${week.emoji}</div>
           <div class="week-title">${week.title}</div>

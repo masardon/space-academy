@@ -14,6 +14,9 @@ A **12-week curriculum** delivered as a progressive web app that runs directly i
 open space-academy-rust/index.html
 # Or on Android: copy the folder to the tablet and open index.html in Chrome
 ```
+Note: opening via `file://` works for browsing lessons, but the service
+worker (offline caching) and PWA install require serving over `http://`
+or `https://` — use Option 2 or 3 for those.
 
 ### Option 2: Local Server (Recommended)
 ```bash
@@ -36,8 +39,13 @@ The app is fully offline-capable once loaded (service worker caches all assets).
 ```
 space-academy-rust/
 ├── index.html              # App shell (entry point)
-├── manifest.json           # PWA manifest
+├── manifest.json           # PWA manifest (with icons — installable)
 ├── sw.js                   # Service worker (offline support)
+├── icons/                  # App icons (SVG + PNG, incl. maskable)
+│   ├── icon.svg
+│   ├── icon-192.png
+│   ├── icon-512.png
+│   └── icon-maskable-512.png
 ├── css/
 │   └── styles.css          # Complete design system (~1600 lines)
 └── js/
@@ -68,6 +76,7 @@ space-academy-rust/
 - **Glossary** of Rust terms
 - **Export/Import** progress as JSON
 - **Offline-ready** via service worker
+- **Installable PWA** — add to home screen on Android tablets (icons included)
 - **Tablet-optimized** — large touch targets (44px+), responsive layout, safe-area support
 - **Dark space theme** — easy on the eyes, no glare on tablets
 

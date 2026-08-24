@@ -7,7 +7,7 @@ Views.pilotSelect = () => {
   const main = document.getElementById("mainContent");
 
   const pilotCards = Object.values(pilots).map(p => `
-    <div class="pilot-card" data-pilot="${escapeHtml(p.name)}">
+    <div class="pilot-card" role="button" tabindex="0" aria-label="Select pilot ${escapeHtml(p.name)}" data-pilot="${escapeHtml(p.name)}">
       <div class="pilot-avatar">${p.avatar}</div>
       <div class="pilot-name">${escapeHtml(p.name)}</div>
       <div class="pilot-rank">${p.rank}</div>
@@ -26,7 +26,7 @@ Views.pilotSelect = () => {
       </div>
       <div class="pilot-grid" style="padding-top:32px;">
         ${pilotCards}
-        <div class="pilot-card" onclick="Views.showNewPilotForm()" style="border-style:dashed;">
+        <div class="pilot-card" role="button" tabindex="0" onclick="Views.showNewPilotForm()" style="border-style:dashed;">
           <div class="pilot-avatar" style="font-size:2rem;color:var(--accent-light);">+</div>
           <div class="pilot-name">New Cadet</div>
           <div class="pilot-rank">Join the Academy</div>

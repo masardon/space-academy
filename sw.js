@@ -1,12 +1,14 @@
-const CACHE_NAME = "space-academy-v1";
+const CACHE_NAME = "space-academy-v2";
 const ASSETS = [
   "./",
   "./index.html",
+  "./manifest.json",
   "./css/styles.css",
   "./js/data.js",
   "./js/progress.js",
   "./js/router.js",
   "./js/app.js",
+  "./js/sw-register.js",
   "./js/views/welcome.js",
   "./js/views/pilot-select.js",
   "./js/views/missions.js",
@@ -14,22 +16,53 @@ const ASSETS = [
   "./js/views/lab.js",
   "./js/views/profile.js",
   "./js/views/settings.js",
+  "./icons/icon.svg",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./icons/icon-maskable-512.png",
 ];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
-});
-
-self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => response || fetch(event.request))
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) =>
+        // add() per-asset so one failure doesn't abort the whole install
+        Promise.allSettled(ASSETS.map((url) => cache.add(url)))
+      )
+      .then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    )
+    caches.keys()
+      .then((keys) =>
+        Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+      )
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener("fetch", (event) => {
+  const req = event.request;
+  if (req.method !== "GET") return;
+
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return; // e.g. Google Fonts: network only
+
+  // Stale-while-revalidate: serve cache fast, refresh in background
+  event.respondWith(
+    caches.match(req).then((cached) => {
+      const fresh = fetch(req)
+        .then((res) => {
+          if (res && res.ok) {
+            const copy = res.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+          }
+          return res;
+        })
+        .catch(() => cached);
+      return cached || fresh;
+    })
   );
 });

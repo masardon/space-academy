@@ -89,13 +89,6 @@ class ProgressTracker {
     this._save();
   }
 
-  markCheckpoint(weekNum) {
-    const pilot = this._getCurrentData();
-    if (!pilot) return;
-    pilot.checkpoint = weekNum;
-    this._save();
-  }
-
   // Checklist per week
   getChecklist(weekNum) {
     const key = `week_${weekNum}_checklist`;
@@ -200,23 +193,6 @@ class ProgressTracker {
     this.data = { pilots: {}, settings: {} };
     localStorage.removeItem(STORAGE_KEY);
     this._save();
-  }
-
-  deletePilot(name) {
-    delete this.data.pilots[name];
-    if (this.data.currentPilot === name) {
-      this.data.currentPilot = Object.keys(this.data.pilots)[0] || null;
-    }
-    this._save();
-  }
-
-  renamePilot(oldName, newName) {
-    if (this.data.pilots[oldName]) {
-      this.data.pilots[newName] = { ...this.data.pilots[oldName], name: newName };
-      if (this.data.currentPilot === oldName) this.data.currentPilot = newName;
-      delete this.data.pilots[oldName];
-      this._save();
-    }
   }
 }
 

@@ -22,7 +22,7 @@ Views.profile = () => {
     return `
       <div class="week-mini ${done ? 'done' : ''} ${locked ? 'locked' : ''}"
            style="--wc:${color};"
-           ${!locked ? `onclick="Router.navigate('week',{id:'${w.week}'})"` : ''}>
+           ${!locked ? `role="button" tabindex="0" aria-label="Open Week ${w.week}" onclick="Router.navigate('week',{id:'${w.week}'})"` : ''}>
         <div class="week-mini-num">${w.week}</div>
         <div class="week-mini-icon">${done ? '✓' : locked ? '🔒' : w.emoji}</div>
       </div>
@@ -81,7 +81,7 @@ Views.profile = () => {
             ${(stats.weeksCompleted || []).map(w => {
               const week = ACADEMY.weeks.find(wh => wh.week === w);
               return `
-                <div class="card card-interactive" style="padding:12px 16px;display:flex;align-items:center;gap:12px;" onclick="Router.navigate('week',{id:'${w}'})">
+                <div class="card card-interactive" role="button" tabindex="0" style="padding:12px 16px;display:flex;align-items:center;gap:12px;" onclick="Router.navigate('week',{id:'${w}'})">
                   <span style="font-size:1.5rem;">${week?.emoji || "📦"}</span>
                   <div style="flex:1;">
                     <div style="font-weight:600;font-size:0.9375rem;">Week ${w}: ${week?.title}</div>

@@ -4,7 +4,6 @@
 
 Views.lab = () => {
   const main = document.getElementById("mainContent");
-  const progress_data = progress.getProgress();
 
   main.innerHTML = `
     <div class="view">
