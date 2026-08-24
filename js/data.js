@@ -125,7 +125,7 @@ const ACADEMY = {
         println!();
     }
 
-    println!("\nLoop complete! The robot knocked on {} doors.", 5);
+    println!("\\nLoop complete! The robot knocked on {} doors.", 5);
 }`,
       challenges: [
         "Change the star loop from 5 to 10. What doubles?",
