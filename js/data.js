@@ -329,13 +329,13 @@ fn main() {
       ],
       code: `// GLITCH #1 — Missing semicolon
 fn main() {
-    let greeting = "Hello, Cadet!";
+    let greeting = "Hello, Cadet!"
     println!("{}", greeting);
 }
 
 // GLITCH #2 — Type mismatch
 fn main() {
-    let age: u32 = 12;
+    let age: u32 = "five";
     println!("The cadet is {} years old.", age);
 }
 
@@ -343,7 +343,6 @@ fn main() {
 fn main() {
     let mission_code = 42;
     println!("Ready for launch!");
-    println!("Mission code: {mission_code}");
 }`,
       challenges: [
         "Copy each program and try to run it. Read the error carefully.",

@@ -136,7 +136,7 @@ class ProgressTracker {
 
   getProgress() {
     const pilot = this._getCurrentData();
-    if (!pilot) return { percent: 0, completed: 0, total: 12, stars: 0, rank: "New Recruit" };
+    if (!pilot) return { percent: 0, completed: 0, total: 12, stars: 0, rank: "New Recruit", streak: 0, checkpoint: 0, weeksCompleted: [] };
     return {
       percent: Math.round((pilot.weeksCompleted.length / 12) * 100),
       completed: pilot.weeksCompleted.length,
@@ -145,6 +145,7 @@ class ProgressTracker {
       rank: pilot.rank,
       streak: pilot.streak,
       checkpoint: pilot.checkpoint,
+      weeksCompleted: [...pilot.weeksCompleted],
     };
   }
 

@@ -6,10 +6,9 @@ function showToast(message, type = "") {
   const toast = document.getElementById("toast");
   toast.textContent = message;
   toast.className = "toast" + (type ? ` ${type}` : "");
-  toast.hidden = false;
   clearTimeout(toast._timeout);
   toast._timeout = setTimeout(() => {
-    toast.hidden = true;
+    toast.classList.add("hidden");
   }, 3000);
 }
 

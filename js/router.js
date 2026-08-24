@@ -24,8 +24,15 @@ const Router = {
     const parts = hash.split("/");
     const view = parts[0] || "welcome";
     this.params = {};
-    if (parts[1]) this.params.id = parts[1];
-    if (parts[2]) this.params.sub = parts[2];
+    // Segments may be "id=3" (from navigate) or bare values like "week/3"
+    for (let i = 1; i < parts.length; i++) {
+      const eq = parts[i].indexOf("=");
+      if (eq > -1) {
+        this.params[parts[i].slice(0, eq)] = parts[i].slice(eq + 1);
+      } else if (!this.params.id) {
+        this.params.id = parts[i];
+      }
+    }
     this.currentView = view;
     this._render();
   },
