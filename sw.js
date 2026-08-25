@@ -1,4 +1,4 @@
-const CACHE_NAME = "space-academy-v2";
+const CACHE_NAME = "space-academy-v3";
 const ASSETS = [
   "./",
   "./index.html",
@@ -9,6 +9,7 @@ const ASSETS = [
   "./js/router.js",
   "./js/app.js",
   "./js/sw-register.js",
+  "./js/i18n.js",
   "./js/views/welcome.js",
   "./js/views/pilot-select.js",
   "./js/views/missions.js",
@@ -16,6 +17,18 @@ const ASSETS = [
   "./js/views/lab.js",
   "./js/views/profile.js",
   "./js/views/settings.js",
+  "./js/content/week01.js",
+  "./js/content/week02.js",
+  "./js/content/week03.js",
+  "./js/content/week04.js",
+  "./js/content/week05.js",
+  "./js/content/week06.js",
+  "./js/content/week07.js",
+  "./js/content/week08.js",
+  "./js/content/week09.js",
+  "./js/content/week10.js",
+  "./js/content/week11.js",
+  "./js/content/week12.js",
   "./icons/icon.svg",
   "./icons/icon-192.png",
   "./icons/icon-512.png",

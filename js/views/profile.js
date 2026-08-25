@@ -29,6 +29,48 @@ Views.profile = () => {
     `;
   }).join('');
 
+  // Quiz Stars per week
+  const quizStarsHtml = ACADEMY.weeks.map(w => {
+    const quiz = progress.getQuizScore(w.week);
+    const stars = quiz ? Math.min(3, Math.round((quiz.score / quiz.total) * 3)) : 0;
+    const show = pilot.weeksCompleted?.includes(w.week) || (quiz && quiz.score > 0);
+    if (!show) return '';
+    return `
+      <div class="quiz-star-row" style="display:flex;align-items:center;gap:12px;padding:8px 12px;background:var(--bg-card);border-radius:var(--radius-md);margin-bottom:8px;">
+        <span style="font-size:1.25rem;">${w.emoji}</span>
+        <span style="flex:1;font-weight:500;">Week ${w.week}: ${w.title}</span>
+        <span style="display:flex;gap:4px;">
+          ${Array.from({length: 3}, (_, i) => `
+            <span style="color:${i < stars ? 'var(--accent)' : 'var(--text-muted)'};font-size:1.125rem;">★</span>
+          `).join('')}
+        </span>
+        ${quiz ? `<span style="font-size:0.75rem;color:var(--text-muted);">${quiz.score}/${quiz.total}</span>` : ''}
+      </div>
+    `;
+  }).join('');
+
+  // Flight Log (Reflections)
+  const reflectionsHtml = ACADEMY.weeks.map(w => {
+    const reflections = progress.getReflections(w.week);
+    if (!reflections || reflections.length === 0) return '';
+    return `
+      <div class="flight-log-entry" style="margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="font-size:1.25rem;">${w.emoji}</span>
+          <span style="font-weight:600;">Week ${w.week}: ${w.title}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${reflections.map((ans, i) => `
+            <div style="background:var(--bg-card);border-radius:var(--radius-md);padding:12px;border-left:3px solid var(--accent);">
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:4px;">Reflection ${i + 1}</div>
+              <div style="white-space:pre-wrap;font-size:0.875rem;line-height:1.5;">${escapeHtml(ans)}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+
   main.innerHTML = `
     <div class="view">
       <div class="profile-header">
@@ -71,6 +113,28 @@ Views.profile = () => {
         <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;">
           ${weeksHtml}
         </div>
+      </div>
+
+      <!-- Quiz Stars -->
+      <div style="padding:var(--space-6);">
+        <h3 style="font-size:0.875rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Quiz Stars</h3>
+        ${quizStarsHtml || `
+          <div class="empty-state" style="padding:24px;">
+            <div style="font-size:2rem;margin-bottom:8px;">⭐</div>
+            <p style="font-size:0.9375rem;color:var(--text-secondary);">Complete quizzes in lessons to earn stars.</p>
+          </div>
+        `}
+      </div>
+
+      <!-- Flight Log (Reflections) -->
+      <div style="padding:var(--space-6);">
+        <h3 style="font-size:0.875rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Flight Log</h3>
+        ${reflectionsHtml || `
+          <div class="empty-state" style="padding:24px;">
+            <div style="font-size:2rem;margin-bottom:8px;">📖</div>
+            <p style="font-size:0.9375rem;color:var(--text-secondary);">Your reflections will appear here after each lesson.</p>
+          </div>
+        `}
       </div>
 
       <!-- Completed Missions -->

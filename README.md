@@ -47,26 +47,34 @@ space-academy/
 │   ├── icon-512.png
 │   └── icon-maskable-512.png
 ├── css/
-│   └── styles.css          # Complete design system (~1600 lines)
+│   └── styles.css          # Complete design system (~1800 lines)
 └── js/
     ├── data.js             # Full 12-week curriculum content
     ├── progress.js         # localStorage progress tracking
     ├── router.js           # Client-side hash router
     ├── app.js              # App initialization
     ├── sw-register.js      # Service worker registration
+    ├── i18n.js             # Bilingual (EN/ID) helpers
+    ├── content/            # Guided lesson content (12 weeks)
+    │   ├── week01.js … week12.js
     └── views/
         ├── welcome.js      # Landing screen
         ├── pilot-select.js # Choose/create pilot
         ├── missions.js     # Week selection grid
-        ├── week-detail.js  # Individual week lesson
+        ├── week-detail.js  # Individual week guided lesson
         ├── lab.js          # Reference materials (cheat sheets, wiring diagrams)
-        ├── profile.js      # Pilot stats & progress
-        └── settings.js     # Export/import/reset data
+        ├── profile.js      # Pilot stats, Quiz Stars, Flight Log
+        └── settings.js     # Export/import/reset data, language toggle
 ```
 
 ## Features
 
 - **12 complete weeks** of Rust curriculum covering variables → structs → hardware
+- **Guided Lesson System** — 11-section lessons per week: Big Idea, Word Wall, Thinking Skill, Code Walkthrough, Predictions, Challenges, Bug Hunt, Quiz, Reflection, Parent Corner
+- **Interactive Quizzes** — instant feedback, stars awarded for improvement, bilingual (EN/ID)
+- **Reflection Journal ("Flight Log")** — kids save written reflections per week
+- **Quiz Stars display** — visual 0-3 star rating per completed quiz
+- **Bilingual** — full English + Bahasa Indonesia content, UI language toggle
 - **Space Academy narrative** — each week is a mission story
 - **Progress tracking** — per-pilot completion, stars, ranks, checkpoint
 - **Multi-pilot support** — each child gets their own saved profile
@@ -75,7 +83,7 @@ space-academy/
 - **Lab reference section** with cheat sheets, wiring diagrams, and debugging guides
 - **Glossary** of Rust terms
 - **Export/Import** progress as JSON
-- **Offline-ready** via service worker
+- **Offline-ready** via service worker (v3 caches all lesson files)
 - **Installable PWA** — add to home screen on Android tablets (icons included)
 - **Tablet-optimized** — large touch targets (44px+), responsive layout, safe-area support
 - **Dark space theme** — easy on the eyes, no glare on tablets
@@ -97,13 +105,31 @@ space-academy/
 | Systems Thinking | 5–8 | Structs, vectors, debugging, Cargo |
 | Final Mission | 9–12 | Arduino robotics (LEDs → sensors → servo → demo day) |
 
-Each week includes:
-- A narrative mission brief
-- 3 learning objectives
-- Copy-paste starter code with syntax highlighting
-- 4 guided challenges with checkboxes
-- A "Pro Tip" hint
-- Next-week tease
+### Thinking-Skill Arc (one per week)
+1. **Decomposition** — break problems into steps
+2. **Conditional Reasoning** — if/else logic
+3. **Pattern Recognition** — find and name repetition
+4. **Abstraction** — hide detail behind names
+5. **Data Modeling** — structs & vectors as labeled pockets
+6. **Sequencing** — order matters in state
+7. **Diagnostic Reasoning** — read compiler clues
+8. **Tool Selection** — pick the right Cargo command
+9. **System Integration** — hardware + code together
+10. **Feedback Loops** — sense → decide → act, forever
+11. **Algorithm Design** — write the recipe
+12. **Metacognition** — teach it to own it
+
+Each week's guided lesson includes:
+- **Big Idea** — one-sentence anchor + short story
+- **Word Wall** — 4–6 kid-friendly definitions (EN/ID)
+- **Thinking Skill** — hook, real-life analogy, code link, try-it activity
+- **Code Walkthrough** — annotated lines from `data.js` code
+- **Predictions** — 3 "what if" questions with answers
+- **Challenges** — 4 tasks matching `data.js` checkboxes
+- **Bug Hunt** — 3 common failures with fixes
+- **Quiz** — 4–5 questions, instant feedback, stars for improvement
+- **Reflection** — 2 prompts saved to Flight Log
+- **Parent Corner** — prep checklist, talking points, stuck helpers
 
 ## Parent Notes
 
