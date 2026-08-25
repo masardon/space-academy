@@ -1,14 +1,8 @@
 // Week 7 — The Glitch Protocol (Debugging)
 LESSONS[7] = {
   bigIdea: {
-    en: {
-      title: "Errors Are Clues, Not Failures",
-      body: "The compiler isn't mad at you. It's the best detective partner in the world: it points at a LINE NUMBER and describes what confused it. Your job is to read the clue, fix ONE thing, and run again.\n\nEvery bug you fix makes you a better thinker. Professional programmers read errors all day long — the skill isn't avoiding errors, it's reading them fast.",
-    },
-    id: {
-      title: "Error Adalah Petunjuk, Bukan Kegagalan",
-      body: "Compiler tidak sedang marah padamu. Ia adalah mitra detektif terbaik di dunia: menunjuk NOMOR BARIS dan menjelaskan apa yang membuatnya bingung. Tugasmu membaca petunjuknya, memperbaiki SATU hal, dan menjalankan lagi.\n\nSetiap bug yang kamu perbaiki menjadikanmu pemikir yang lebih baik. Programmer profesional membaca error sepanjang hari — keahliannya bukan menghindari error, melainkan membacanya dengan cepat.",
-    },
+    title: { en: "Errors Are Clues, Not Failures", id: "Error Adalah Petunjuk, Bukan Kegagalan" },
+    body: { en: "The compiler isn't mad at you. It's the best detective partner in the world: it points at a LINE NUMBER and describes what confused it. Your job is to read the clue, fix ONE thing, and run again.\n\nEvery bug you fix makes you a better thinker. Professional programmers read errors all day long — the skill isn't avoiding errors, it's reading them fast.", id: "Compiler tidak sedang marah padamu. Ia adalah mitra detektif terbaik di dunia: menunjuk NOMOR BARIS dan menjelaskan apa yang membuatnya bingung. Tugasmu membaca petunjuknya, memperbaiki SATU hal, dan menjalankan lagi.\n\nSetiap bug yang kamu perbaiki menjadikanmu pemikir yang lebih baik. Programmer profesional membaca error sepanjang hari — keahliannya bukan menghindari error, melainkan membacanya dengan cepat." }
   },
 
   wordWall: [
@@ -21,18 +15,10 @@ LESSONS[7] = {
 
   thinkSkill: {
     name: "Diagnostic Reasoning",
-    en: {
-      hook: "Doctors don't panic at a cough. They ask questions, one at a time.",
-      realLife: "A bike won't ride. Is the chain off? Is the tire flat? Are the brakes stuck? You test ONE guess at a time — never all at once. Kicking the bike is not debugging. Checking things in order IS.",
-      codeLink: "Rust's compiler is your checklist partner: it names the line and the problem. The ritual: read the FIRST error, go to that line, fix one thing, run again. Fixing the first error often reveals (or fixes) the next — errors travel in packs.",
-      tryIt: "The next time you see an error, read its first line OUT LOUD before touching any code.",
-    },
-    id: {
-      hook: "Dokter tidak panik mendengar batuk. Mereka bertanya, satu per satu.",
-      realLife: "Sepeda tidak bisa dikendarai. Rantainya lepas? Ban bocor? Rem macet? Kamu menguji SATU dugaan pada satu waktu — tidak pernah semuanya sekaligus. Menendang sepeda bukanlah debugging. Memeriksa secara berurutan barulah debugging.",
-      codeLink: "Compiler Rust adalah mitra checklist-mu: ia menyebutkan baris dan masalahnya. Ritualnya: baca error PERTAMA, pergi ke baris itu, perbaiki satu hal, jalankan lagi. Memperbaiki error pertama sering kali memunculkan (atau sekaligus memperbaiki) error berikutnya — error berjalan berkelompok.",
-      tryIt: "Lain kali kamu melihat error, bacalah baris pertamanya KERAS-KERAS sebelum menyentuh kode apa pun.",
-    },
+    hook: { en: "Doctors don't panic at a cough. They ask questions, one at a time.", id: "Dokter tidak panik mendengar batuk. Mereka bertanya, satu per satu." },
+    realLife: { en: "A bike won't ride. Is the chain off? Is the tire flat? Are the brakes stuck? You test ONE guess at a time — never all at once. Kicking the bike is not debugging. Checking things in order IS.", id: "Sepeda tidak bisa dikendarai. Rantainya lepas? Ban bocor? Rem macet? Kamu menguji SATU dugaan pada satu waktu — tidak pernah semuanya sekaligus. Menendang sepeda bukanlah debugging. Memeriksa secara berurutan barulah debugging." },
+    codeLink: { en: "Rust's compiler is your checklist partner: it names the line and the problem. The ritual: read the FIRST error, go to that line, fix one thing, run again. Fixing the first error often reveals (or fixes) the next — errors travel in packs.", id: "Compiler Rust adalah mitra checklist-mu: ia menyebutkan baris dan masalahnya. Ritualnya: baca error PERTAMA, pergi ke baris itu, perbaiki satu hal, jalankan lagi. Memperbaiki error pertama sering kali memunculkan (atau sekaligus memperbaiki) error berikutnya — error berjalan berkelompok." },
+    tryIt: { en: "The next time you see an error, read its first line OUT LOUD before touching any code.", id: "Lain kali kamu melihat error, bacalah baris pertamanya KERAS-KERAS sebelum menyentuh kode apa pun." }
   },
 
   codeWalkthrough: [

@@ -1,14 +1,8 @@
 // Week 9 — Lights and Sounds (Arduino: Hardware IO)
 LESSONS[9] = {
   bigIdea: {
-    en: {
-      title: "Today Your Code Steps Off the Screen",
-      body: "Everything so far lived inside the computer. Today, code flows through real copper wires and becomes LIGHT and SOUND. The thinking is identical — turn on, wait, turn off — but the canvas is the physical world.\n\nTwo special functions rule every Arduino: setup() runs ONCE at power-up, and loop() runs FOREVER after. Your robot lives inside its loop.",
-    },
-    id: {
-      title: "Hari Ini Kodemu Melangkah Keluar dari Layar",
-      body: "Sejauh ini semuanya hidup di dalam komputer. Hari ini, kode mengalir melalui kabel tembaga sungguhan dan menjadi CAHAYA dan BUNYI. Pola pikirnya identik — nyalakan, tunggu, matikan — tetapi kanvasnya adalah dunia fisik.\n\nDua fungsi istimewa menguasai setiap Arduino: setup() berjalan SEKALI saat dinyalakan, dan loop() berjalan SELAMANYA setelahnya. Robotmu hidup di dalam loop-nya.",
-    },
+    title: { en: "Today Your Code Steps Off the Screen", id: "Hari Ini Kodemu Melangkah Keluar dari Layar" },
+    body: { en: "Everything so far lived inside the computer. Today, code flows through real copper wires and becomes LIGHT and SOUND. The thinking is identical — turn on, wait, turn off — but the canvas is the physical world.\n\nTwo special functions rule every Arduino: setup() runs ONCE at power-up, and loop() runs FOREVER after. Your robot lives inside its loop.", id: "Sejauh ini semuanya hidup di dalam komputer. Hari ini, kode mengalir melalui kabel tembaga sungguhan dan menjadi CAHAYA dan BUNYI. Pola pikirnya identik — nyalakan, tunggu, matikan — tetapi kanvasnya adalah dunia fisik.\n\nDua fungsi istimewa menguasai setiap Arduino: setup() berjalan SEKALI saat dinyalakan, dan loop() berjalan SELAMANYA setelahnya. Robotmu hidup di dalam loop-nya." }
   },
 
   wordWall: [
@@ -22,18 +16,10 @@ LESSONS[9] = {
 
   thinkSkill: {
     name: "System Integration",
-    en: {
-      hook: "Today your code and electricity become one system.",
-      realLife: "A traffic light is a program made of light bulbs: green for 30 seconds, yellow for 3, red for 40 — repeat forever. Somebody wrote that loop, and millions of people obey it daily.",
-      codeLink: "digitalWrite is a switch; delay is a wait — the same on/off/wait thinking from weeks 1–8, now in copper. Integration means making separate pieces (LED + buzzer + code) behave as ONE machine. Each piece is simple; the system is the achievement.",
-      tryIt: "Find one machine at home that repeats a light or sound pattern. Describe its loop: what happens, in what order, for how long?",
-    },
-    id: {
-      hook: "Hari ini kodemu dan listrik menjadi satu sistem.",
-      realLife: "Lampu lalu lintas adalah program dari bohlam: hijau 30 detik, kuning 3 detik, merah 40 detik — ulangi selamanya. Seseorang menulis loop itu, dan jutaan orang menaatinya setiap hari.",
-      codeLink: "digitalWrite adalah saklar; delay adalah jeda — pola nyalakan/matikan/tunggu dari minggu 1–8 yang sama, kini lewat tembaga. Integrasi berarti menyatukan potongan-potongan (LED + buzzer + kode) agar berperilaku sebagai SATU mesin. Setiap potongan sederhana; sistemnya itulah pencapaiannya.",
-      tryIt: "Temukan satu mesin di rumah yang mengulang pola cahaya atau suara. Jelaskan loop-nya: apa yang terjadi, dalam urutan apa, berapa lama?",
-    },
+    hook: { en: "Today your code and electricity become one system.", id: "Hari ini kodemu dan listrik menjadi satu sistem." },
+    realLife: { en: "A traffic light is a program made of light bulbs: green for 30 seconds, yellow for 3, red for 40 — repeat forever. Somebody wrote that loop, and millions of people obey it daily.", id: "Lampu lalu lintas adalah program dari bohlam: hijau 30 detik, kuning 3 detik, merah 40 detik — ulangi selamanya. Seseorang menulis loop itu, dan jutaan orang menaatinya setiap hari." },
+    codeLink: { en: "digitalWrite is a switch; delay is a wait — the same on/off/wait thinking from weeks 1–8, now in copper. Integration means making separate pieces (LED + buzzer + code) behave as ONE machine. Each piece is simple; the system is the achievement.", id: "digitalWrite adalah saklar; delay adalah jeda — pola nyalakan/matikan/tunggu dari minggu 1–8 yang sama, kini lewat tembaga. Integrasi berarti menyatukan potongan-potongan (LED + buzzer + kode) agar berperilaku sebagai SATU mesin. Setiap potongan sederhana; sistemnya itulah pencapaiannya." },
+    tryIt: { en: "Find one machine at home that repeats a light or sound pattern. Describe its loop: what happens, in what order, for how long?", id: "Temukan satu mesin di rumah yang mengulang pola cahaya atau suara. Jelaskan loop-nya: apa yang terjadi, dalam urutan apa, berapa lama?" }
   },
 
   codeWalkthrough: [

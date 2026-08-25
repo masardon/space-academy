@@ -8,14 +8,8 @@ const LESSONS = {};
 
 LESSONS[1] = {
   bigIdea: {
-    en: {
-      title: "A Variable Is a Labeled Pocket",
-      body: "Imagine your backpack. It has a pocket with a label: WATER BOTTLE. Today a red bottle is inside. Tomorrow you might swap it for a blue one. The label stays the same — only the thing inside changes.\n\nIn code, let robot_hp = 100; makes a pocket labeled robot_hp and puts the number 100 inside. Whenever your program reads robot_hp, it looks in the pocket and finds 100.",
-    },
-    id: {
-      title: "Variabel Adalah Kantong Berlabel",
-      body: "Bayangkan tas ranselmu. Ada kantong dengan label: AIR MINUM. Hari ini berisi botol merah. Besok kamu mungkin menggantinya dengan botol biru. Labelnya tetap sama — hanya isinya yang berubah.\n\nDalam kode, let robot_hp = 100; membuat kantong berlabel robot_hp dan mengisi angka 100 di dalamnya. Setiap kali programmu membaca robot_hp, program melihat ke dalam kantong dan menemukan 100.",
-    },
+    title: { en: "A Variable Is a Labeled Pocket", id: "Variabel Adalah Kantong Berlabel" },
+    body: { en: "Imagine your backpack. It has a pocket with a label: WATER BOTTLE. Today a red bottle is inside. Tomorrow you might swap it for a blue one. The label stays the same — only the thing inside changes.\n\nIn code, let robot_hp = 100; makes a pocket labeled robot_hp and puts the number 100 inside. Whenever your program reads robot_hp, it looks in the pocket and finds 100.", id: "Bayangkan tas ranselmu. Ada kantong dengan label: AIR MINUM. Hari ini berisi botol merah. Besok kamu mungkin menggantinya dengan botol biru. Labelnya tetap sama — hanya isinya yang berubah.\n\nDalam kode, let robot_hp = 100; membuat kantong berlabel robot_hp dan mengisi angka 100 di dalamnya. Setiap kali programmu membaca robot_hp, program melihat ke dalam kantong dan menemukan 100." }
   },
 
   wordWall: [
@@ -29,18 +23,10 @@ LESSONS[1] = {
 
   thinkSkill: {
     name: "Decomposition",
-    en: {
-      hook: "Big problems are just small problems wearing a disguise.",
-      realLife: "\"Clean your room!\" sounds huge. Break it up: make the bed → put toys in the box → hang your clothes. Four small jobs feel easy; one giant job feels impossible. That trick has a name: decomposition.",
-      codeLink: "Programmers do the same. \"Make a robot profile\" breaks into four small parts: a name, health points, a speed level, and an on/off switch. Each small part becomes ONE line of code. Big problem → small parts → one line each. That is how all software is built.",
-      tryIt: "Think of one big task (in real life or in code) and split it into 3–5 small steps. Say the steps out loud to your parent.",
-    },
-    id: {
-      hook: "Masalah besar hanyalah masalah-masalah kecil yang menyamar.",
-      realLife: "\"Rapikan kamar!\" terdengar berat. Pecahkan: rapikan tempat tidur → masukkan mainan ke kotak → gantung baju. Empat pekerjaan kecil terasa mudah; satu pekerjaan raksasa terasa mustahil. Trik ini punya nama: dekomposisi.",
-      codeLink: "Programmer melakukan hal yang sama. \"Buat profil robot\" dipecah menjadi empat bagian kecil: nama, nyawa, kecepatan, dan saklar nyala/mati. Setiap bagian kecil menjadi SATU baris kode. Masalah besar → bagian kecil → satu baris untuk masing-masing. Begitulah semua perangkat lunak dibuat.",
-      tryIt: "Pikirkan satu tugas besar (di dunia nyata atau dalam kode) dan pecah menjadi 3–5 langkah kecil. Ucapkan langkah-langkah itu keras-keras kepada orang tuamu.",
-    },
+    hook: { en: "Big problems are just small problems wearing a disguise.", id: "Masalah besar hanyalah masalah-masalah kecil yang menyamar." },
+    realLife: { en: "\"Clean your room!\" sounds huge. Break it up: make the bed → put toys in the box → hang your clothes. Four small jobs feel easy; one giant job feels impossible. That trick has a name: decomposition.", id: "\"Rapikan kamar!\" terdengar berat. Pecahkan: rapikan tempat tidur → masukkan mainan ke kotak → gantung baju. Empat pekerjaan kecil terasa mudah; satu pekerjaan raksasa terasa mustahil. Trik ini punya nama: dekomposisi." },
+    codeLink: { en: "Programmers do the same. \"Make a robot profile\" breaks into four small parts: a name, health points, a speed level, and an on/off switch. Each small part becomes ONE line of code. Big problem → small parts → one line each. That is how all software is built.", id: "Programmer melakukan hal yang sama. \"Buat profil robot\" dipecah menjadi empat bagian kecil: nama, nyawa, kecepatan, dan saklar nyala/mati. Setiap bagian kecil menjadi SATU baris kode. Masalah besar → bagian kecil → satu baris untuk masing-masing. Begitulah semua perangkat lunak dibuat." },
+    tryIt: { en: "Think of one big task (in real life or in code) and split it into 3–5 small steps. Say the steps out loud to your parent.", id: "Pikirkan satu tugas besar (di dunia nyata atau dalam kode) dan pecah menjadi 3–5 langkah kecil. Ucapkan langkah-langkah itu keras-keras kepada orang tuamu." }
   },
 
   codeWalkthrough: [

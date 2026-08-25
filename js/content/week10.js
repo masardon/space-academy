@@ -1,14 +1,8 @@
 // Week 10 — The Sensor Eye (Ultrasonic Sensor: Feedback Loops)
 LESSONS[10] = {
   bigIdea: {
-    en: {
-      title: "Sense → Decide → Act, Forever",
-      body: "The ultrasonic sensor is Sparky's ear: it shouts a sound pulse and times the echo, turning the world into a NUMBER — distance in centimeters.\n\nThen the oldest pattern in robotics takes over: READ the sensor, COMPARE to a threshold, REACT with light and sound. The loop runs about ten times a second, forever. That's a feedback loop — the same loop your eyes, brain, and feet run when walking a dark hallway.",
-    },
-    id: {
-      title: "Rasa → Pikir → Bertindak, Selamanya",
-      body: "Sensor ultrasonik adalah telinga Sparky: ia menembakkan denyut suara dan menghitung waktu gema, mengubah dunia menjadi sebuah ANGKA — jarak dalam sentimeter.\n\nLalu pola tertua dalam dunia robotika mengambil alih: BACA sensor, BANDINGKAN dengan ambang batas, BEREAKSI dengan cahaya dan suara. Loop berjalan kurang lebih sepuluh kali per detik, selamanya. Itulah feedback loop — loop yang sama dengan matamu, otakmu, dan kakimu saat berjalan di lorong gelap.",
-    },
+    title: { en: "Sense → Decide → Act, Forever", id: "Rasa → Pikir → Bertindak, Selamanya" },
+    body: { en: "The ultrasonic sensor is Sparky's ear: it shouts a sound pulse and times the echo, turning the world into a NUMBER — distance in centimeters.\n\nThen the oldest pattern in robotics takes over: READ the sensor, COMPARE to a threshold, REACT with light and sound. The loop runs about ten times a second, forever. That's a feedback loop — the same loop your eyes, brain, and feet run when walking a dark hallway.", id: "Sensor ultrasonik adalah telinga Sparky: ia menembakkan denyut suara dan menghitung waktu gema, mengubah dunia menjadi sebuah ANGKA — jarak dalam sentimeter.\n\nLalu pola tertua dalam dunia robotika mengambil alih: BACA sensor, BANDINGKAN dengan ambang batas, BEREAKSI dengan cahaya dan suara. Loop berjalan kurang lebih sepuluh kali per detik, selamanya. Itulah feedback loop — loop yang sama dengan matamu, otakmu, dan kakimu saat berjalan di lorong gelap." }
   },
 
   wordWall: [
@@ -22,18 +16,10 @@ LESSONS[10] = {
 
   thinkSkill: {
     name: "Feedback Loops",
-    en: {
-      hook: "You are running two sensors, a processor, and four actuators right now. They're called eyes, brain, and hands.",
-      realLife: "Walking in the dark: eyes sense → brain decides \"too close to the wall\" → feet steer. Constantly, without effort. Every living thing runs sense-decide-act loops — and so does every robot.",
-      codeLink: "loop() reads distance, compares it to the threshold (10 cm), and reacts. Change 10 to 20 and the WHOLE personality of the robot changes — it startles from farther away. One number, one behavior change: that's parameterization.",
-      tryIt: "Close your eyes and let a parent guide you across the room by voice only. You just became the actuator in their feedback loop.",
-    },
-    id: {
-      hook: "Saat ini kamu menjalankan dua sensor, satu pemroses, dan empat penggerak. Namanya mata, otak, dan tangan.",
-      realLife: "Berjalan di kegelapan: mata merasakan → otak memutuskan \"terlalu dekat ke dinding\" → kaki mengarahkan. Terus-menerus, tanpa usaha. Setiap makhluk hidup menjalankan loop rasa-pikir-bertindak — begitu juga setiap robot.",
-      codeLink: "loop() membaca jarak, membandingkannya dengan ambang batas (10 cm), dan bereaksi. Ubah 10 menjadi 20 dan SELURUH kepribadian robot berubah — ia terkejut dari jarak lebih jauh. Satu angka, satu perubahan perilaku: itulah parameterisasi.",
-      tryIt: "Tutup mata dan biarkan orang tua memandumu melintasi ruangan hanya dengan suara. Kamu baru saja menjadi penggerak dalam feedback loop mereka.",
-    },
+    hook: { en: "You are running two sensors, a processor, and four actuators right now. They're called eyes, brain, and hands.", id: "Saat ini kamu menjalankan dua sensor, satu pemroses, dan empat penggerak. Namanya mata, otak, dan tangan." },
+    realLife: { en: "Walking in the dark: eyes sense → brain decides \"too close to the wall\" → feet steer. Constantly, without effort. Every living thing runs sense-decide-act loops — and so does every robot.", id: "Berjalan di kegelapan: mata merasakan → otak memutuskan \"terlalu dekat ke dinding\" → kaki mengarahkan. Terus-menerus, tanpa usaha. Setiap makhluk hidup menjalankan loop rasa-pikir-bertindak — begitu juga setiap robot." },
+    codeLink: { en: "loop() reads distance, compares it to the threshold (10 cm), and reacts. Change 10 to 20 and the WHOLE personality of the robot changes — it startles from farther away. One number, one behavior change: that's parameterization.", id: "loop() membaca jarak, membandingkannya dengan ambang batas (10 cm), dan bereaksi. Ubah 10 menjadi 20 dan SELURUH kepribadian robot berubah — ia terkejut dari jarak lebih jauh. Satu angka, satu perubahan perilaku: itulah parameterisasi." },
+    tryIt: { en: "Close your eyes and let a parent guide you across the room by voice only. You just became the actuator in their feedback loop.", id: "Tutup mata dan biarkan orang tua memandumu melintasi ruangan hanya dengan suara. Kamu baru saja menjadi penggerak dalam feedback loop mereka." }
   },
 
   codeWalkthrough: [

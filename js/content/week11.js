@@ -1,14 +1,8 @@
 // Week 11 — Movement & Control (Servo & State)
 LESSONS[11] = {
   bigIdea: {
-    en: {
-      title: "Robots Are State Machines",
-      body: "Add a servo and Sparky gets a NECK: it points its sensor left and right, sweeping the room like a lighthouse. At every stop it runs the week-10 loop: sense → decide → act.\n\nWhat the robot is DOING right now is its STATE: SCANNING or ALARM. Naming states is how engineers reason about behavior — and it's exactly the enum you'll write in Rust one day.",
-    },
-    id: {
-      title: "Robot Adalah Mesin Keadaan",
-      body: "Tambahkan servo dan Sparky mendapat LEHER: ia mengarahkan sensornya ke kiri dan kanan, menyapu ruangan seperti mercusuar. Di setiap pemberhentian ia menjalankan loop minggu 10: rasa → pikir → bertindak.\n\nApa yang SEDANG dilakukan robot adalah KEADAANNYA: SCANNING atau ALARM. Menamai keadaan adalah cara insinyur menalar perilaku — dan itu persis enum yang suatu hari akan kamu tulis di Rust.",
-    },
+    title: { en: "Robots Are State Machines", id: "Robot Adalah Mesin Keadaan" },
+    body: { en: "Add a servo and Sparky gets a NECK: it points its sensor left and right, sweeping the room like a lighthouse. At every stop it runs the week-10 loop: sense → decide → act.\n\nWhat the robot is DOING right now is its STATE: SCANNING or ALARM. Naming states is how engineers reason about behavior — and it's exactly the enum you'll write in Rust one day.", id: "Tambahkan servo dan Sparky mendapat LEHER: ia mengarahkan sensornya ke kiri dan kanan, menyapu ruangan seperti mercusuar. Di setiap pemberhentian ia menjalankan loop minggu 10: rasa → pikir → bertindak.\n\nApa yang SEDANG dilakukan robot adalah KEADAANNYA: SCANNING atau ALARM. Menamai keadaan adalah cara insinyur menalar perilaku — dan itu persis enum yang suatu hari akan kamu tulis di Rust." }
   },
 
   wordWall: [
@@ -22,18 +16,10 @@ LESSONS[11] = {
 
   thinkSkill: {
     name: "Algorithm Design",
-    en: {
-      hook: "A recipe is an algorithm you can eat.",
-      realLife: "Brushing teeth: wet the brush → add paste → two minutes of circles → rinse. Precise steps, in an order that works EVERY time. That's an algorithm — and writing your own is algorithm design.",
-      codeLink: "The scanning algorithm: point at angle → wait 30ms → measure → react → next angle … there and back, forever. The two for loops are the algorithm's skeleton; measureAndReact() is the heart it pumps at every stop.",
-      tryIt: "Write the 5-step algorithm for making a sandwich. Then have your parent FOLLOW it literally — bugs in the algorithm become hilarious.",
-    },
-    id: {
-      hook: "Resep adalah algoritma yang bisa kamu makan.",
-      realLife: "Menyikat gigi: basahi sikat → beri pasta → dua menit berputar → bilas. Langkah yang presisi, dalam urutan yang selalu berhasil. Itulah algoritma — dan menulis algoritma sendiri adalah desain algoritma.",
-      codeLink: "Algoritma pemindaian: arahkan ke sudut → tunggu 30 md → ukur → bereaksi → sudut berikutnya … bolak-balik, selamanya. Dua for loop adalah kerangka algoritmanya; measureAndReact() adalah jantung yang berdenyut di setiap pemberhentian.",
-      tryIt: "Tulis algoritma 5 langkah membuat sandwich. Lalu minta orang tuamu MENGIKUTINYA secara harfiah — bug dalam algoritma jadi sangat lucu.",
-    },
+    hook: { en: "A recipe is an algorithm you can eat.", id: "Resep adalah algoritma yang bisa kamu makan." },
+    realLife: { en: "Brushing teeth: wet the brush → add paste → two minutes of circles → rinse. Precise steps, in an order that works EVERY time. That's an algorithm — and writing your own is algorithm design.", id: "Menyikat gigi: basahi sikat → beri pasta → dua menit berputar → bilas. Langkah yang presisi, dalam urutan yang selalu berhasil. Itulah algoritma — dan menulis algoritma sendiri adalah desain algoritma." },
+    codeLink: { en: "The scanning algorithm: point at angle → wait 30ms → measure → react → next angle … there and back, forever. The two for loops are the algorithm's skeleton; measureAndReact() is the heart it pumps at every stop.", id: "Algoritma pemindaian: arahkan ke sudut → tunggu 30 md → ukur → bereaksi → sudut berikutnya … bolak-balik, selamanya. Dua for loop adalah kerangka algoritmanya; measureAndReact() adalah jantung yang berdenyut di setiap pemberhentian." },
+    tryIt: { en: "Write the 5-step algorithm for making a sandwich. Then have your parent FOLLOW it literally — bugs in the algorithm become hilarious.", id: "Tulis algoritma 5 langkah membuat sandwich. Lalu minta orang tuamu MENGIKUTINYA secara harfiah — bug dalam algoritma jadi sangat lucu." }
   },
 
   codeWalkthrough: [

@@ -1,14 +1,8 @@
 // Week 8 — Equipment Upgrade Day (Cargo & Projects)
 LESSONS[8] = {
   bigIdea: {
-    en: {
-      title: "Cargo Is Your Robot Assistant",
-      body: "Until now, every program was one loose file. Real projects are FOLDERS: code lives in src/main.rs, settings live in Cargo.toml, and one command — cargo run — builds AND runs everything.\n\nYou don't organize any of it by hand. You tell Cargo \"make me a project called X\" and it builds the whole structure. Real engineers keep tidy workspaces — Cargo does the tidying.",
-    },
-    id: {
-      title: "Cargo Adalah Asisten Robotmu",
-      body: "Sampai sekarang, setiap program hanyalah satu file lepas. Proyek sungguhan adalah FOLDER: kode tinggal di src/main.rs, pengaturan tinggal di Cargo.toml, dan satu perintah — cargo run — membangun SEKALIGUS menjalankan semuanya.\n\nKamu tidak merapikannya manual. Kamu berkata pada Cargo \"buatkan proyek bernama X\" dan ia membangun seluruh strukturnya. Insinyur sungguhan menjaga ruang kerja yang rapi — Cargo yang merapikannya.",
-    },
+    title: { en: "Cargo Is Your Robot Assistant", id: "Cargo Adalah Asisten Robotmu" },
+    body: { en: "Until now, every program was one loose file. Real projects are FOLDERS: code lives in src/main.rs, settings live in Cargo.toml, and one command — cargo run — builds AND runs everything.\n\nYou don't organize any of it by hand. You tell Cargo \"make me a project called X\" and it builds the whole structure. Real engineers keep tidy workspaces — Cargo does the tidying.", id: "Sampai sekarang, setiap program hanyalah satu file lepas. Proyek sungguhan adalah FOLDER: kode tinggal di src/main.rs, pengaturan tinggal di Cargo.toml, dan satu perintah — cargo run — membangun SEKALIGUS menjalankan semuanya.\n\nKamu tidak merapikannya manual. Kamu berkata pada Cargo \"buatkan proyek bernama X\" dan ia membangun seluruh strukturnya. Insinyur sungguhan menjaga ruang kerja yang rapi — Cargo yang merapikannya." }
   },
 
   wordWall: [
@@ -22,18 +16,10 @@ LESSONS[8] = {
 
   thinkSkill: {
     name: "Tool Selection",
-    en: {
-      hook: "You could cut paper with scissors held upside down. Why would you?",
-      realLife: "Spoon, fork, whisk: same kitchen, different jobs. Choosing the right tool on PURPOSE — and knowing why — is a thinking skill, not just a habit.",
-      codeLink: "rustc compiles one file, fine for week 1. But real projects need folders, settings, and extra libraries — that's Cargo's job. Today we stop holding the scissors upside down: cargo new to build, cargo run to launch.",
-      tryIt: "Sometime today, pick a tool ON PURPOSE for a task and say out loud why it's the right one.",
-    },
-    id: {
-      hook: "Kamu bisa memotong kertas dengan gunting terbalik. Tapi untuk apa?",
-      realLife: "Sendok, garpu, pengocok telur: dapur yang sama, tugas berbeda. Memilih alat yang tepat dengan SEGENG — dan tahu alasannya — adalah keterampilan berpikir, bukan sekadar kebiasaan.",
-      codeLink: "rustc mengompilasi satu file, cukup untuk minggu pertama. Tetapi proyek sungguhan butuh folder, pengaturan, dan pustaka tambahan — itu tugas Cargo. Hari ini kita berhenti memegang gunting terbalik: cargo new untuk membangun, cargo run untuk meluncurkan.",
-      tryIt: "Someday hari ini, pilih sebuah alat dengan SEGENG untuk satu tugas dan ucapkan keras-keras mengapa itu yang paling tepat.",
-    },
+    hook: { en: "You could cut paper with scissors held upside down. Why would you?", id: "Kamu bisa memotong kertas dengan gunting terbalik. Tapi untuk apa?" },
+    realLife: { en: "Spoon, fork, whisk: same kitchen, different jobs. Choosing the right tool on PURPOSE — and knowing why — is a thinking skill, not just a habit.", id: "Sendok, garpu, pengocok telur: dapur yang sama, tugas berbeda. Memilih alat yang tepat dengan SEGENG — dan tahu alasannya — adalah keterampilan berpikir, bukan sekadar kebiasaan." },
+    codeLink: { en: "rustc compiles one file, fine for week 1. But real projects need folders, settings, and extra libraries — that's Cargo's job. Today we stop holding the scissors upside down: cargo new to build, cargo run to launch.", id: "rustc mengompilasi satu file, cukup untuk minggu pertama. Tetapi proyek sungguhan butuh folder, pengaturan, dan pustaka tambahan — itu tugas Cargo. Hari ini kita berhenti memegang gunting terbalik: cargo new untuk membangun, cargo run untuk meluncurkan." },
+    tryIt: { en: "Sometime today, pick a tool ON PURPOSE for a task and say out loud why it's the right one.", id: "Someday hari ini, pilih sebuah alat dengan SEGENG untuk satu tugas dan ucapkan keras-keras mengapa itu yang paling tepat." }
   },
 
   codeWalkthrough: [

@@ -1,14 +1,8 @@
 // Week 6 — The Inventory System (Vectors)
 LESSONS[6] = {
   bigIdea: {
-    en: {
-      title: "A Vector Is a Numbered Shopping List",
-      body: "A Vec is a list that GROWS and SHRINKS. push adds to the end, remove takes one out and the rest shuffle up to fill the gap. Every item has a position number — an index.\n\nOne surprise to rule them all: computers start counting at ZERO. The first item is item 0. The last item is always len − 1.",
-    },
-    id: {
-      title: "Vector Adalah Daftar Belanja Bernomor",
-      body: "Vec adalah daftar yang BERTAMBAH dan BERKURANG. push menambah di ujung, remove mengambil satu dan sisanya bergeser mengisi kekosongan. Setiap item punya nomor posisi — indeks.\n\nSatu kejutan yang mengatur semuanya: komputer mulai menghitung dari NOL. Item pertama adalah item 0. Item terakhir selalu len − 1.",
-    },
+    title: { en: "A Vector Is a Numbered Shopping List", id: "Vector Adalah Daftar Belanja Bernomor" },
+    body: { en: "A Vec is a list that GROWS and SHRINKS. push adds to the end, remove takes one out and the rest shuffle up to fill the gap. Every item has a position number — an index.\n\nOne surprise to rule them all: computers start counting at ZERO. The first item is item 0. The last item is always len − 1.", id: "Vec adalah daftar yang BERTAMBAH dan BERKURANG. push menambah di ujung, remove mengambil satu dan sisanya bergeser mengisi kekosongan. Setiap item punya nomor posisi — indeks.\n\nSatu kejutan yang mengatur semuanya: komputer mulai menghitung dari NOL. Item pertama adalah item 0. Item terakhir selalu len − 1." }
   },
 
   wordWall: [
@@ -22,18 +16,10 @@ LESSONS[6] = {
 
   thinkSkill: {
     name: "Sequencing",
-    en: {
-      hook: "Order is information.",
-      realLife: "A bus queue is first-come-first-served. When someone leaves the middle of the queue, everyone behind shuffles forward — nobody keeps their old spot. One removal changes every position after it.",
-      codeLink: "Vectors work exactly like that queue. push appends at the back; remove(1) takes the SECOND item and slides the rest up. After any removal, the later indexes all change — sequencing means tracking what happens to order, step by step.",
-      tryIt: "Line up four toys. Say \"remove index 1\" — which toy leaves? Recount the indexes out loud.",
-    },
-    id: {
-      hook: "Urutan adalah informasi.",
-      realLife: "Antrean bus berdasarkan siapa-dulu-datang. Ketika seseorang keluar dari tengah antrean, semua di belakangnya bergeser maju — tidak ada yang mempertahankan posisi lamanya. Satu penghapusan mengubah semua posisi setelahnya.",
-      codeLink: "Vector bekerja persis seperti antrean itu. push menambah di belakang; remove(1) mengambil item KEDUA dan menggeser sisanya ke atas. Setelah penghapusan apa pun, indeks-indeks setelahnya berubah — sequencing berarti melacak apa yang terjadi pada urutan, langkah demi langkah.",
-      tryIt: "Bariskan empat mainan. Ucapkan \"hapus indeks 1\" — mainan mana yang keluar? Hitung ulang indeksnya sambil bersuara.",
-    },
+    hook: { en: "Order is information.", id: "Urutan adalah informasi." },
+    realLife: { en: "A bus queue is first-come-first-served. When someone leaves the middle of the queue, everyone behind shuffles forward — nobody keeps their old spot. One removal changes every position after it.", id: "Antrean bus berdasarkan siapa-dulu-datang. Ketika seseorang keluar dari tengah antrean, semua di belakangnya bergeser maju — tidak ada yang mempertahankan posisi lamanya. Satu penghapusan mengubah semua posisi setelahnya." },
+    codeLink: { en: "Vectors work exactly like that queue. push appends at the back; remove(1) takes the SECOND item and slides the rest up. After any removal, the later indexes all change — sequencing means tracking what happens to order, step by step.", id: "Vector bekerja persis seperti antrean itu. push menambah di belakang; remove(1) mengambil item KEDUA dan menggeser sisanya ke atas. Setelah penghapusan apa pun, indeks-indeks setelahnya berubah — sequencing berarti melacak apa yang terjadi pada urutan, langkah demi langkah." },
+    tryIt: { en: "Line up four toys. Say \"remove index 1\" — which toy leaves? Recount the indexes out loud.", id: "Bariskan empat mainan. Ucapkan \"hapus indeks 1\" — mainan mana yang keluar? Hitung ulang indeksnya sambil bersuara." }
   },
 
   codeWalkthrough: [

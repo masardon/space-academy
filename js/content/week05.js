@@ -1,14 +1,8 @@
 // Week 5 — Design Your Character Creator (Structs)
 LESSONS[5] = {
   bigIdea: {
-    en: {
-      title: "A Struct Is a Blueprint, Not the Thing Itself",
-      body: "struct Cadet is not a cadet. It's the CARD TEMPLATE: a decision that every cadet must have a name, hp, speed, and species. The struct decides the FIELDS — each cadet you build fills in its own VALUES.\n\nOne blueprint, unlimited copies. Change the blueprint and every future cadet must follow the new rules.",
-    },
-    id: {
-      title: "Struct Adalah Cetak Biru, Bukan Benda Itu Sendiri",
-      body: "struct Cadet bukanlah seorang kadet. Itu adalah TEMPLATE KARTU: sebuah keputusan bahwa setiap kadet harus punya name, hp, speed, dan species. Struct menentukan FIELD-nya — setiap kadet yang kamu bangun mengisi NILAI-nya sendiri.\n\nSatu cetak biru, salinan tanpa batas. Ubah cetak birunya dan semua kadet berikutnya harus mengikuti aturan baru.",
-    },
+    title: { en: "A Struct Is a Blueprint, Not the Thing Itself", id: "Struct Adalah Cetak Biru, Bukan Benda Itu Sendiri" },
+    body: { en: "struct Cadet is not a cadet. It's the CARD TEMPLATE: a decision that every cadet must have a name, hp, speed, and species. The struct decides the FIELDS — each cadet you build fills in its own VALUES.\n\nOne blueprint, unlimited copies. Change the blueprint and every future cadet must follow the new rules.", id: "struct Cadet bukanlah seorang kadet. Itu adalah TEMPLATE KARTU: sebuah keputusan bahwa setiap kadet harus punya name, hp, speed, dan species. Struct menentukan FIELD-nya — setiap kadet yang kamu bangun mengisi NILAI-nya sendiri.\n\nSatu cetak biru, salinan tanpa batas. Ubah cetak birunya dan semua kadet berikutnya harus mengikuti aturan baru." }
   },
 
   wordWall: [
@@ -22,18 +16,10 @@ LESSONS[5] = {
 
   thinkSkill: {
     name: "Data Modeling",
-    en: {
-      hook: "Before you build a thing, you decide what it's MADE OF.",
-      realLife: "Design a collectible card game: every card needs a name, a power number, and an element. You're not drawing any single card — you're deciding what EVERY card must have. That decision is data modeling.",
-      codeLink: "struct Cadet is the card template: every cadet has name, hp, speed, species. The struct fixes the fields; each instance fills its own values. Good modelers ask: \"what does every one of these things HAVE, and what can every one of them DO?\"",
-      tryIt: "Design a creature card for your pet or favorite animal: list its 4 fields (and what type each one is).",
-    },
-    id: {
-      hook: "Sebelum membangun sesuatu, kamu memutuskan bahan penyusunnya.",
-      realLife: "Mendesain game kartu koleksi: setiap kartu butuh nama, angka kekuatan, dan elemen. Kamu tidak menggambar satu kartu pun — kamu memutuskan apa yang DIMILIKI setiap kartu. Keputusan itulah pemodelan data.",
-      codeLink: "struct Cadet adalah template kartunya: setiap kadet punya name, hp, speed, species. Struct menentukan field-nya; setiap instance mengisi nilainya sendiri. Pemodel yang baik bertanya: \"apa yang DIMILIKI semua benda ini, dan apa yang BISA dilakukan semua benda ini?\"",
-      tryIt: "Rancang kartu makhluk untuk hewan peliharaanmu atau hewan favoritmu: tulis 4 field-nya (beserta tipe masing-masing).",
-    },
+    hook: { en: "Before you build a thing, you decide what it's MADE OF.", id: "Sebelum membangun sesuatu, kamu memutuskan bahan penyusunnya." },
+    realLife: { en: "Design a collectible card game: every card needs a name, a power number, and an element. You're not drawing any single card — you're deciding what EVERY card must have. That decision is data modeling.", id: "Mendesain game kartu koleksi: setiap kartu butuh nama, angka kekuatan, dan elemen. Kamu tidak menggambar satu kartu pun — kamu memutuskan apa yang DIMILIKI setiap kartu. Keputusan itulah pemodelan data." },
+    codeLink: { en: "struct Cadet is the card template: every cadet has name, hp, speed, species. The struct fixes the fields; each instance fills its own values. Good modelers ask: \"what does every one of these things HAVE, and what can every one of them DO?\"", id: "struct Cadet adalah template kartunya: setiap kadet punya name, hp, speed, species. Struct menentukan field-nya; setiap instance mengisi nilainya sendiri. Pemodel yang baik bertanya: \"apa yang DIMILIKI semua benda ini, dan apa yang BISA dilakukan semua benda ini?\"" },
+    tryIt: { en: "Design a creature card for your pet or favorite animal: list its 4 fields (and what type each one is).", id: "Rancang kartu makhluk untuk hewan peliharaanmu atau hewan favoritmu: tulis 4 field-nya (beserta tipe masing-masing)." }
   },
 
   codeWalkthrough: [

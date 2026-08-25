@@ -1,14 +1,8 @@
 // Week 3 — The Repeating Door (Loops)
 LESSONS[3] = {
   bigIdea: {
-    en: {
-      title: "A Loop Is a Robot That Repeats",
-      body: "Instead of writing \"print a star\" five times, you tell a robot: \"do print-a-star, five rounds.\" You say WHAT to repeat and HOW MANY times — the robot handles the boredom.\n\n1..=5 means \"1 up to and including 5\" — five rounds. The two dots with an equals sign are the difference between 5 stars and 4.",
-    },
-    id: {
-      title: "Loop Adalah Robot yang Mengulang",
-      body: "Alih-alih menulis \"cetak bintang\" lima kali, kamu memerintahkan robot: \"lakukan cetak-bintang, lima putaran.\" Kamu bilang APA yang diulang dan BERAPA kali — robot yang menanggung kebosanannya.\n\n1..=5 berarti \"1 sampai dengan 5\" — lima putaran. Dua titik dengan tanda sama dengan itulah bedanya antara 5 bintang dan 4.",
-    },
+    title: { en: "A Loop Is a Robot That Repeats", id: "Loop Adalah Robot yang Mengulang" },
+    body: { en: "Instead of writing \"print a star\" five times, you tell a robot: \"do print-a-star, five rounds.\" You say WHAT to repeat and HOW MANY times — the robot handles the boredom.\n\n1..=5 means \"1 up to and including 5\" — five rounds. The two dots with an equals sign are the difference between 5 stars and 4.", id: "Alih-alih menulis \"cetak bintang\" lima kali, kamu memerintahkan robot: \"lakukan cetak-bintang, lima putaran.\" Kamu bilang APA yang diulang dan BERAPA kali — robot yang menanggung kebosanannya.\n\n1..=5 berarti \"1 sampai dengan 5\" — lima putaran. Dua titik dengan tanda sama dengan itulah bedanya antara 5 bintang dan 4." }
   },
 
   wordWall: [
@@ -22,18 +16,10 @@ LESSONS[3] = {
 
   thinkSkill: {
     name: "Pattern Recognition",
-    en: {
-      hook: "Your brain is a pattern-finding machine — loops are what patterns look like in code.",
-      realLife: "Days of the week. Choruses in songs. Stairs on a staircase. You never ask \"which step comes next?\" because the pattern already told you. Spotting WHAT repeats — and HOW MANY times — is pattern recognition.",
-      codeLink: "When code repeats, a programmer never types it twice. Spot the pattern: \"print a star\" happens 5 times → wrap it in for _ in 1..=5. The repeating part goes INSIDE the loop; anything that changes each round (like the row number) gets its own pocket.",
-      tryIt: "Find three things around you that repeat. For each, say: what repeats, and how many times?",
-    },
-    id: {
-      hook: "Otakmu adalah mesin pencari pola — loop adalah wujud pola di dalam kode.",
-      realLife: "Hari dalam seminggu. Reff lagu. Anak tangga. Kamu tidak pernah bertanya \"anak tangga berikutnya seperti apa?\" karena polanya sudah memberitahumu. Menemukan APA yang berulang — dan BERAPA kali — itulah pengenalan pola.",
-      codeLink: "Saat kode berulang, programmer tidak pernah mengetiknya dua kali. Temukan polanya: \"cetak bintang\" terjadi 5 kali → bungkus dengan for _ in 1..=5. Bagian yang berulang masuk KE DALAM loop; apa pun yang berubah setiap putaran (seperti nomor baris) mendapat kantongnya sendiri.",
-      tryIt: "Temukan tiga hal di sekitarmu yang berulang. Untuk masing-masing, katakan: apa yang berulang, dan berapa kali?",
-    },
+    hook: { en: "Your brain is a pattern-finding machine — loops are what patterns look like in code.", id: "Otakmu adalah mesin pencari pola — loop adalah wujud pola di dalam kode." },
+    realLife: { en: "Days of the week. Choruses in songs. Stairs on a staircase. You never ask \"which step comes next?\" because the pattern already told you. Spotting WHAT repeats — and HOW MANY times — is pattern recognition.", id: "Hari dalam seminggu. Reff lagu. Anak tangga. Kamu tidak pernah bertanya \"anak tangga berikutnya seperti apa?\" karena polanya sudah memberitahumu. Menemukan APA yang berulang — dan BERAPA kali — itulah pengenalan pola." },
+    codeLink: { en: "When code repeats, a programmer never types it twice. Spot the pattern: \"print a star\" happens 5 times → wrap it in for _ in 1..=5. The repeating part goes INSIDE the loop; anything that changes each round (like the row number) gets its own pocket.", id: "Saat kode berulang, programmer tidak pernah mengetiknya dua kali. Temukan polanya: \"cetak bintang\" terjadi 5 kali → bungkus dengan for _ in 1..=5. Bagian yang berulang masuk KE DALAM loop; apa pun yang berubah setiap putaran (seperti nomor baris) mendapat kantongnya sendiri." },
+    tryIt: { en: "Find three things around you that repeat. For each, say: what repeats, and how many times?", id: "Temukan tiga hal di sekitarmu yang berulang. Untuk masing-masing, katakan: apa yang berulang, dan berapa kali?" }
   },
 
   codeWalkthrough: [

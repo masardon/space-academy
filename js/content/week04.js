@@ -1,14 +1,8 @@
 // Week 4 — The Mission Control Panel (Functions)
 LESSONS[4] = {
   bigIdea: {
-    en: {
-      title: "A Function Is a Machine with a Name",
-      body: "Picture a vending machine. You put something IN (a coin), the machine does its hidden work, and something comes OUT (a snack). A function works the same: inputs go in through slots called parameters, the machine runs its steps, and a result comes out — the return value.\n\nBest part: you give the machine a NAME. From then on, anyone can use it without knowing how the inside works.",
-    },
-    id: {
-      title: "Fungsi Adalah Mesin yang Punya Nama",
-      body: "Bayangkan mesin penjual otomatis. Kamu memasukkan sesuatu (koin), mesin mengerjakan rahasianya, dan sesuatu keluar (camilan). Fungsi bekerja sama: masukan masuk lewat celah bernama parameter, mesin menjalankan langkah-langkahnya, dan hasil keluar — itulah nilai kembalian.\n\nBagian terbaiknya: kamu memberi mesin itu NAMA. Sejak saat itu, siapa pun bisa memakainya tanpa tahu cara kerja bagian dalamnya.",
-    },
+    title: { en: "A Function Is a Machine with a Name", id: "Fungsi Adalah Mesin yang Punya Nama" },
+    body: { en: "Picture a vending machine. You put something IN (a coin), the machine does its hidden work, and something comes OUT (a snack). A function works the same: inputs go in through slots called parameters, the machine runs its steps, and a result comes out — the return value.\n\nBest part: you give the machine a NAME. From then on, anyone can use it without knowing how the inside works.", id: "Bayangkan mesin penjual otomatis. Kamu memasukkan sesuatu (koin), mesin mengerjakan rahasianya, dan sesuatu keluar (camilan). Fungsi bekerja sama: masukan masuk lewat celah bernama parameter, mesin menjalankan langkah-langkahnya, dan hasil keluar — itulah nilai kembalian.\n\nBagian terbaiknya: kamu memberi mesin itu NAMA. Sejak saat itu, siapa pun bisa memakainya tanpa tahu cara kerja bagian dalamnya." }
   },
 
   wordWall: [
@@ -22,18 +16,10 @@ LESSONS[4] = {
 
   thinkSkill: {
     name: "Abstraction",
-    en: {
-      hook: "You use powerful machines every day without ever seeing their insides.",
-      realLife: "Pressing play on a cartoon is ONE button. Inside, a hundred steps happen — you don't care. The button's name hides the details so your brain can think \"play\" instead of \"decode video frames\". Hiding details behind a simple name is abstraction.",
-      codeLink: "generate_question() is a button labeled \"make me a question\". main() presses it without knowing how it works. When you wrap steps in a named function, you can THINK about it as one step instead of ten — that's how programmers stay sane in huge programs.",
-      tryIt: "Name three \"buttons\" you pressed today. For each: what does the name hide?",
-    },
-    id: {
-      hook: "Kamu memakai mesin-mesin hebat setiap hari tanpa pernah melihat bagian dalamnya.",
-      realLife: "Menekan play pada kartun adalah SATU tombol. Di dalamnya, seratus langkah terjadi — kamu tidak peduli. Nama tombol menyembunyikan detail agar otakmu cukup berpikir \"putar\" alih-alih \"uraikan frame video\". Menyembunyikan detail di balik nama sederhana itulah abstraksi.",
-      codeLink: "generate_question() adalah tombol bertuliskan \"buatkan aku pertanyaan\". main() menekannya tanpa tahu cara kerjanya. Ketika kamu membungkus langkah-langkah dalam fungsi bernama, kamu bisa memikirkannya sebagai SATU langkah, bukan sepuluh — begitulah programmer tetap waras di program raksasa.",
-      tryIt: "Sebutkan tiga \"tombol\" yang kamu tekan hari ini. Untuk masing-masing: detail apa yang disembunyikan namanya?",
-    },
+    hook: { en: "You use powerful machines every day without ever seeing their insides.", id: "Kamu memakai mesin-mesin hebat setiap hari tanpa pernah melihat bagian dalamnya." },
+    realLife: { en: "Pressing play on a cartoon is ONE button. Inside, a hundred steps happen — you don't care. The button's name hides the details so your brain can think \"play\" instead of \"decode video frames\". Hiding details behind a simple name is abstraction.", id: "Menekan play pada kartun adalah SATU tombol. Di dalamnya, seratus langkah terjadi — kamu tidak peduli. Nama tombol menyembunyikan detail agar otakmu cukup berpikir \"putar\" alih-alih \"uraikan frame video\". Menyembunyikan detail di balik nama sederhana itulah abstraksi." },
+    codeLink: { en: "generate_question() is a button labeled \"make me a question\". main() presses it without knowing how it works. When you wrap steps in a named function, you can THINK about it as one step instead of ten — that's how programmers stay sane in huge programs.", id: "generate_question() adalah tombol bertuliskan \"buatkan aku pertanyaan\". main() menekannya tanpa tahu cara kerjanya. Ketika kamu membungkus langkah-langkah dalam fungsi bernama, kamu bisa memikirkannya sebagai SATU langkah, bukan sepuluh — begitulah programmer tetap waras di program raksasa." },
+    tryIt: { en: "Name three \"buttons\" you pressed today. For each: what does the name hide?", id: "Sebutkan tiga \"tombol\" yang kamu tekan hari ini. Untuk masing-masing: detail apa yang disembunyikan namanya?" }
   },
 
   codeWalkthrough: [

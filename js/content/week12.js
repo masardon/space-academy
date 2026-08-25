@@ -1,14 +1,8 @@
 // Week 12 — Demo Day (Showcase & Metacognition)
 LESSONS[12] = {
   bigIdea: {
-    en: {
-      title: "Explaining Is the Final Level of Knowing",
-      body: "Twelve weeks ago, a variable was a strange word. Today you can build machines that sense, decide, and act — and explain HOW.\n\nToday isn't about new code. It's about proving what you know by TEACHING it: show the robot, explain one piece of code, tell one bug story. If you can explain it, you own it.",
-    },
-    id: {
-      title: "Menjelaskan Adalah Level Terakhir dari Paham",
-      body: "Dua belas minggu lalu, variabel adalah kata asing. Hari ini kamu bisa membangun mesin yang merasa, memutuskan, dan bertindak — serta menjelaskan CARANYA.\n\nHari ini bukan tentang kode baru. Ini tentang membuktikan apa yang kamu tahu dengan MENGAJARKANNYA: perlihatkan robotnya, jelaskan satu potongan kode, ceritakan satu kisah bug. Jika bisa menjelaskannya, kamu menguasainya.",
-    },
+    title: { en: "Explaining Is the Final Level of Knowing", id: "Menjelaskan Adalah Level Terakhir dari Paham" },
+    body: { en: "Twelve weeks ago, a variable was a strange word. Today you can build machines that sense, decide, and act — and explain HOW.\n\nToday isn't about new code. It's about proving what you know by TEACHING it: show the robot, explain one piece of code, tell one bug story. If you can explain it, you own it.", id: "Dua belas minggu lalu, variabel adalah kata asing. Hari ini kamu bisa membangun mesin yang merasa, memutuskan, dan bertindak — serta menjelaskan CARANYA.\n\nHari ini bukan tentang kode baru. Ini tentang membuktikan apa yang kamu tahu dengan MENGAJARKANNYA: perlihatkan robotnya, jelaskan satu potongan kode, ceritakan satu kisah bug. Jika bisa menjelaskannya, kamu menguasainya." }
   },
 
   wordWall: [
@@ -20,17 +14,10 @@ LESSONS[12] = {
 
   thinkSkill: {
     name: "Metacognition",
-    en: {
-      hook: "Thinking about your own thinking — the skill that upgrades all the other skills.",
-      realLife: "Athletes watch replays: what did I do well? what will I try next time? They're not being hard on themselves — they're coaching themselves.",
-      codeLink: "Today you replay all twelve weeks: one concept you can explain, one bug you conquered, one thing you'd tell Week-1-you. Teaching an idea proves you understand it better than any test ever could.",
-      tryIt: "Tell your rubber duck the ONE thing you're proudest of building. Out loud. That's your demo's heart.",
-    },
-    id: {
-      hook: "Berpikir tentang cara berpikirmu sendiri — keterampilan yang meningkatkan semua keterampilan lain.",
-      realLife: "Atlet menonton ulangan pertandingan: apa yang sudah baik? apa yang akan kucoba lain kali? Mereka tidak sedang kejam pada diri sendiri — mereka melatih diri sendiri.",
-      codeLink: "Hari ini kamu memutar ulang dua belas minggu: satu konsep yang bisa kamu jelaskan, satu bug yang kamu taklukkan, satu hal yang ingin kamu katakan kepada dirimu yang di minggu 1. Mengajarkan sebuah ide membuktikan pemahamanmu lebih baik daripada tes apa pun.",
-      tryIt: "Katakan pada bebek karetmu SATU hal yang paling membanggakan untuk dibangun. Keras-keras. Itulah jantung demomu." },
+    hook: { en: "Thinking about your own thinking — the skill that upgrades all the other skills.", id: "Berpikir tentang cara berpikirmu sendiri — keterampilan yang meningkatkan semua keterampilan lain." },
+    realLife: { en: "Athletes watch replays: what did I do well? what will I try next time? They're not being hard on themselves — they're coaching themselves.", id: "Atlet menonton ulangan pertandingan: apa yang sudah baik? apa yang akan kucoba lain kali? Mereka tidak sedang kejam pada diri sendiri — mereka melatih diri sendiri." },
+    codeLink: { en: "Today you replay all twelve weeks: one concept you can explain, one bug you conquered, one thing you'd tell Week-1-you. Teaching an idea proves you understand it better than any test ever could.", id: "Hari ini kamu memutar ulang dua belas minggu: satu konsep yang bisa kamu jelaskan, satu bug yang kamu taklukkan, satu hal yang ingin kamu katakan kepada dirimu yang di minggu 1. Mengajarkan sebuah ide membuktikan pemahamanmu lebih baik daripada tes apa pun." },
+    tryIt: { en: "Tell your rubber duck the ONE thing you're proudest of building. Out loud. That's your demo's heart.", id: "Katakan pada bebek karetmu SATU hal yang paling membanggakan untuk dibangun. Keras-keras. Itulah jantung demomu." }
   },
 
   codeWalkthrough: [

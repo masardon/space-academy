@@ -1,14 +1,8 @@
 // Week 2 — The Choice Portal (Conditionals)
 LESSONS[2] = {
   bigIdea: {
-    en: {
-      title: "Every Choice Is a Fork in the Road",
-      body: "Your program just walked up to a fork in the road. if asks ONE question, the answer is always true or false, and the answer picks the path.\n\nOnly ONE branch ever runs. The moment a question answers true, its code runs and every other branch is skipped — like doors slamming shut behind you.",
-    },
-    id: {
-      title: "Setiap Pilihan Adalah Persimpangan Jalan",
-      body: "Programmu baru saja berdiri di persimpangan jalan. if mengajukan SATU pertanyaan, jawabannya selalu true atau false, dan jawaban itulah yang memilih jalan.\n\nHanya SATU cabang yang pernah berjalan. Begitu ada pertanyaan yang menjawab true, kodenya berjalan dan semua cabang lain dilewati — seperti pintu yang tertutup di belakangmu.",
-    },
+    title: { en: "Every Choice Is a Fork in the Road", id: "Setiap Pilihan Adalah Persimpangan Jalan" },
+    body: { en: "Your program just walked up to a fork in the road. if asks ONE question, the answer is always true or false, and the answer picks the path.\n\nOnly ONE branch ever runs. The moment a question answers true, its code runs and every other branch is skipped — like doors slamming shut behind you.", id: "Programmu baru saja berdiri di persimpangan jalan. if mengajukan SATU pertanyaan, jawabannya selalu true atau false, dan jawaban itulah yang memilih jalan.\n\nHanya SATU cabang yang pernah berjalan. Begitu ada pertanyaan yang menjawab true, kodenya berjalan dan semua cabang lain dilewati — seperti pintu yang tertutup di belakangmu." }
   },
 
   wordWall: [
@@ -21,18 +15,10 @@ LESSONS[2] = {
 
   thinkSkill: {
     name: "Conditional Reasoning",
-    en: {
-      hook: "You already run if/else every single morning — you just never called it code.",
-      realLife: "Getting dressed: IF it's cold, wear a jacket. ELSE IF it's raining, take an umbrella. ELSE wear sunglasses. You check conditions, pick one path, and never wear all three at once.",
-      codeLink: "In code, the question is a comparison: choice == \"left\" produces true or false. The branch that matches runs; ALL others are skipped. First match wins — so the ORDER of your questions matters.",
-      tryIt: "Write your morning as three if / else if / else rules on paper. Test them: what happens on a cold AND rainy day?",
-    },
-    id: {
-      hook: "Kamu sebenarnya menjalankan if/else setiap pagi — kamu hanya belum menyebutnya kode.",
-      realLife: "Berpakaian: IF dingin, pakai jaket. ELSE IF hujan, bawa payung. ELSE pakai kacamata hitam. Kamu memeriksa syarat, memilih satu jalan, dan tidak pernah memakai ketiganya sekaligus.",
-      codeLink: "Dalam kode, pertanyaannya adalah perbandingan: choice == \"left\" menghasilkan true atau false. Cabang yang cocok berjalan; SEMUA cabang lain dilewati. Kecocokan pertama menang — jadi URUTAN pertanyaanmu penting.",
-      tryIt: "Tulis pagimu sebagai tiga aturan if / else if / else di kertas. Uji: apa yang terjadi pada hari yang dingin DAN hujan?",
-    },
+    hook: { en: "You already run if/else every single morning — you just never called it code.", id: "Kamu sebenarnya menjalankan if/else setiap pagi — kamu hanya belum menyebutnya kode." },
+    realLife: { en: "Getting dressed: IF it's cold, wear a jacket. ELSE IF it's raining, take an umbrella. ELSE wear sunglasses. You check conditions, pick one path, and never wear all three at once.", id: "Berpakaian: IF dingin, pakai jaket. ELSE IF hujan, bawa payung. ELSE pakai kacamata hitam. Kamu memeriksa syarat, memilih satu jalan, dan tidak pernah memakai ketiganya sekaligus." },
+    codeLink: { en: "In code, the question is a comparison: choice == \"left\" produces true or false. The branch that matches runs; ALL others are skipped. First match wins — so the ORDER of your questions matters.", id: "Dalam kode, pertanyaannya adalah perbandingan: choice == \"left\" menghasilkan true atau false. Cabang yang cocok berjalan; SEMUA cabang lain dilewati. Kecocokan pertama menang — jadi URUTAN pertanyaanmu penting." },
+    tryIt: { en: "Write your morning as three if / else if / else rules on paper. Test them: what happens on a cold AND rainy day?", id: "Tulis pagimu sebagai tiga aturan if / else if / else di kertas. Uji: apa yang terjadi pada hari yang dingin DAN hujan?" }
   },
 
   codeWalkthrough: [
