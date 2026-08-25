@@ -122,13 +122,16 @@ Views.setLanguage = (lang) => {
   // Update all UI strings that use data-i18n attribute
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    const translation = I18N.t(I18N.ui[key] || key);
+    const enText = I18N.ui.en[key];
+    const idText = I18N.ui.id[key];
+    const translation = I18N.t({ en: enText, id: idText });
     if (translation) el.textContent = translation;
   });
   // Update header title if on a view that uses i18n
   const headerTitle = document.getElementById('headerTitle');
   if (headerTitle && headerTitle.dataset.i18n) {
-    headerTitle.textContent = I18N.t(I18N.ui[headerTitle.dataset.i18n] || headerTitle.dataset.i18n);
+    const key = headerTitle.dataset.i18n;
+    headerTitle.textContent = I18N.t({ en: I18N.ui.en[key], id: I18N.ui.id[key] });
   }
   // Re-render current view if it's settings (to update group titles etc.)
   if (Router.currentView === 'settings') {

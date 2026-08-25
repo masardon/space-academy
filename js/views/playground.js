@@ -3,9 +3,9 @@
 // ============================================
 
 window.Views = window.Views || {};
-Views.playground = () => {
+Views.playground = (params) => {
   const main = document.getElementById("mainContent");
-  const weekParam = Router.getParams().week;
+  const weekParam = params?.week;
   const t = (x) => I18N.t(x);
 
   main.innerHTML = `
@@ -77,10 +77,10 @@ Views.playground = () => {
       <details class="starter-templates" style="margin-top:24px;">
         <summary style="cursor:pointer;font-weight:600;color:var(--accent-light);">${t({ en: "📚 Starter Templates (click to load)", id: "📚 Template Starter (klik untuk muat)" })}</summary>
         <div class="template-grid" style="margin-top:12px;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
-          ${PLAYGROUND_TEMPLATES.map(t => `
-            <button class="card template-card" onclick="Views.loadTemplate('${t.id}')" style="text-align:left;">
-              <strong>${t({ en: t.title, id: t.title })}</strong>
-              <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:4px;">${t({ en: t.desc, id: t.desc })}</p>
+          ${PLAYGROUND_TEMPLATES.map(tmpl => `
+            <button class="card template-card" onclick="Views.loadTemplate('${tmpl.id}')" style="text-align:left;">
+              <strong>${t({ en: tmpl.title, id: tmpl.title })}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:4px;">${t({ en: tmpl.desc, id: tmpl.desc })}</p>
             </button>
           `).join('')}
         </div>
