@@ -2,6 +2,7 @@
 // SPACE ACADEMY — Missions View
 // ============================================
 
+window.Views = window.Views || {};
 Views.missions = () => {
   const pilot = progress.getCurrentPilot();
   const main = document.getElementById("mainContent");

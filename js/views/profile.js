@@ -2,6 +2,7 @@
 // SPACE ACADEMY — Profile View
 // ============================================
 
+window.Views = window.Views || {};
 Views.profile = () => {
   const pilotName = progress.getCurrentPilot();
   const pilot = progress.getPilots()[pilotName];

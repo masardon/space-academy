@@ -4,6 +4,7 @@
 // Renders a full guided lesson when LESSONS[week] exists, and falls back to
 // the classic mission view otherwise (used while content is being authored).
 
+window.Views = window.Views || {};
 const QuizState = {};
 
 Views.weekDetail = (params) => {

@@ -2,6 +2,7 @@
 // SPACE ACADEMY — About View
 // ============================================
 
+window.Views = window.Views || {};
 Views.about = () => {
   const main = document.getElementById("mainContent");
   const t = (x) => I18N.t(x);

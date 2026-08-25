@@ -2,6 +2,7 @@
 // SPACE ACADEMY — Pilot Select View
 // ============================================
 
+window.Views = window.Views || {};
 Views.pilotSelect = () => {
   const pilots = progress.getPilots();
   const main = document.getElementById("mainContent");

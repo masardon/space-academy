@@ -2,6 +2,7 @@
 // SPACE ACADEMY — Playground View (Code Evaluator)
 // ============================================
 
+window.Views = window.Views || {};
 Views.playground = () => {
   const main = document.getElementById("mainContent");
   const weekParam = Router.getParams().week;

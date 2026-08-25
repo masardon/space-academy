@@ -2,6 +2,7 @@
 // SPACE ACADEMY — Welcome View
 // ============================================
 
+window.Views = window.Views || {};
 Views.welcome = () => {
   const pilot = progress.getCurrentPilot();
   const main = document.getElementById("mainContent");

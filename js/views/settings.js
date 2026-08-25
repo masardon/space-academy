@@ -2,6 +2,7 @@
 // SPACE ACADEMY — Settings View
 // ============================================
 
+window.Views = window.Views || {};
 Views.settings = () => {
   const pilots = progress.getPilots();
   const main = document.getElementById("mainContent");
