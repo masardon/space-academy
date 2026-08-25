@@ -261,6 +261,24 @@ Views.weekDetail = (params) => {
 
   html += `</div>`;
   main.innerHTML = html;
+
+  // Keyboard navigation: ←/→ arrows to go to previous/next week
+  document.addEventListener('keydown', Views.handleWeekKeydown);
+};
+
+Views.handleWeekKeydown = (e) => {
+  // Only handle in week view
+  if (Router.currentView !== 'week') return;
+  const weekNum = parseInt(Router.params.id);
+  if (!weekNum) return;
+  
+  if (e.key === 'ArrowLeft' && weekNum > 1) {
+    e.preventDefault();
+    Router.navigate('week', { id: String(weekNum - 1) });
+  } else if (e.key === 'ArrowRight' && weekNum < 12) {
+    e.preventDefault();
+    Router.navigate('week', { id: String(weekNum + 1) });
+  }
 };
 
 // ---------- section helpers ----------
@@ -357,6 +375,11 @@ Views.toggleChallenge = (weekNum, index, checkbox) => {
   const li = checkbox.closest('li');
   if (li) li.classList.toggle('done', checked);
 
+  // Micro-celebration for individual challenge
+  if (checked) {
+    Views.celebrate('challenge');
+  }
+
   // Check if all challenges are done
   const week = ACADEMY.weeks.find(w => w.week === weekNum);
   const allDone = week.challenges.every((_, i) => progress.getChecklist(weekNum)[i]);
@@ -364,6 +387,60 @@ Views.toggleChallenge = (weekNum, index, checkbox) => {
     setTimeout(() => {
       showToast(`🎉 All challenges complete! Mission ${weekNum} unlocked!`, "success");
     }, 300);
+  }
+};
+
+// Micro-celebration (confetti burst)
+Views.celebrate = (type) => {
+  const colors = ['#7f5af0', '#2cb67d', '#ff8906', '#3da9fc', '#e53170', '#00f5d4'];
+  const container = document.getElementById('mainContent');
+  if (!container) return;
+
+  const count = type === 'week' ? 50 : 15;
+  for (let i = 0; i < count; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.cssText = `
+      position: fixed;
+      left: ${Math.random() * 100}vw;
+      top: -10px;
+      width: ${8 + Math.random() * 6}px;
+      height: ${8 + Math.random() * 6}px;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.9;
+      transform: rotate(${Math.random() * 360}deg);
+    `;
+    document.body.appendChild(confetti);
+
+    const fallDuration = 1500 + Math.random() * 1000;
+    const drift = (Math.random() - 0.5) * 200;
+
+    confetti.animate([
+      { transform: `translate(0, 0) rotate(0deg)`, opacity: 0.9 },
+      { transform: `translate(${drift}px, ${window.innerHeight + 50}px) rotate(${720 + Math.random() * 720}deg)`, opacity: 0 }
+    ], {
+      duration: fallDuration,
+      easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    }).onfinish = () => confetti.remove();
+  }
+
+  // Screen flash for week completion
+  if (type === 'week') {
+    const flash = document.createElement('div');
+    flash.style.cssText = `
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(127,90,240,0.3), transparent 70%);
+      pointer-events: none;
+      z-index: 9998;
+    `;
+    document.body.appendChild(flash);
+    flash.animate([{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], {
+      duration: 800,
+      easing: 'ease-out'
+    }).onfinish = () => flash.remove();
   }
 };
 

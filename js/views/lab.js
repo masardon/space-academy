@@ -12,6 +12,13 @@ Views.lab = () => {
         <p>Your workspace — reference materials, wiring diagrams, and tools for every mission.</p>
       </div>
 
+      <!-- Search -->
+      <div class="lab-search" style="margin: 16px 0;">
+        <input type="search" id="labSearch" placeholder="🔍 Search cheat sheets, wiring, debug tips, terms..." 
+               oninput="Views.filterLab(this.value)" 
+               style="width:100%;padding:12px 16px;font-size:0.9375rem;border-radius:var(--radius-md);border:1px solid var(--border-color);background:var(--bg-elevated);color:var(--text-primary);font-family:var(--font-body);">
+      </div>
+
       <!-- Quick Reference Tabs -->
       <div class="pills">
         <button class="pill active" onclick="Views.showLabSection('cheatsheet', this)">Cheat Sheet</button>
@@ -26,6 +33,35 @@ Views.lab = () => {
   `;
 
   Views.showLabSection('cheatsheet');
+};
+
+Views.filterLab = (query) => {
+  const content = document.getElementById('labContent');
+  if (!content) return;
+  
+  const q = query.toLowerCase().trim();
+  const cards = content.querySelectorAll('.card, .lab-section > div, .lab-section > h3, .lab-section > p, .lab-section .code-block, .info-box');
+  
+  if (!q) {
+    cards.forEach(el => el.style.display = '');
+    return;
+  }
+  
+  cards.forEach(el => {
+    const text = el.textContent.toLowerCase();
+    el.style.display = text.includes(q) ? '' : 'none';
+  });
+  
+  // Also hide section headers if all their content is hidden
+  const sections = content.querySelectorAll('.lab-section');
+  sections.forEach(section => {
+    const visible = section.querySelector('[style="display: none;"]') === null || 
+                    Array.from(section.querySelectorAll('*')).some(el => el.style.display !== 'none' && el.offsetParent !== null);
+    // Simpler: just check if any direct content child is visible
+    const hasVisible = Array.from(section.children).some(child => 
+      child.style.display !== 'none' && child.textContent.trim() && child.offsetParent !== null
+    );
+  });
 };
 
 Views.showLabSection = (section, btn) => {
