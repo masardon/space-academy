@@ -5,59 +5,60 @@
 Views.playground = () => {
   const main = document.getElementById("mainContent");
   const weekParam = Router.getParams().week;
+  const t = (x) => I18N.t(x);
 
   main.innerHTML = `
     <div class="view">
       <div class="section-header">
-        <h2>🧪 Code Playground</h2>
-        <p>Write, run, and experiment with Rust code — right here in your browser.</p>
+        <h2>${t({ en: "🧪 Code Playground", id: "🧪 Taman Kode" })}</h2>
+        <p>${t({ en: "Write, run, and experiment with Rust code — right here in your browser.", id: "Tulis, jalankan, dan bereksperimen dengan kode Rust — langsung di browser." })}</p>
       </div>
 
       <div class="pills" style="margin-bottom:16px;">
         ${[1,2,3,4,5,6,7,8].map(w => `
           <button class="pill ${weekParam == w ? 'active' : ''}" 
                   onclick="Router.navigate('playground',{week:'${w}','${w}')}"
-                  aria-label="Week ${w} starter">${w}</button>
+                  aria-label="${t({ en: "Week", id: "Minggu" })} ${w} ${t({ en: "starter", id: "starter" })}">${w}</button>
         `).join('')}
         <button class="pill ${!weekParam ? 'active' : ''}" 
                 onclick="Router.navigate('playground',{})"
-                aria-label="Blank slate">Blank</button>
+                aria-label="${t({ en: "Blank slate", id: "Kosong" })}">${t({ en: "Blank", id: "Kosong" })}</button>
       </div>
 
       <div class="playground-split">
         <!-- Editor Panel -->
         <div class="playground-panel editor-panel">
           <div class="panel-header">
-            <span>📝 Editor</span>
+            <span>${t({ en: "📝 Editor", id: "📝 Editor" })}</span>
             <div class="editor-toolbar">
-              <button class="btn-icon" id="btnFormat" title="Format" aria-label="Format code">
+              <button class="btn-icon" id="btnFormat" title="${t({ en: "Format", id: "Format" })}" aria-label="${t({ en: "Format code", id: "Format kode" })}">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="19" x2="10" y2="5"/><line x1="14" y1="19" x2="14" y2="5"/><line x1="18" y1="19" x2="18" y2="5"/></svg>
               </button>
-              <button class="btn-icon" id="btnClear" title="Clear" aria-label="Clear editor">
+              <button class="btn-icon" id="btnClear" title="${t({ en: "Clear", id: "Bersihkan" })}" aria-label="${t({ en: "Clear editor", id: "Bersihkan editor" })}">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
               </button>
             </div>
           </div>
           <div class="editor-wrapper">
-            <textarea id="codeEditor" class="code-editor" spellcheck="false" placeholder="// Type Rust code here...&#10;fn main() {&#10;    println!("Hello, Space Academy!");&#10;}"></textarea>
+            <textarea id="codeEditor" class="code-editor" spellcheck="false" placeholder="${t({ en: "// Type Rust code here...", id: "// Tulis kode Rust di sini..." })}\nfn main() {\n    println!(\"${t({ en: "Hello, Space Academy!", id: "Halo, Space Academy!" })}\");\n}"></textarea>
           </div>
         </div>
 
         <!-- Output Panel -->
         <div class="playground-panel output-panel">
           <div class="panel-header">
-            <span>📤 Output</span>
+            <span>${t({ en: "📤 Output", id: "📤 Keluaran" })}</span>
             <div class="output-toolbar">
-              <button class="btn-icon" id="btnCopyOutput" title="Copy output" aria-label="Copy output">
+              <button class="btn-icon" id="btnCopyOutput" title="${t({ en: "Copy output", id: "Salin keluaran" })}" aria-label="${t({ en: "Copy output", id: "Salin keluaran" })}">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               </button>
-              <button class="btn-icon" id="btnClearOutput" title="Clear output" aria-label="Clear output">
+              <button class="btn-icon" id="btnClearOutput" title="${t({ en: "Clear output", id: "Bersihkan keluaran" })}" aria-label="${t({ en: "Clear output", id: "Bersihkan keluaran" })}">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
               </button>
             </div>
           </div>
           <div class="output-wrapper">
-            <pre id="codeOutput" class="code-output"><span class="output-hint">Click ▶ Run to see output...</span></pre>
+            <pre id="codeOutput" class="code-output"><span class="output-hint">${t({ en: "Click ▶ Run to see output...", id: "Klik ▶ Jalankan untuk lihat keluaran..." })}</span></pre>
           </div>
         </div>
       </div>
@@ -66,19 +67,19 @@ Views.playground = () => {
       <div style="text-align:center;margin-top:16px;">
         <button class="btn btn-primary btn-large" id="btnRun" onclick="Views.runPlaygroundCode()">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Run Code
+          ${t({ en: "Run Code", id: "Jalankan Kode" })}
         </button>
         <span id="runStatus" style="margin-left:12px;font-size:0.875rem;color:var(--text-muted);"></span>
       </div>
 
       <!-- Starter Templates -->
       <details class="starter-templates" style="margin-top:24px;">
-        <summary style="cursor:pointer;font-weight:600;color:var(--accent-light);">📚 Starter Templates (click to load)</summary>
+        <summary style="cursor:pointer;font-weight:600;color:var(--accent-light);">${t({ en: "📚 Starter Templates (click to load)", id: "📚 Template Starter (klik untuk muat)" })}</summary>
         <div class="template-grid" style="margin-top:12px;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
           ${PLAYGROUND_TEMPLATES.map(t => `
             <button class="card template-card" onclick="Views.loadTemplate('${t.id}')" style="text-align:left;">
-              <strong>${t.title}</strong>
-              <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:4px;">${t.desc}</p>
+              <strong>${t({ en: t.title, id: t.title })}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:4px;">${t({ en: t.desc, id: t.desc })}</p>
             </button>
           `).join('')}
         </div>
@@ -448,15 +449,17 @@ Views.clearEditor = () => {
 
 Views.clearOutput = () => {
   const output = document.getElementById('codeOutput');
-  if (output) output.innerHTML = '<span class="output-hint">Click ▶ Run to see output...</span>';
-  Views.updateRunStatus('Output cleared');
+  const t = (x) => I18N.t(x);
+  if (output) output.innerHTML = `<span class="output-hint">${t({ en: "Click ▶ Run to see output...", id: "Klik ▶ Jalankan untuk lihat keluaran..." })}</span>`;
+  Views.updateRunStatus(t({ en: "Output cleared", id: "Keluaran dibersihkan" }));
 };
 
 Views.copyOutput = () => {
   const output = document.getElementById('codeOutput');
+  const t = (x) => I18N.t(x);
   if (output) {
     navigator.clipboard.writeText(output.textContent).then(() => {
-      Views.updateRunStatus('Output copied!');
+      Views.updateRunStatus(t({ en: "Output copied!", id: "Keluaran disalin!" }));
     });
   }
 };
@@ -466,18 +469,19 @@ Views.runPlaygroundCode = async () => {
   const editor = document.getElementById('codeEditor');
   const output = document.getElementById('codeOutput');
   const runBtn = document.getElementById('btnRun');
+  const t = (x) => I18N.t(x);
   
   if (!editor || !output) return;
   
   const code = editor.value.trim();
   if (!code) {
-    Views.updateRunStatus('Editor is empty');
+    Views.updateRunStatus(t({ en: "Editor is empty", id: "Editor kosong" }));
     return;
   }
 
   runBtn.disabled = true;
-  runBtn.innerHTML = `<svg class="spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> Running...`;
-  Views.updateRunStatus('Evaluating...');
+  runBtn.innerHTML = `<svg class="spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> ${t({ en: "Running...", id: "Menjalankan..." })}`;
+  Views.updateRunStatus(t({ en: "Evaluating...", id: "Mengevaluasi..." }));
 
   // Simulate async execution
   await new Promise(r => setTimeout(r, 300));
@@ -488,17 +492,18 @@ Views.runPlaygroundCode = async () => {
     Views.updateRunStatus(result.status);
   } catch (err) {
     output.innerHTML = `<span class="output-error">Error: ${escapeHtml(err.message)}</span>`;
-    Views.updateRunStatus('Evaluation failed');
+    Views.updateRunStatus(t({ en: "Evaluation failed", id: "Evaluasi gagal" }));
   }
 
   runBtn.disabled = false;
-  runBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;"><polygon points="5 3 19 12 5 21 5 3"/></svg> Run Code`;
+  runBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;"><polygon points="5 3 19 12 5 21 5 3"/></svg> ${t({ en: "Run Code", id: "Jalankan Kode" })}`;
 };
 
 // Rust-like evaluator for lesson patterns
 Views.evaluateRustLike = (code) => {
   let output = '';
-  let status = 'Completed';
+  const t = (x) => I18N.t(x);
+  let status = t({ en: "Completed", id: "Selesai" });
   let vars = {}; // variable store
   let structs = {}; // struct definitions
   let functions = {}; // function definitions
@@ -597,8 +602,9 @@ Views.evaluateRustLike = (code) => {
 
   // If no output, show that it ran silently
   if (!output.trim()) {
-    output = '<span class="output-success">✓ Program ran successfully (no output)</span>';
-    status = 'Completed silently';
+    const t = (x) => I18N.t(x);
+    output = `<span class="output-success">✓ ${t({ en: "Program ran successfully (no output)", id: "Program berjalan sukses (tanpa keluaran)" })}</span>`;
+    status = t({ en: "Completed silently", id: "Selesai tanpa output" });
   }
 
   return { output: escapeHtml(output).replace(/\n/g, '<br>'), status };

@@ -13,6 +13,7 @@ const Router = {
     "playground": "playground",
     "profile": "profile",
     "settings": "settings",
+    "about": "about",
   },
 
   init() {
@@ -59,6 +60,7 @@ const Router = {
       "playground": Views.playground,
       "profile": Views.profile,
       "settings": Views.settings,
+      "about": Views.about,
     };
 
     const renderFn = viewMap[this.currentView] || Views.welcome;
@@ -100,6 +102,7 @@ const Router = {
       "playground": "Playground",
       "profile": "Pilot Profile",
       "settings": "Settings",
+      "about": "About",
     };
     document.getElementById("headerTitle").textContent = titles[this.currentView] || "Space Academy";
   },

@@ -5,6 +5,7 @@
 Views.missions = () => {
   const pilot = progress.getCurrentPilot();
   const main = document.getElementById("mainContent");
+  const t = (x) => I18N.t(x);
 
   if (!pilot) {
     Router.navigate("welcome");
@@ -24,22 +25,22 @@ Views.missions = () => {
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
           <span style="font-size:2rem;">${progress.getPilots()[pilot]?.avatar || "👩‍🚀"}</span>
           <div>
-            <h2 style="margin:0;">Cadet ${escapeHtml(pilot)}</h2>
-            <p style="margin:0;font-size:0.875rem;color:var(--text-muted);">${progress.getPilots()[pilot]?.rank || "New Recruit"}</p>
+            <h2 style="margin:0;">${t({ en: "Cadet", id: "Kadet" })} ${escapeHtml(pilot)}</h2>
+            <p style="margin:0;font-size:0.875rem;color:var(--text-muted);">${progress.getPilots()[pilot]?.rank || t({ en: "New Recruit", id: "ReKRUT Baru" })}</p>
           </div>
         </div>
         <div style="display:flex;gap:16px;margin-top:16px;">
           <div style="text-align:center;padding:8px 16px;background:var(--bg-card);border-radius:12px;">
             <div style="font-size:1.25rem;font-weight:800;color:var(--warning);">${stars}</div>
-            <div style="font-size:0.6875rem;color:var(--text-muted);text-transform:uppercase;">Stars</div>
+            <div style="font-size:0.6875rem;color:var(--text-muted);text-transform:uppercase;">${t({ en: "Stars", id: "Bintang" })}</div>
           </div>
           <div style="text-align:center;padding:8px 16px;background:var(--bg-card);border-radius:12px;">
             <div style="font-size:1.25rem;font-weight:800;color:var(--success);">${completedWeeks}/12</div>
-            <div style="font-size:0.6875rem;color:var(--text-muted);text-transform:uppercase;">Missions</div>
+            <div style="font-size:0.6875rem;color:var(--text-muted);text-transform:uppercase;">${t({ en: "Missions", id: "Misi" })}</div>
           </div>
           <div style="text-align:center;padding:8px 16px;background:var(--bg-card);border-radius:12px;">
             <div style="font-size:1.25rem;font-weight:800;color:var(--info);">${checkpoint}</div>
-            <div style="font-size:0.6875rem;color:var(--text-muted);text-transform:uppercase;">Current</div>
+            <div style="font-size:0.6875rem;color:var(--text-muted);text-transform:uppercase;">${t({ en: "Current", id: "Saat Ini" })}</div>
           </div>
         </div>
       </div>
@@ -69,8 +70,8 @@ Views.missions = () => {
       html += `
         <div class="week-card ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}"
              style="--week-color:${color};--week-bg:${color}22;"
-             ${isLocked ? '' : `role="button" tabindex="0" aria-label="Open Week ${week.week}: ${week.title}" onclick="Router.navigate('week',{id:'${week.week}'})"`}>
-          <div class="week-number">Week ${String(week.week).padStart(2, '0')}</div>
+             ${isLocked ? '' : `role="button" tabindex="0" aria-label="${t({ en: "Open Week", id: "Buka Minggu" })} ${week.week}: ${week.title}" onclick="Router.navigate('week',{id:'${week.week}'})"`}>
+          <div class="week-number">${t({ en: "Week", id: "Minggu" })} ${String(week.week).padStart(2, '0')}</div>
           <div style="font-size:1.5rem;margin-bottom:4px;">${week.emoji}</div>
           <div class="week-title">${week.title}</div>
           <div class="week-desc">${week.hero.slice(0, 80)}...</div>
