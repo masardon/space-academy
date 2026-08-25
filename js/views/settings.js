@@ -83,7 +83,7 @@ Views.settings = () => {
 
       <div class="settings-group" style="padding-top:0;">
         <div class="settings-group-title">${t({ en: "About", id: "Tentang" })}</div>
-        <div class="settings-item" style="border-radius:var(--radius-lg) var(--radius-lg) 0 0;">
+        <div class="settings-item" style="border-radius:var(--radius-lg) var(--radius-lg) 0 0;" role="button" tabindex="0" onclick="Router.navigate('about')">
           <div class="settings-item-left">
             <div class="settings-item-icon">🚀</div>
             <div class="settings-item-text">
@@ -91,8 +91,9 @@ Views.settings = () => {
               <p>Version 1.0 · ${t({ en: "Computational Thinking Curriculum", id: "Kurikulum Berpikir Komputasional" })}</p>
             </div>
           </div>
+          <svg class="settings-item-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
         </div>
-        <div class="settings-item" style="border-radius:0 0 var(--radius-lg) var(--radius-lg);border-bottom:none;">
+        <div class="settings-item" style="border-radius:0 0 var(--radius-lg) var(--radius-lg);border-bottom:none;" role="button" tabindex="0" onclick="Router.navigate('about')">
           <div class="settings-item-left">
             <div class="settings-item-icon">💡</div>
             <div class="settings-item-text">
@@ -100,6 +101,7 @@ Views.settings = () => {
               <p>${t({ en: "Each week = one mission. Follow the guide, do the challenges, earn stars!", id: "Setiap minggu = satu misi. Ikuti panduan, kerjakan tantangan, dapatkan bintang!" })}</p>
             </div>
           </div>
+          <svg class="settings-item-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
         </div>
       </div>
 
