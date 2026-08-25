@@ -104,7 +104,7 @@ Views.weekDetail = (params) => {
         <p class="lesson-body think-hook">${t(lesson.thinkSkill.hook)}</p>
         <p class="lesson-body">${t(lesson.thinkSkill.realLife)}</p>
         <p class="lesson-body">${t(lesson.thinkSkill.codeLink)}</p>
-        <div class="think-try">🙌 ${t(lesson.thinkSkill.tryIt)}</div>
+        <div class="think-try">${t(lesson.thinkSkill.tryIt)}</div>
       </div>
     `);
 
@@ -267,7 +267,7 @@ Views.weekDetail = (params) => {
 
 function chipsHtml() {
   const items = [
-    ["learn", "🎓"], ["story", "📖"], ["bigidea", "💡"], ["words", "🔤"], ["think", "🧠"],
+    ["story", "📖"], ["learn", "🎓"], ["bigidea", "💡"], ["words", "🔤"], ["think", "🧠"],
     ["code", "💻"], ["predict", "🔮"], ["challenges", "🎯"], ["bugs", "🐛"], ["quiz", "📝"],
     ["reflect", "🪞"], ["parent", "👪"],
   ];
