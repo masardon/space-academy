@@ -138,6 +138,70 @@ LESSONS[1] = {
       answer: 1,
       explain: { en: "Decomposition = break it down. It's the #1 thinking skill of this mission — and of all programming.", id: "Dekomposisi = memecah masalah. Ini keterampilan berpikir nomor satu di misi ini — dan di semua pemrograman." },
     },
+    {
+      q: { en: "If you write let x = 5; and then let x = 10;, what happens?", id: "Jika kamu menulis let x = 5; lalu let x = 10;, apa yang terjadi?" },
+      options: [
+        { en: "Error: x already exists", id: "Error: x sudah ada" },
+        { en: "x becomes 10 (shadowing)", id: "x menjadi 10 (shadowing)" },
+        { en: "x stays 5", id: "x tetap 5" },
+        { en: "Program crashes", id: "Program mogok" },
+      ],
+      answer: 1,
+      explain: { en: "Rust allows shadowing — the second let creates a NEW pocket with the same label. The old one is hidden, not changed.", id: "Rust mengizinkan shadowing — let kedua membuat kantong BARU dengan label yang sama. Yang lama tersembunyi, tidak berubah." },
+    },
+    {
+      q: { en: "What prints: println!(\"A {}\", \"B\");?", id: "Apa yang tercetak: println!(\"A {}\", \"B\");?" },
+      options: [
+        { en: "A {}", id: "A {}" },
+        { en: "A B", id: "A B" },
+        { en: "B A", id: "B A" },
+        { en: "Error", id: "Error" },
+      ],
+      answer: 1,
+      explain: { en: "The {} hole gets filled with \"B\". Result: \"A B\".", id: "Lubang {} diisi dengan \"B\". Hasil: \"A B\"." },
+    },
+    {
+      q: { en: "Which is a valid variable name in Rust?", id: "Mana nama variabel yang valid di Rust?" },
+      options: [
+        { en: "2fast", id: "2fast" },
+        { en: "my-variable", id: "my-variable" },
+        { en: "robot_name", id: "robot_name" },
+        { en: "let", id: "let" },
+      ],
+      answer: 2,
+      explain: { en: "Rust uses snake_case. Names can't start with numbers, contain hyphens, or be keywords like let.", id: "Rust pakai snake_case. Nama tak bisa mulai angka, mengandung tanda hubung, atau jadi kata kunci seperti let." },
+    },
+    {
+      q: { en: "True or false: let mut x = 1; x = 2; works.", id: "Benar atau salah: let mut x = 1; x = 2; itu bisa." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 0,
+      explain: { en: "mut gives permission to change the pocket's contents. Without mut, x would be frozen.", id: "mut memberi izin mengubah isi kantong. Tanpa mut, x akan beku." },
+    },
+    {
+      q: { en: "In Week 1, what does is_active hold?", id: "Di minggu 1, is_active menyimpan apa?" },
+      options: [
+        { en: "A number", id: "Sebuah angka" },
+        { en: "Text", id: "Teks" },
+        { en: "true or false", id: "true atau false" },
+        { en: "A robot", id: "Sebuah robot" },
+      ],
+      answer: 2,
+      explain: { en: "is_active = true; — that's a boolean, only ever true or false.", id: "is_active = true; — itu boolean, hanya bisa true atau false." },
+    },
+    {
+      q: { en: "What thinking skill did you practice in Week 1?", id: "Keterampilan berpikir apa yang dilatih di minggu 1?" },
+      options: [
+        { en: "Conditional Reasoning", id: "Penalaran Kondisional" },
+        { en: "Pattern Recognition", id: "Pengenalan Pola" },
+        { en: "Decomposition", id: "Dekomposisi" },
+        { en: "Abstraction", id: "Abstraksi" },
+      ],
+      answer: 2,
+      explain: { en: "Week 1's skill: break big problems into small parts — that's decomposition.", id: "Keterampilan minggu 1: pecah masalah besar jadi bagian kecil — itu dekomposisi." },
+    },
   ],
 
   reflect: [

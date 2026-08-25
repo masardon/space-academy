@@ -129,6 +129,70 @@ LESSONS[6] = {
       answer: 1,
       explain: { en: "Frozen lists can't change. mut is the permission slip — Rust makes you SAY it before you may modify.", id: "Daftar beku tidak bisa berubah. mut adalah slip izinnya — Rust menyuruhmu MENGUCAPKannya sebelum boleh memodifikasi." },
     },
+    {
+      q: { en: "What does .len() return?", id: "Apa yang dikembalikan .len()?" },
+      options: [
+        { en: "The last index", id: "Indeks terakhir" },
+        { en: "How many items are in the vector", id: "Berapa banyak item di dalam vector" },
+        { en: "The first item", id: "Item pertama" },
+        { en: "The capacity", id: "Kapasitas" },
+      ],
+      answer: 1,
+      explain: { en: "len() counts items. If 3 items pushed, len() = 3. Valid indexes are 0 to len()-1.", id: "len() menghitung item. Kalau 3 item di-push, len() = 3. Indeks sah 0 sampai len()-1." },
+    },
+    {
+      q: { en: "If you push to vector A, does vector B change?", id: "Jika push ke vector A, apakah vector B berubah?" },
+      options: [
+        { en: "Yes, they're linked", id: "Ya, mereka terhubung" },
+        { en: "No, each vector owns its own data", id: "Tidak, tiap vector punya datanya sendiri" },
+        { en: "Only if they're mutable", id: "Hanya kalau mutable" },
+        { en: "Only if same type", id: "Hanya kalau tipe sama" },
+      ],
+      answer: 1,
+      explain: { en: "Each Vec owns its heap allocation. Push to A never touches B — ownership means isolation.", id: "Setiap Vec punya alokasi heap sendiri. Push ke A tidak pernah menyentuh B — kepemilikan berarti isolasi." },
+    },
+    {
+      q: { en: "What does enumerate() give you?", id: "Apa yang diberikan enumerate()?" },
+      options: [
+        { en: "Just the items", id: "Hanya itemnya" },
+        { en: "Pairs of (index, item)", id: "Pasangan (indeks, item)" },
+        { en: "Just the indexes", id: "Hanya indeksnya" },
+        { en: "A sorted list", id: "Daftar terurut" },
+      ],
+      answer: 1,
+      explain: { en: "for (i, item) in v.iter().enumerate() — i is index, item is value. Perfect for numbered displays!", id: "for (i, item) in v.iter().enumerate() — i indeks, item nilai. Sempurna untuk tampilan bernomor!" },
+    },
+    {
+      q: { en: "True or false: remove(0) is slower than remove(last).", id: "Benar/salah: remove(0) lebih lambat dari remove(last)." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 0,
+      explain: { en: "remove(0) shifts ALL remaining items. remove(last) just drops the last — no shifting. End is faster!", id: "remove(0) menggeser SEMUA item tersisa. remove(last) cuma buang terakhir — tanpa geser. Ujung lebih cepat!" },
+    },
+    {
+      q: { en: "Which thinking skill is Week 6's focus?", id: "Keterampilan berpikir minggu 6 adalah?" },
+      options: [
+        { en: "Data Modeling", id: "Pemodelan Data" },
+        { en: "Sequencing", id: "Sequencing" },
+        { en: "Diagnostic Reasoning", id: "Penalaran Diagnostik" },
+        { en: "Tool Selection", id: "Pemilihan Alat" },
+      ],
+      answer: 1,
+      explain: { en: "Week 6: order matters, items shift, indexes change — track it step by step. That's sequencing!", id: "Minggu 6: urutan penting, item geser, indeks berubah — lacak langkah demi langkah. Itulah sequencing!" },
+    },
+    {
+      q: { en: "What does vec![\"a\", \"b\", \"c\"] create?", id: "Apa yang dibuat vec![\"a\", \"b\", \"c\"]?" },
+      options: [
+        { en: "A vector with 3 strings", id: "Vector dengan 3 string" },
+        { en: "An array", id: "Sebuah array" },
+        { en: "A struct", id: "Sebuah struct" },
+        { en: "A tuple", id: "Sebuah tuple" },
+      ],
+      answer: 0,
+      explain: { en: "vec![] macro = quick way to make a vector with initial items. Same as push push push but shorter!", id: "vec![] makro = cara cepat bikin vector dengan item awal. Sama seperti push push push tapi lebih pendek!" },
+    },
   ],
 
   reflect: [

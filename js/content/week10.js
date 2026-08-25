@@ -130,6 +130,70 @@ LESSONS[10] = {
       answer: 1,
       explain: { en: "The echo flies a round trip. Halving gives the distance to the object, not twice it.", id: "Gema menempuh perjalanan pulang-pergi. Dibagi dua memberi jarak ke benda, bukan dua kalinya." },
     },
+    {
+      q: { en: "What does pulseIn(echoPin, HIGH) measure?", id: "Apa yang diukur pulseIn(echoPin, HIGH)?" },
+      options: [
+        { en: "Voltage", id: "Tegangan" },
+        { en: "Time in microseconds", id: "Waktu dalam mikrodetik" },
+        { en: "Distance in cm", id: "Jarak dalam cm" },
+        { en: "Sound volume", id: "Volume suara" },
+      ],
+      answer: 1,
+      explain: { en: "pulseIn = stopwatch. Measures how long echoPin stays HIGH = echo travel time.", id: "pulseIn = stopwatch. Ukur berapa lama echoPin HIGH = waktu tempuh gema." },
+    },
+    {
+      q: { en: "If distance prints 0 cm constantly, what's the most likely cause?", id: "Jika jarak tercetak 0 cm terus-menerus, penyebab paling mungkin?" },
+      options: [
+        { en: "Sensor broken", id: "Sensor rusak" },
+        { en: "TRIG and ECHO wires swapped", id: "Kabel TRIG dan ECHO tertukar" },
+        { en: "Code error", id: "Error kode" },
+        { en: "Battery dead", id: "Baterai habis" },
+      ],
+      answer: 1,
+      explain: { en: "Swapped TRIG/ECHO is the #1 cause of 0 readings. Check: TRIG→pin 2, ECHO→pin 3.", id: "TRIG/ECHO tertukar adalah penyebab #1 baca 0. Periksa: TRIG→pin 2, ECHO→pin 3." },
+    },
+    {
+      q: { en: "What does Serial.begin(9600) do?", id: "Apa yang dilakukan Serial.begin(9600)?" },
+      options: [
+        { en: "Starts the sensor", id: "Memulai sensor" },
+        { en: "Opens communication at 9600 baud", id: "Buka komunikasi 9600 baud" },
+        { en: "Sets the threshold", id: "Atur ambang batas" },
+        { en: "Calibrates the sensor", id: "Kalibrasi sensor" },
+      ],
+      answer: 1,
+      explain: { en: "Serial.begin(speed) opens the USB serial port. Match baud in Serial Monitor or see garbage!", id: "Serial.begin(kecepatan) buka port serial USB. Cocokkan baud di Serial Monitor atau lihat sampah!" },
+    },
+    {
+      q: { en: "True or false: The sensor measures distance with light.", id: "Benar/salah: Sensor mengukur jarak dengan cahaya." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 1,
+      explain: { en: "HC-SR04 uses SOUND (ultrasonic), not light. Like a bat — shout, listen for echo!", id: "HC-SR04 pakai SUARA (ultrasonik), bukan cahaya. Seperti kelelawar — teriakan, dengar gema!" },
+    },
+    {
+      q: { en: "Which thinking skill is Week 10's focus?", id: "Keterampilan berpikir minggu 10 adalah?" },
+      options: [
+        { en: "Tool Selection", id: "Pemilihan Alat" },
+        { en: "System Integration", id: "Integrasi Sistem" },
+        { en: "Feedback Loops", id: "Feedback Loops" },
+        { en: "Algorithm Design", id: "Desain Algoritma" },
+      ],
+      answer: 2,
+      explain: { en: "Week 10: sense → decide → act, repeat forever. That's a feedback loop — the robot's heartbeat!", id: "Minggu 10: rasa → pikir → bertindak, ulangi selamanya. Itulah feedback loop — detak jantung robot!" },
+    },
+    {
+      q: { en: "What happens if you power the sensor with 3.3V instead of 5V?", id: "Apa jika sensor diberi daya 3.3V bukan 5V?" },
+      options: [
+        { en: "Works better", id: "Lebih baik" },
+        { en: "May give unreliable readings", id: "Bisa bikin pembacaan tidak andal" },
+        { en: "Breaks immediately", id: "Langsung rusak" },
+        { en: "No difference", id: "Tidak beda" },
+      ],
+      answer: 1,
+      explain: { en: "HC-SR04 spec = 5V. At 3.3V it might work but readings can be jumpy or zero. Use 5V for reliability!", id: "HC-SR04 spec = 5V. Di 3.3V mungkin jalan tapi bacaannya bisa lompat atau nol. Pakai 5V untuk andal!" },
+    },
   ],
 
   reflect: [

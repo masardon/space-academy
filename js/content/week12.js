@@ -125,6 +125,70 @@ LESSONS[12] = {
       answer: 2,
       explain: { en: "The detective partner from Week 7. You'll keep meeting it — and it will keep making you better.", id: "Mitra detektif dari minggu 7. Kamu akan terus bertemu dengannya — dan ia akan terus membuatmu lebih baik." },
     },
+    {
+      q: { en: "Which week introduced loops?", id: "Minggu berapa yang memperkenalkan loop?" },
+      options: [
+        { en: "Week 1", id: "Minggu 1" },
+        { en: "Week 2", id: "Minggu 2" },
+        { en: "Week 3", id: "Minggu 3" },
+        { en: "Week 4", id: "Minggu 4" },
+      ],
+      answer: 2,
+      explain: { en: "Week 3: for loops, while loops, nested loops — the repeating door!", id: "Minggu 3: for loop, while loop, nested loop — pintu yang berulang!" },
+    },
+    {
+      q: { en: "What thinking skill helps you design a struct?", id: "Keterampilan berpikir apa yang bantu desain struct?" },
+      options: [
+        { en: "Conditional Reasoning", id: "Penalaran Kondisional" },
+        { en: "Data Modeling", id: "Pemodelan Data" },
+        { en: "Pattern Recognition", id: "Pengenalan Pola" },
+        { en: "Abstraction", id: "Abstraksi" },
+      ],
+      answer: 1,
+      explain: { en: "Week 5: decide what fields belong together. That's data modeling!", id: "Minggu 5: tentukan field apa yang berpasangan. Itulah pemodelan data!" },
+    },
+    {
+      q: { en: "In Rust, what does mut allow?", id: "Di Rust, mut mengizinkan apa?" },
+      options: [
+        { en: "Reading a variable", id: "Membaca variabel" },
+        { en: "Changing a variable's value", id: "Mengubah nilai variabel" },
+        { en: "Deleting a variable", id: "Menghapus variabel" },
+        { en: "Printing a variable", id: "Mencetak variabel" },
+      ],
+      answer: 1,
+      explain: { en: "Without mut, variables are immutable (frozen). mut = permission to change.", id: "Tanpa mut, variabel immutable (beku). mut = izin untuk mengubah." },
+    },
+    {
+      q: { en: "True or false: You can run Rust code in a browser with WASM.", id: "Benar/salah: Kode Rust bisa dijalankan di browser dengan WASM." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 0,
+      explain: { en: "Rust compiles to WebAssembly (WASM) — runs in browsers at near-native speed!", id: "Rust kompilasi ke WebAssembly (WASM) — jalan di browser kecepatan near-native!" },
+    },
+    {
+      q: { en: "Which thinking skill is Week 12's focus?", id: "Keterampilan berpikir minggu 12 adalah?" },
+      options: [
+        { en: "Algorithm Design", id: "Desain Algoritma" },
+        { en: "Metacognition", id: "Metakognisi" },
+        { en: "System Integration", id: "Integrasi Sistem" },
+        { en: "Feedback Loops", id: "Feedback Loops" },
+      ],
+      answer: 1,
+      explain: { en: "Week 12: teach it to own it. Thinking about your thinking — that's metacognition!", id: "Minggu 12: ajarkan untuk menguasai. Berpikir tentang berpikirmu — itulah metakognisi!" },
+    },
+    {
+      q: { en: "What's your superpower after 12 weeks?", id: "Apa kekuatan supermu setelah 12 minggu?" },
+      options: [
+        { en: "Memorizing Rust syntax", id: "Menghafal sintaks Rust" },
+        { en: "Thinking like an engineer — decompose, test, debug, build", id: "Berpikir seperti insinyur — dekomposisi, uji, debug, bangun" },
+        { en: "Typing really fast", id: "Mengetik super cepat" },
+        { en: "Knowing all keywords", id: "Tahu semua kata kunci" },
+      ],
+      answer: 1,
+      explain: { en: "Syntax fades. The thinking skills — decomposition, conditionals, patterns, debugging, modeling — stay forever. That's the real graduation gift!", id: "Sintaks pudar. Keterampilan berpikir — dekomposisi, kondisional, pola, debugging, modeling — tetap selamanya. Itulah hadiah kelulusan sungguhan!" },
+    },
   ],
 
   reflect: [

@@ -126,6 +126,70 @@ LESSONS[7] = {
       answer: 1,
       explain: { en: "Error = wall, the program won't build. Warning = raised eyebrow, it runs but the compiler has advice.", id: "Error = tembok, program tak bisa dibangun. Warning = angkat alis, program berjalan tetapi compiler punya nasihat." },
     },
+    {
+      q: { en: "What does 'mismatched types' mean?", id: "Apa arti 'mismatched types'?" },
+      options: [
+        { en: "Wrong number of semicolons", id: "Jumlah titik koma salah" },
+        { en: "You promised one type, delivered another", id: "Menjanjikan satu tipe, mengirim yang lain" },
+        { en: "Missing function", id: "Fungsi hilang" },
+        { en: "Typo in variable name", id: "Salah ketik nama variabel" },
+      ],
+      answer: 1,
+      explain: { en: "The compiler expected (say) u32 but found &str. Pocket label and contents must agree.", id: "Compiler harap (misal) u32 tapi dapat &str. Label kantong dan isinya harus sepakat." },
+    },
+    {
+      q: { en: "If you see 5 errors, which do you fix first?", id: "Jika lihat 5 error, yang mana diperbaiki dulu?" },
+      options: [
+        { en: "The longest one", id: "Yang paling panjang" },
+        { en: "The first one", id: "Yang pertama" },
+        { en: "The last one", id: "Yang terakhir" },
+        { en: "Pick randomly", id: "Pilih acak" },
+      ],
+      answer: 1,
+      explain: { en: "Errors cascade. Fix the first and later ones often disappear — they were just echoes.", id: "Error berkelompok. Perbaiki yang pertama, yang belakangan sering hilang — cuma gema saja." },
+    },
+    {
+      q: { en: "What does 'unused variable' warning suggest?", id: "Apa saran warning 'unused variable'?" },
+      options: [
+        { en: "Delete the variable", id: "Hapus variabelnya" },
+        { en: "Prefix with _ to acknowledge intentionally unused", id: "Tambah awalan _ untuk akui sengaja tak dipakai" },
+        { en: "Add a semicolon", id: "Tambah titik koma" },
+        { en: "Change the type", id: "Ubah tipenya" },
+      ],
+      answer: 1,
+      explain: { en: "Rust suggests: if truly unused, rename to _name — tells compiler \"I know, on purpose\".", id: "Rust sarankan: jika memang tak dipakai, ganti jadi _name — bilang ke compiler \"aku tahu, sengaja\"." },
+    },
+    {
+      q: { en: "True or false: The compiler runs your code to find bugs.", id: "Benar/salah: Compiler menjalankan kodemu untuk cari bug." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 1,
+      explain: { en: "Compiler ONLY reads your code (static analysis). It never runs it. Running = runtime, different phase!", id: "Compiler HANYA baca kode (analisis statis). Ia TIDAK PERNAH menjalankan. Menjalankan = runtime, fase beda!" },
+    },
+    {
+      q: { en: "Which thinking skill is Week 7's focus?", id: "Keterampilan berpikir minggu 7 adalah?" },
+      options: [
+        { en: "Sequencing", id: "Sequencing" },
+        { en: "Diagnostic Reasoning", id: "Penalaran Diagnostik" },
+        { en: "Tool Selection", id: "Pemilihan Alat" },
+        { en: "System Integration", id: "Integrasi Sistem" },
+      ],
+      answer: 1,
+      explain: { en: "Week 7: read clues, test one hypothesis at a time. That's diagnostic reasoning — like a doctor!", id: "Minggu 7: baca petunjuk, uji satu dugaan. Itulah penalaran diagnostik — seperti dokter!" },
+    },
+    {
+      q: { en: "What does 'expected struct, found ()' mean?", id: "Apa arti 'expected struct, found ()'?" },
+      options: [
+        { en: "Missing semicolon", id: "Titik koma hilang" },
+        { en: "Function returned nothing (unit type)", id: "Fungsi kembalikan kosong (tipe unit)" },
+        { en: "Wrong variable name", id: "Nama variabel salah" },
+        { en: "Type mismatch", id: "Tipe tidak cocok" },
+      ],
+      answer: 1,
+      explain: { en: "() is the unit type — 'nothing'. You probably forgot a return value or the last line has a semicolon.", id: "() adalah tipe unit — 'kosong'. Mungkin lupa nilai kembalian atau baris terakhir punya titik koma." },
+    },
   ],
 
   reflect: [

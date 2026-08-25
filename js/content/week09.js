@@ -130,6 +130,70 @@ LESSONS[9] = {
       answer: 1,
       explain: { en: "It's a function call: name + two inputs. Same machine-with-slots idea as Week 4 — different language.", id: "Itu pemanggilan fungsi: nama + dua masukan. Ide mesin-bercelah dari minggu 4 — bahasa yang berbeda." },
     },
+    {
+      q: { en: "What does pinMode(13, OUTPUT) do?", id: "Apa yang dilakukan pinMode(13, OUTPUT)?" },
+      options: [
+        { en: "Reads pin 13", id: "Membaca pin 13" },
+        { en: "Sets pin 13 as output (speaker)", id: "Atur pin 13 sebagai output (pembicara)" },
+        { en: "Turns on pin 13", id: "Nyalakan pin 13" },
+        { en: "Deletes pin 13", id: "Hapus pin 13" },
+      ],
+      answer: 1,
+      explain: { en: "OUTPUT = this pin will SPEAK (send voltage). INPUT = this pin will LISTEN. Declare first, use later!", id: "OUTPUT = pin ini BICARA (kirim tegangan). INPUT = pin ini DENGAR. Daftar dulu, pakai belakangan!" },
+    },
+    {
+      q: { en: "If you delete delay(500), what happens to the buzzer?", id: "Jika hapus delay(500), apa yang terjadi pada buzzer?" },
+      options: [
+        { en: "Stays on longer", id: "Menyala lebih lama" },
+        { en: "Blips too fast to hear", id: "Bip terlalu cepat tak kedengaran" },
+        { en: "Stops working", id: "Berhenti kerja" },
+        { en: "Gets louder", id: "Lebih keras" },
+      ],
+      answer: 1,
+      explain: { en: "Without delay, loop races through HIGH→LOW instantly. Human ears (and buzzers) need milliseconds to react!", id: "Tanpa delay, loop lari HIGH→LOW seketika. Telinga (dan buzzer) butuh milidetik untuk bereaksi!" },
+    },
+    {
+      q: { en: "The built-in LED on pin 13 — what color is it usually?", id: "LED bawaan di pin 13 — biasanya warna apa?" },
+      options: [
+        { en: "Red", id: "Merah" },
+        { en: "Green", id: "Hijau" },
+        { en: "Blue", id: "Biru" },
+        { en: "Yellow", id: "Kuning" },
+      ],
+      answer: 0,
+      explain: { en: "Most Arduino Unos have a tiny RED LED on pin 13. External LEDs can be any color!", id: "Kebanyakan Arduino Uno punya LED MERAH kecil di pin 13. LED eksternal bisa warna apa saja!" },
+    },
+    {
+      q: { en: "True or false: loop() runs once like setup().", id: "Benar/salah: loop() berjalan sekali seperti setup()." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 1,
+      explain: { en: "setup() = once. loop() = forever. That's the difference — your robot lives in loop()!", id: "setup() = sekali. loop() = selamanya. Itulah bedanya — robotmu hidup di loop()!" },
+    },
+    {
+      q: { en: "Which thinking skill is Week 9's focus?", id: "Keterampilan berpikir minggu 9 adalah?" },
+      options: [
+        { en: "Diagnostic Reasoning", id: "Penalaran Diagnostik" },
+        { en: "Tool Selection", id: "Pemilihan Alat" },
+        { en: "System Integration", id: "Integrasi Sistem" },
+        { en: "Feedback Loops", id: "Feedback Loops" },
+      ],
+      answer: 2,
+      explain: { en: "Week 9: code + hardware + wiring = one working system. That's system integration!", id: "Minggu 9: kode + hardware + kabel = satu sistem yang jalan. Itulah integrasi sistem!" },
+    },
+    {
+      q: { en: "What does a resistor do for an LED?", id: "Apa fungsi resistor untuk LED?" },
+      options: [
+        { en: "Makes it brighter", id: "Bikin lebih terang" },
+        { en: "Limits current to prevent burnout", id: "Batasi arus supaya tak terbakar" },
+        { en: "Changes color", id: "Ubah warna" },
+        { en: "Nothing", id: "Tidak apa-apa" },
+      ],
+      answer: 1,
+      explain: { en: "LEDs need current limiting. Without resistor, too much current flows and LED dies. Resistor = bodyguard!", id: "LED butuh pembatas arus. Tanpa resistor, arus kebanyakan dan LED mati. Resistor = pengawal!" },
+    },
   ],
 
   reflect: [

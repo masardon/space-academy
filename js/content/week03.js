@@ -130,6 +130,70 @@ LESSONS[3] = {
       answer: 1,
       explain: { en: "Nested loops build grids: the outer loop makes rows, the inner loop fills each row. Week 3's rocket triangle is one!", id: "Loop bersarang membangun kisi: loop luar membuat baris, loop dalam mengisi setiap baris. Segitiga roket di minggu 3 adalah contohnya!" },
     },
+    {
+      q: { en: "What does (1..=5).rev() produce?", id: "Apa yang dihasilkan (1..=5).rev()?" },
+      options: [
+        { en: "1, 2, 3, 4, 5", id: "1, 2, 3, 4, 5" },
+        { en: "5, 4, 3, 2, 1", id: "5, 4, 3, 2, 1" },
+        { en: "0, 1, 2, 3, 4", id: "0, 1, 2, 3, 4" },
+        { en: "Error", id: "Error" },
+      ],
+      answer: 1,
+      explain: { en: ".rev() reverses the range. Countdown: 5, 4, 3, 2, 1 — blastoff!", id: ".rev() membalik rentang. Hitung mundur: 5, 4, 3, 2, 1 — meluncur!" },
+    },
+    {
+      q: { en: "In for number in 1..=5 { print!(\"{} \", number); }, what prints?", id: "Dalam for number in 1..=5 { print!(\"{} \", number); }, apa yang tercetak?" },
+      options: [
+        { en: "1 2 3 4 5", id: "1 2 3 4 5" },
+        { en: "0 1 2 3 4", id: "0 1 2 3 4" },
+        { en: "number number number number number", id: "number number number number number" },
+        { en: "5 4 3 2 1", id: "5 4 3 2 1" },
+      ],
+      answer: 0,
+      explain: { en: "number takes values 1, 2, 3, 4, 5 each round. print! keeps them on one line.", id: "number bernilai 1, 2, 3, 4, 5 tiap putaran. print! membuatnya tetap satu baris." },
+    },
+    {
+      q: { en: "What happens if you forget the braces { } in a for loop?", id: "Apa yang terjadi jika lupa kurung kurawal { } di for loop?" },
+      options: [
+        { en: "Only the next line repeats", id: "Hanya baris berikutnya yang ulang" },
+        { en: "Error", id: "Error" },
+        { en: "Infinite loop", id: "Loop tak terbatas" },
+        { en: "Nothing", id: "Tidak ada" },
+      ],
+      answer: 0,
+      explain: { en: "Without braces, only the very next statement is the loop body. That's why { } hug the code!", id: "Tanpa kurung, hanya pernyataan BERIKUTNYA yang jadi badan loop. Itulah mengapa { } memeluk kode!" },
+    },
+    {
+      q: { en: "True or false: while loops run a known number of times.", id: "Benar/salah: while loop berjalan jumlah putaran yang diketahui." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 1,
+      explain: { en: "for loops = known count. while loops = run until condition becomes false. Different tools!", id: "for loop = jumlah diketahui. while loop = jalan sampai kondisi false. Alat berbeda!" },
+    },
+    {
+      q: { en: "What does continue do in a loop?", id: "Apa yang dilakukan continue di loop?" },
+      options: [
+        { en: "Stops the loop entirely", id: "Menghentikan loop total" },
+        { en: "Skips to the next round", id: "Lompat ke putaran berikutnya" },
+        { en: "Repeats current round", id: "Ulangi putaran ini" },
+        { en: "Does nothing", id: "Tidak apa-apa" },
+      ],
+      answer: 1,
+      explain: { en: "continue means \"skip the rest of this round, go to next\". Useful for filtering!", id: "continue berarti \"lewati sisa putaran ini, ke putaran berikutnya\". Berguna untuk filter!" },
+    },
+    {
+      q: { en: "Which thinking skill is Week 3's focus?", id: "Keterampilan berpikir minggu 3 adalah?" },
+      options: [
+        { en: "Conditional Reasoning", id: "Penalaran Kondisional" },
+        { en: "Pattern Recognition", id: "Pengenalan Pola" },
+        { en: "Sequencing", id: "Sequencing" },
+        { en: "Abstraction", id: "Abstraksi" },
+      ],
+      answer: 1,
+      explain: { en: "Week 3: spot what repeats, wrap it in a loop. That's pattern recognition!", id: "Minggu 3: temukan yang berulang, bungkus dengan loop. Itulah pengenalan pola!" },
+    },
   ],
 
   reflect: [

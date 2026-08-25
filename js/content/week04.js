@@ -130,6 +130,70 @@ LESSONS[4] = {
       answer: 1,
       explain: { en: "format! is the factory; println! is the loudspeaker. Machines often build with format!, then someone else prints.", id: "format! adalah pabriknya; println! pengeras suaranya. Mesin sering membangun dengan format!, lalu pihak lain yang mencetak." },
     },
+    {
+      q: { en: "If you call a function but don't use its return value, what happens?", id: "Jika memanggil fungsi tapi tidak pakai nilai kembalinya, apa yang terjadi?" },
+      options: [
+        { en: "Error", id: "Error" },
+        { en: "The value is discarded", id: "Nilainya dibuang" },
+        { en: "Program crashes", id: "Program mogok" },
+        { en: "Warning only", id: "Hanya warning" },
+      ],
+      answer: 1,
+      explain: { en: "The machine runs and hands back a result — if nobody catches it, it falls on the floor. Rust warns: \"unused return value\".", id: "Mesin jalan & kembalikan hasil — kalau tak ditangkap, jatuh ke lantai. Rust peringatkan: \"unused return value\"." },
+    },
+    {
+      q: { en: "Can a function call another function?", id: "Bisakah fungsi memanggil fungsi lain?" },
+      options: [
+        { en: "Never", id: "Tidak pernah" },
+        { en: "Yes! main calls generate_question which calls format!", id: "Ya! main panggil generate_question yang panggil format!" },
+        { en: "Only in main", id: "Hanya di main" },
+        { en: "Only if they're in the same file", id: "Hanya kalau file sama" },
+      ],
+      answer: 1,
+      explain: { en: "Functions calling functions is how programs grow. main → generate_question → format! — a chain of machines!", id: "Fungsi memanggil fungsi itulah cara program berkembang. main → generate_question → format! — rantai mesin!" },
+    },
+    {
+      q: { en: "What does &str mean in a parameter?", id: "Apa arti &str di parameter?" },
+      options: [
+        { en: "A mutable string", id: "String yang bisa diubah" },
+        { en: "A borrowed piece of text (read-only)", id: "Sepenggal teks pinjaman (hanya baca)" },
+        { en: "A string reference to modify", id: "Referensi string untuk diubah" },
+        { en: "A number", id: "Sebuah angka" },
+      ],
+      answer: 1,
+      explain: { en: "&str = borrowed text slice. The function reads it but doesn't own it. Like borrowing a book to read.", id: "&str = sepenggal teks pinjaman. Fungsi baca tapi tidak punya. Seperti pinjam buku untuk dibaca." },
+    },
+    {
+      q: { en: "True or false: The last line of a function (without ;) is its return value.", id: "Benar/salah: Baris terakhir fungsi (tanpa ;) adalah nilai kembalinya." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 0,
+      explain: { en: "In Rust, the final expression (no semicolon) becomes the return value. No return keyword needed!", id: "Di Rust, ekspresi akhir (tanpa titik koma) jadi nilai kembalian. Tak perlu kata kunci return!" },
+    },
+    {
+      q: { en: "Which thinking skill is Week 4's focus?", id: "Keterampilan berpikir minggu 4 adalah?" },
+      options: [
+        { en: "Pattern Recognition", id: "Pengenalan Pola" },
+        { en: "Abstraction", id: "Abstraksi" },
+        { en: "Data Modeling", id: "Pemodelan Data" },
+        { en: "Sequencing", id: "Sequencing" },
+      ],
+      answer: 1,
+      explain: { en: "Week 4: hide details behind a named function. That's abstraction — the TV remote skill!", id: "Minggu 4: sembunyikan detail di balik fungsi bernama. Itulah abstraksi — keterampilan remote TV!" },
+    },
+    {
+      q: { en: "How do you return a value early from a function?", id: "Bagaimana mengembalikan nilai lebih awal dari fungsi?" },
+      options: [
+        { en: "Use return keyword", id: "Pakai kata kunci return" },
+        { en: "Use break", id: "Pakai break" },
+        { en: "Use continue", id: "Pakai continue" },
+        { en: "Impossible", id: "Tidak mungkin" },
+      ],
+      answer: 0,
+      explain: { en: "return value; exits the function immediately with that value. Works anywhere in the function!", id: "return value; keluar fungsi seketika dengan nilai itu. Bisa di mana saja di dalam fungsi!" },
+    },
   ],
 
   reflect: [

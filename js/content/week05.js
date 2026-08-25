@@ -131,6 +131,70 @@ LESSONS[5] = {
       answer: 1,
       explain: { en: "The compiler will list every incomplete instance for you — blueprints are strict on purpose.", id: "Compiler akan mendaftar setiap instance yang belum lengkap — cetak biru memang sengaja ketat." },
     },
+    {
+      q: { en: "What happens if you write fn introduce() { println!(\"{}\", self.name); } without &self?", id: "Apa jika menulis fn introduce() { println!(\"{}\", self.name); } tanpa &self?" },
+      options: [
+        { en: "Works fine", id: "Bisa saja" },
+        { en: "Error: cannot find self", id: "Error: cannot find self" },
+        { en: "Prints empty", id: "Mencetak kosong" },
+        { en: "Prints wrong cadet", id: "Mencetak kadet salah" },
+      ],
+      answer: 1,
+      explain: { en: "Methods MUST have &self (or &mut self) as first parameter — that's how they know which instance they're called on.", id: "Method HARUS punya &self (atau &mut self) sebagai parameter pertama — begitulah cara mereka tahu instance mana yang dipanggil." },
+    },
+    {
+      q: { en: "Can you add a method to a struct AFTER defining it?", id: "Bisakah menambah method ke struct SETELAH didefinisikan?" },
+      options: [
+        { en: "No, must be in same impl block", id: "Tidak, harus di blok impl yang sama" },
+        { en: "Yes! Multiple impl blocks allowed", id: "Ya! Boleh beberapa blok impl" },
+        { en: "Only if you use mod", id: "Hanya kalau pakai mod" },
+        { en: "Only in main", id: "Hanya di main" },
+      ],
+      answer: 1,
+      explain: { en: "You can have as many impl Cadet { ... } blocks as you want — even in different files! Great for organizing.", id: "Kamu bisa punya banyak blok impl Cadet { ... } — bahkan di file berbeda! Bagus untuk merapikan." },
+    },
+    {
+      q: { en: "What does String::from(\"Luna\") do?", id: "Apa yang dilakukan String::from(\"Luna\")?" },
+      options: [
+        { en: "Creates an owned String from text", id: "Membuat String milik sendiri dari teks" },
+        { en: "Borrows text", id: "Meminjam teks" },
+        { en: "Prints Luna", id: "Mencetak Luna" },
+        { en: "Converts to number", id: "Mengubah jadi angka" },
+      ],
+      answer: 0,
+      explain: { en: "String::from takes a string literal (&str) and makes an owned String — a pocket with its own copy.", id: "String::from mengambil string literal (&str) dan bikin String milik sendiri — kantong dengan salinan sendiri." },
+    },
+    {
+      q: { en: "True or false: Two cadets from the same struct share the same HP.", id: "Benar/salah: Dua kadet dari struct yang sama berbagi HP yang sama." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 1,
+      explain: { en: "Each instance has its OWN copy of every field. cadet1.hp and cadet2.hp are completely separate.", id: "Setiap instance punya SALINAN fieldnya sendiri. cadet1.hp dan cadet2.hp terpisah total." },
+    },
+    {
+      q: { en: "Which thinking skill is Week 5's focus?", id: "Keterampilan berpikir minggu 5 adalah?" },
+      options: [
+        { en: "Abstraction", id: "Abstraksi" },
+        { en: "Data Modeling", id: "Pemodelan Data" },
+        { en: "Sequencing", id: "Sequencing" },
+        { en: "Diagnostic Reasoning", id: "Penalaran Diagnostik" },
+      ],
+      answer: 1,
+      explain: { en: "Week 5: design what data belongs together — that's data modeling!", id: "Minggu 5: desain data apa yang berpasangan — itulah pemodelan data!" },
+    },
+    {
+      q: { en: "What does #[derive(Debug)] do?", id: "Apa fungsi #[derive(Debug)]?" },
+      options: [
+        { en: "Makes the struct printable with println!", id: "Bikin struct bisa dicetak dengan println!" },
+        { en: "Adds a debug method", id: "Tambah method debug" },
+        { en: "Slows down the program", id: "Melambatkan program" },
+        { en: "Nothing", id: "Tidak apa-apa" },
+      ],
+      answer: 0,
+      explain: { en: "derive(Debug) auto-generates code so you can println!(\"{:?}\", my_struct). Super handy!", id: "derive(Debug) auto-bikin kode supaya bisa println!(\"{:?}\", my_struct). Sangat berguna!" },
+    },
   ],
 
   reflect: [

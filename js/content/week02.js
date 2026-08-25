@@ -128,6 +128,70 @@ LESSONS[2] = {
       answer: 1,
       explain: { en: "else is the safety net — it must be LAST, catching everything the questions above didn't.", id: "else adalah jaring pengaman — harus di PALING AKHIR, menangkap semua yang tidak tertangkap pertanyaan di atasnya." },
     },
+    {
+      q: { en: "If choice = \"left\" and you have if choice == \"left\" then else if choice == \"left\" — which runs?", id: "Jika choice = \"left\" dan ada if choice == \"left\" lalu else if choice == \"left\" — yang mana jalan?" },
+      options: [
+        { en: "First if", id: "if pertama" },
+        { en: "Second else if", id: "else if kedua" },
+        { en: "Both", id: "Keduanya" },
+        { en: "Neither", id: "Tidak ada" },
+      ],
+      answer: 0,
+      explain: { en: "First match wins! The first if is true, so it runs and the else if is skipped entirely.", id: "Kecocokan pertama menang! if pertama true, jadi dia jalan dan else if dilewati total." },
+    },
+    {
+      q: { en: "What does != mean?", id: "Apa arti !=?" },
+      options: [
+        { en: "Equal to", id: "Sama dengan" },
+        { en: "Not equal to", id: "Tidak sama dengan" },
+        { en: "Greater than", id: "Lebih besar" },
+        { en: "Less than", id: "Lebih kecil" },
+      ],
+      answer: 1,
+      explain: { en: "!= means \"not equal\". If choice != \"left\" is true, choice is anything BUT \"left\".", id: "!= berarti \"tidak sama\". Jika choice != \"left\" true, choice adalah apa saja KECUALI \"left\"." },
+    },
+    {
+      q: { en: "Can you compare numbers with == ?", id: "Bisakah membandingkan angka dengan == ?" },
+      options: [
+        { en: "Only strings", id: "Hanya string" },
+        { en: "Yes, works on numbers too", id: "Ya, bisa untuk angka juga" },
+        { en: "Only booleans", id: "Hanya boolean" },
+        { en: "Never", id: "Tidak pernah" },
+      ],
+      answer: 1,
+      explain: { en: "== works on any type that can be compared: numbers, strings, booleans. 5 == 5 is true!", id: "== bisa untuk tipe apa saja yang bisa dibandingkan: angka, string, boolean. 5 == 5 itu true!" },
+    },
+    {
+      q: { en: "What happens if you forget the else in if/else if chain?", id: "Apa yang terjadi jika lupa else di rantai if/else if?" },
+      options: [
+        { en: "Error", id: "Error" },
+        { en: "Nothing runs if no condition matches", id: "Tidak ada yang jalan jika tak ada yg cocok" },
+        { en: "Last if runs anyway", id: "if terakhir jalan tetap" },
+        { en: "Program loops forever", id: "Program loop selamanya" },
+      ],
+      answer: 1,
+      explain: { en: "Without else, it's possible NO branch runs. That's fine — sometimes you only want to act on specific cases.", id: "Tanpa else, bisa jadi TIDAK ADA cabang yang jalan. Itu wajar — terkadang kamu hanya mau bereaksi pada kasus tertentu." },
+    },
+    {
+      q: { en: "True or false: if (5 > 3) { println!(\"yes\"); } prints \"yes\".", id: "Benar/salah: if (5 > 3) { println!(\"yes\"); } mencetak \"yes\"." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 0,
+      explain: { en: "5 is greater than 3, so the condition is true and the branch runs.", id: "5 lebih besar dari 3, jadi kondisinya true dan cabangnya berjalan." },
+    },
+    {
+      q: { en: "Which thinking skill is Week 2's focus?", id: "Keterampilan berpikir minggu 2 adalah?" },
+      options: [
+        { en: "Decomposition", id: "Dekomposisi" },
+        { en: "Conditional Reasoning", id: "Penalaran Kondisional" },
+        { en: "Pattern Recognition", id: "Pengenalan Pola" },
+        { en: "Abstraction", id: "Abstraksi" },
+      ],
+      answer: 1,
+      explain: { en: "Week 2 teaches if/else — making decisions based on conditions. That's conditional reasoning.", id: "Minggu 2 mengajarkan if/else — keputusan berdasarkan kondisi. Itulah penalaran kondisional." },
+    },
   ],
 
   reflect: [

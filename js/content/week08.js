@@ -127,6 +127,70 @@ LESSONS[8] = {
       answer: 1,
       explain: { en: "Right tool, on purpose, for the job. That's this week's thinking skill — and a life skill too.", id: "Alat yang tepat, dengan sengaja, untuk tugasnya. Itulah keterampilan berpikir minggu ini — sekaligus keterampilan hidup." },
     },
+    {
+      q: { en: "What does cargo new my_project create?", id: "Apa yang dibuat cargo new my_project?" },
+      options: [
+        { en: "Just a main.rs file", id: "Hanya file main.rs" },
+        { en: "A folder with src/ and Cargo.toml", id: "Folder dengan src/ dan Cargo.toml" },
+        { en: "A compiled binary", id: "Biner terkompilasi" },
+        { en: "A GitHub repo", id: "Repo GitHub" },
+      ],
+      answer: 1,
+      explain: { en: "Cargo builds the whole project skeleton: folder, Cargo.toml, src/main.rs with Hello World!", id: "Cargo bangun kerangka lengkap: folder, Cargo.toml, src/main.rs dengan Hello World!" },
+    },
+    {
+      q: { en: "If you edit main.rs in the project root (not src/), what happens?", id: "Jika edit main.rs di root proyek (bukan src/), apa yang terjadi?" },
+      options: [
+        { en: "Works fine", id: "Bisa saja" },
+        { en: "cargo run ignores it — only src/main.rs counts", id: "cargo run abaikan — hanya src/main.rs yang dihitung" },
+        { en: "Creates duplicate", id: "Bikin duplikat" },
+        { en: "Error", id: "Error" },
+      ],
+      answer: 1,
+      explain: { en: "Cargo ONLY compiles src/main.rs. A main.rs at the top level is just a lonely file nobody reads.", id: "Cargo HANYA kompilasi src/main.rs. main.rs di level atas cuma file sendirian yang tak dibaca siapa." },
+    },
+    {
+      q: { en: "What is Cargo.toml for?", id: "Cargo.toml untuk apa?" },
+      options: [
+        { en: "Writing code", id: "Menulis kode" },
+        { en: "Project metadata: name, version, dependencies", id: "Metadata proyek: nama, versi, dependensi" },
+        { en: "Running tests", id: "Menjalankan tes" },
+        { en: "Formatting code", id: "Memformat kode" },
+      ],
+      answer: 1,
+      explain: { en: "Cargo.toml = recipe card. Lists what the project needs (dependencies) and who it is (name/version).", id: "Cargo.toml = kartu resep. Daftar butuhan proyek (dependensi) dan identitasnya (nama/versi)." },
+    },
+    {
+      q: { en: "True or false: You must run cargo build before cargo run.", id: "Benar/salah: Harus cargo build dulu baru cargo run." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 1,
+      explain: { en: "cargo run does BOTH: builds if needed, then runs. One command, zero waiting.", id: "cargo run LAKUKAN KEDUANYA: bangun kalau perlu, lalu jalan. Satu perintah, nunggu nol." },
+    },
+    {
+      q: { en: "Which thinking skill is Week 8's focus?", id: "Keterampilan berpikir minggu 8 adalah?" },
+      options: [
+        { en: "Diagnostic Reasoning", id: "Penalaran Diagnostik" },
+        { en: "Tool Selection", id: "Pemilihan Alat" },
+        { en: "System Integration", id: "Integrasi Sistem" },
+        { en: "Feedback Loops", id: "Feedback Loops" },
+      ],
+      answer: 1,
+      explain: { en: "Week 8: pick the right tool (Cargo) for the job on purpose. That's tool selection!", id: "Minggu 8: pilih alat tepat (Cargo) untuk tugasnya dengan sengaja. Itulah pemilihan alat!" },
+    },
+    {
+      q: { en: "What does cargo check do?", id: "Apa fungsi cargo check?" },
+      options: [
+        { en: "Builds and runs", id: "Bangun dan jalankan" },
+        { en: "Only checks for errors (faster, no binary)", id: "Hanya cek error (lebih cepat, tanpa biner)" },
+        { en: "Formats code", id: "Format kode" },
+        { en: "Runs tests", id: "Jalankan tes" },
+      ],
+      answer: 1,
+      explain: { en: "cargo check = type-check only, no codegen. Much faster for 'does this compile?' checks!", id: "cargo check = cek tipe saja, tanpa codegen. Jauh lebih cepat untuk cek 'apakah ini kompil?'!" },
+    },
   ],
 
   reflect: [

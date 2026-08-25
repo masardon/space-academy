@@ -130,6 +130,70 @@ LESSONS[11] = {
       answer: 0,
       explain: { en: "An enum names every possible state, and the compiler makes you handle them all. Robots and Rust get along great.", id: "Enum menamai setiap keadaan yang mungkin, dan compiler memastikan kamu menangani semuanya. Robot dan Rust cocok sekali." },
     },
+    {
+      q: { en: "What does scanner.attach(9) do?", id: "Apa yang dilakukan scanner.attach(9)?" },
+      options: [
+        { en: "Attaches servo to pin 9", id: "Memasang servo ke pin 9" },
+        { en: "Sets servo speed to 9", id: "Atur kecepatan servo 9" },
+        { en: "Moves servo to angle 9", id: "Gerakkan servo ke sudut 9" },
+        { en: "Creates 9 servos", id: "Buat 9 servo" },
+      ],
+      answer: 0,
+      explain: { en: "attach(pin) tells the servo object which Arduino pin controls it. Orange wire goes there!", id: "attach(pin) bilang ke objek servo pin mana yang mengontrolnya. Kabel oranye ke sana!" },
+    },
+    {
+      q: { en: "In for (int angle = 0; angle <= 180; angle += 5), how many steps?", id: "Dalam for (int angle = 0; angle <= 180; angle += 5), berapa langkah?" },
+      options: [
+        { en: "180", id: "180" },
+        { en: "37", id: "37" },
+        { en: "36", id: "36" },
+        { en: "5", id: "5" },
+      ],
+      answer: 1,
+      explain: { en: "0, 5, 10... 180. That's 37 stops (0 to 180 inclusive, step 5).", id: "0, 5, 10... 180. Ada 37 pemberhentian (0 sampai 180 inclusive, langkah 5)." },
+    },
+    {
+      q: { en: "What happens if you remove the second for loop (right-to-left)?", id: "Apa jika hapus for loop kedua (kanan-ke-kiri)?" },
+      options: [
+        { en: "Servo stops", id: "Servo berhenti" },
+        { en: "Scans left→right then snaps back to 0", id: "Sapu kiri→kanan lalu lompat ke 0" },
+        { en: "Scans forever one way", id: "Sapu satu arah selamanya" },
+        { en: "Error", id: "Error" },
+      ],
+      answer: 1,
+      explain: { en: "First loop ends at 180, then loop() restarts at 0 — instant snap! Both loops = smooth ping-pong.", id: "Loop pertama selesai di 180, lalu loop() mulai lagi di 0 — lompat seketika! Kedua loop = ping-pong halus." },
+    },
+    {
+      q: { en: "True or false: Servos can spin 360 degrees continuously.", id: "Benar/salah: Servo bisa putar 360 derajat terus-menerus." },
+      options: [
+        { en: "True", id: "Benar" },
+        { en: "False", id: "Salah" },
+      ],
+      answer: 1,
+      explain: { en: "Standard SG90 = 0° to 180° only. Continuous rotation servos exist but are different beasts!", id: "SG90 standar = 0° sampai 180° saja. Servo rotasi terus ada tapi beda jenis!" },
+    },
+    {
+      q: { en: "Which thinking skill is Week 11's focus?", id: "Keterampilan berpikir minggu 11 adalah?" },
+      options: [
+        { en: "Feedback Loops", id: "Feedback Loops" },
+        { en: "Algorithm Design", id: "Desain Algoritma" },
+        { en: "Metacognition", id: "Metakognisi" },
+        { en: "System Integration", id: "Integrasi Sistem" },
+      ],
+      answer: 1,
+      explain: { en: "Week 11: write the scan recipe (point → wait → measure → react). That's algorithm design!", id: "Minggu 11: tulis resep sapuan (arah → tunggu → ukur → bereaksi). Itulah desain algoritma!" },
+    },
+    {
+      q: { en: "Why does the servo need a separate power supply for big projects?", id: "Mengapa servo butuh supply daya terpisah untuk proyek besar?" },
+      options: [
+        { en: "Arduino 5V pin can't supply enough current", id: "Pin 5V Arduino tak cukup arusnya" },
+        { en: "Servos need 12V", id: "Servo butuh 12V" },
+        { en: "To reduce noise", id: "Kurangi noise" },
+        { en: "Arduino pins are output only", id: "Pin Arduino output saja" },
+      ],
+      answer: 0,
+      explain: { en: "Servos draw peaks of 500mA+. Arduino's 5V regulator maxes at ~400mA. Big servos = external power!", id: "Servo tarik puncak 500mA+. Regulator 5V Arduino max ~400mA. Servo besar = daya eksternal!" },
+    },
   ],
 
   reflect: [
