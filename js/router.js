@@ -10,6 +10,7 @@ const Router = {
     "": "welcome",
     "missions": "missions",
     "lab": "lab",
+    "playground": "playground",
     "profile": "profile",
     "settings": "settings",
   },
@@ -55,6 +56,7 @@ const Router = {
       "missions": Views.missions,
       "week": Views.weekDetail,
       "lab": Views.lab,
+      "playground": Views.playground,
       "profile": Views.profile,
       "settings": Views.settings,
     };
@@ -95,6 +97,7 @@ const Router = {
       "missions": "Missions",
       "week": `Week ${this.params.id || ""}`,
       "lab": "Lab",
+      "playground": "Playground",
       "profile": "Pilot Profile",
       "settings": "Settings",
     };
