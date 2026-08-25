@@ -18,6 +18,7 @@ const Router = {
 
   init() {
     window.addEventListener("popstate", () => this._handleRoute());
+    window.addEventListener("hashchange", () => this._handleRoute());
     this._handleRoute();
   },
 
