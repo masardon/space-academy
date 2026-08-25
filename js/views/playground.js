@@ -18,7 +18,7 @@ Views.playground = (params) => {
       <div class="pills" style="margin-bottom:16px;">
         ${[1,2,3,4,5,6,7,8].map(w => `
           <button class="pill ${weekParam == w ? 'active' : ''}" 
-                  onclick="Router.navigate('playground',{week:'${w}','${w}')}"
+                  onclick="Router.navigate('playground',{week:'${w}'})"
                   aria-label="${t({ en: "Week", id: "Minggu" })} ${w} ${t({ en: "starter", id: "starter" })}">${w}</button>
         `).join('')}
         <button class="pill ${!weekParam ? 'active' : ''}" 
@@ -117,6 +117,41 @@ Views.playground = (params) => {
       }
     });
   }
+
+  // Attach toolbar button handlers
+  const btnFormat = document.getElementById('btnFormat');
+  if (btnFormat) {
+    btnFormat.addEventListener('click', function() {
+      const editor = document.getElementById('codeEditor');
+      if (editor) {
+        // Basic formatting: just ensure consistent indentation
+        const lines = editor.value.split('\n');
+        let indent = 0;
+        const formatted = lines.map(function(line) {
+          var trimmed = line.trim();
+          if (trimmed.startsWith('}') || trimmed.startsWith('} else') || trimmed.startsWith('else')) {
+            indent = Math.max(0, indent - 2);
+          }
+          var result = ' '.repeat(indent) + trimmed;
+          if (trimmed.endsWith('{') || trimmed.endsWith('{ ')) {
+            indent += 2;
+          }
+          return result;
+        });
+        editor.value = formatted.join('\n');
+        Views.updateRunStatus(t({ en: "Formatted", id: "Diformat" }));
+      }
+    });
+  }
+
+  var btnClear = document.getElementById('btnClear');
+  if (btnClear) btnClear.addEventListener('click', Views.clearEditor);
+
+  var btnCopyOutput = document.getElementById('btnCopyOutput');
+  if (btnCopyOutput) btnCopyOutput.addEventListener('click', Views.copyOutput);
+
+  var btnClearOutput = document.getElementById('btnClearOutput');
+  if (btnClearOutput) btnClearOutput.addEventListener('click', Views.clearOutput);
 };
 
 // Playground starter templates

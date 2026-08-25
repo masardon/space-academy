@@ -41,8 +41,17 @@ const Router = {
 
   navigate(view, params = {}) {
     let hash = `#${view}`;
-    if (params.id) hash += `/id=${params.id}`;
-    if (params.sub) hash += `/sub=${params.sub}`;
+    const paramParts = [];
+    if (params.id) paramParts.push(`id=${params.id}`);
+    if (params.sub) paramParts.push(`sub=${params.sub}`);
+    if (params.week) paramParts.push(`week=${params.week}`);
+    // Handle any additional params
+    Object.keys(params).forEach(key => {
+      if (!['id', 'sub', 'week'].includes(key)) {
+        paramParts.push(`${key}=${params[key]}`);
+      }
+    });
+    if (paramParts.length) hash += `/${paramParts.join('/')}`;
     location.hash = hash;
   },
 
