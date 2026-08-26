@@ -11,7 +11,7 @@ Views.lab = () => {
     <div class="view">
       <div class="section-header">
         <h2>🔬 ${t({ en: "The Lab", id: "Lab" })}</h2>
-        <p>${t({ en: "Your workspace — reference materials, wiring diagrams, and tools for every mission.", id: "Ruang kerjamu — referensi, diagram wiring, dan alat untuk setiap misi." })}</p>
+        <p>${t({ en: "Your workspace — reference materials, wiring diagrams, analogies, and tools for every mission.", id: "Ruang kerjamu — referensi, diagram wiring, analogi, dan alat untuk setiap misi." })}</p>
       </div>
 
       <!-- Search -->
@@ -27,6 +27,8 @@ Views.lab = () => {
         <button class="pill" onclick="Views.showLabSection('wiring', this)">${t({ en: "Wiring Guide", id: "Panduan Wiring" })}</button>
         <button class="pill" onclick="Views.showLabSection('debug', this)">${t({ en: "Debug Guide", id: "Panduan Debug" })}</button>
         <button class="pill" onclick="Views.showLabSection('terms', this)">${t({ en: "Rust Terms", id: "Istilah Rust" })}</button>
+        <button class="pill" onclick="Views.showLabSection('analogies', this)">${t({ en: "Analogies", id: "Analogi" })}</button>
+        <button class="pill" onclick="Views.showLabSection('mistakes', this)">${t({ en: "Common Mistakes", id: "Kesalahan Umum" })}</button>
       </div>
 
       <!-- Lab Content Area -->
@@ -42,7 +44,7 @@ Views.filterLab = (query) => {
   if (!content) return;
   
   const q = query.toLowerCase().trim();
-  const cards = content.querySelectorAll('.card, .lab-section > div, .lab-section > h3, .lab-section > p, .lab-section .code-block, .info-box');
+  const cards = content.querySelectorAll('.card, .lab-section > div, .lab-section > h3, .lab-section > p, .lab-section .code-block, .info-box, .lab-analogy, .lab-mistake, .lab-component, .lab-diagram');
   
   if (!q) {
     cards.forEach(el => el.style.display = '');
@@ -52,17 +54,6 @@ Views.filterLab = (query) => {
   cards.forEach(el => {
     const text = el.textContent.toLowerCase();
     el.style.display = text.includes(q) ? '' : 'none';
-  });
-  
-  // Also hide section headers if all their content is hidden
-  const sections = content.querySelectorAll('.lab-section');
-  sections.forEach(section => {
-    const visible = section.querySelector('[style="display: none;"]') === null || 
-                    Array.from(section.querySelectorAll('*')).some(el => el.style.display !== 'none' && el.offsetParent !== null);
-    // Simpler: just check if any direct content child is visible
-    const hasVisible = Array.from(section.children).some(child => 
-      child.style.display !== 'none' && child.textContent.trim() && child.offsetParent !== null
-    );
   });
 };
 
@@ -89,50 +80,65 @@ Views.showLabSection = (section, btn) => {
       goRight: t({ en: "Go right!", id: "Ke kanan!" }),
       stay: t({ en: "Stay here.", id: "Tetap di sini." }),
       loops: t({ en: "🔄 Loops", id: "🔄 Loop" }),
-      forLoop: t({ en: "For loop \u2014 known times", id: "For loop \u2014 jumlah diketahui" }),
-      whileLoop: t({ en: "While loop \u2014 until condition", id: "While loop \u2014 sampai kondisi" }),
+      forLoop: t({ en: "For loop — known times", id: "For loop — jumlah diketahui" }),
+      whileLoop: t({ en: "While loop — until condition", id: "While loop — sampai kondisi" }),
       rangeIncl: t({ en: "Range: 1..=5 means 1 to 5 (inclusive)", id: "Range: 1..=5 artinya 1 sampai 5 (inklusif)" }),
       rangeExcl: t({ en: "Range: 1..5 means 1 to 4 (exclusive)", id: "Range: 1..5 artinya 1 sampai 4 (eksklusif)" }),
-      functions: t({ en: "\u2697\ufe0f Functions", id: "\u2697\ufe0f Fungsi" }),
+      functions: t({ en: "⚗️ Functions", id: "⚗️ Fungsi" }),
       hello: t({ en: "Hello, {}!", id: "Halo, {}!" }),
       callIt: t({ en: "Call it:", id: "Panggil:" }),
-      structs: t({ en: "\u1f3d7\ufe0f Structs", id: "\u1f3d7\ufe0f Struct" }),
+      structs: t({ en: "🏗️ Structs", id: "🏗️ Struct" }),
       iAm: t({ en: "I am {}", id: "Aku {}" }),
+      vectors: t({ en: "📋 Vectors (Lists)", id: "📋 Vector (Daftar)" }),
+      methods: t({ en: "⚡ Methods", id: "⚡ Method" }),
+      cargo: t({ en: "🔧 Cargo Commands", id: "🔧 Perintah Cargo" }),
+      memoryTitle: t({ en: "🧠 How Memory Works", id: "🧠 Bagaimana Memori Bekerja" }),
+      memoryDesc: t({ en: "Each variable is a labeled box in memory. The name is the label, the value is inside.", id: "Setiap variabel adalah kotak berlabel di memori. Nama adalah label, nilai ada di dalam." }),
+      dataFlowTitle: t({ en: "➡️ Data Flow: Input → Process → Output", id: "➡️ Alur Data: Masukan → Proses → Keluaran" }),
     },
     wiring: {
-      lab: t({ en: "Lab", id: "Lab" }),
       warningTitle: t({ en: "Always double-check wiring before plugging in USB.", id: "Selalu cek wiring sebelum colok USB." }),
       warningDesc: t({ en: "Wrong connections can damage components.", id: "Koneksi salah bisa rusak komponen." }),
-      week9: t({ en: "\U0001f4a1 Week 9 \u2014 LED + Buzzer", id: "\U0001f4a1 Minggu 9 \u2014 LED + Buzzer" }),
+      week9: t({ en: "💡 Week 9 — LED + Buzzer", id: "💡 Minggu 9 — LED + Buzzer" }),
       wiringDiagram: t({ en: "Wiring Diagram", id: "Diagram Wiring" }),
       arduino: t({ en: "Arduino UNO", id: "Arduino UNO" }),
-      pin13: t({ en: "\u251c\u2500\u2500 Pin 13 \u2500\u2500 [LED built-in] \u2500\u2500\u2500 GND", id: "\u251c\u2500\u2500 Pin 13 \u2500\u2500 [LED bawaan] \u2500\u2500\u2500 GND" }),
-      pin12: t({ en: "\u251c\u2500\u2500 Pin 12 \u2500\u2500 [220\u03a9 resistor] \u2500\u2500\u2500 LED \u2500\u2500\u2500 GND", id: "\u251c\u2500\u2500 Pin 12 \u2500\u2500 [220\u03a9 resistor] \u2500\u2500\u2500 LED \u2500\u2500\u2500 GND" }),
-      pin11: t({ en: "\u251c\u2500\u2500 Pin 11 \u2500\u2500 [Buzzer +] \u2500\u2500\u2500\u2500 Buzzer - \u2500\u2500\u2500 GND", id: "\u251c\u2500\u2500 Pin 11 \u2500\u2500 [Buzzer +] \u2500\u2500\u2500\u2500 Buzzer - \u2500\u2500\u2500 GND" }),
-      usb: t({ en: "\u2514\u2500\u2500\u2500 USB \u2500\u2500\u2500\u2500 to Mini PC", id: "\u2514\u2500\u2500\u2500 USB \u2500\u2500\u2500\u2500 ke Mini PC" }),
-      week10: t({ en: "\U0001f441\ufe0f Week 10 \u2014 Add Ultrasonic Sensor", id: "\U0001f441\ufe0f Minggu 10 \u2014 Tambah Sensor Ultrasonik" }),
+      pin13: t({ en: "├── Pin 13 ── [LED built-in] ─── GND", id: "├── Pin 13 ── [LED bawaan] ─── GND" }),
+      pin12: t({ en: "├── Pin 12 ── [220Ω resistor] ─── LED ─── GND", id: "├── Pin 12 ── [220Ω resistor] ─── LED ─── GND" }),
+      pin11: t({ en: "├── Pin 11 ── [Buzzer +] ──── Buzzer - ─── GND", id: "├── Pin 11 ── [Buzzer +] ──── Buzzer - ─── GND" }),
+      usb: t({ en: "└─── USB ──── to Mini PC", id: "└─── USB ──── ke Mini PC" }),
+      week10: t({ en: "👁️ Week 10 — Add Ultrasonic Sensor", id: "👁️ Minggu 10 — Tambah Sensor Ultrasonik" }),
       hcsr04: t({ en: "HC-SR04 Sensor", id: "Sensor HC-SR04" }),
-      vcc: t({ en: "\u251c\u2500\u2500 VCC \u2500\u2500\u2500\u2500\u2500 5V", id: "\u251c\u2500\u2500 VCC \u2500\u2500\u2500\u2500\u2500 5V" }),
-      trig: t({ en: "\u251c\u2500\u2500 TRIG \u2500\u2500\u2500\u2500 Pin 2", id: "\u251c\u2500\u2500 TRIG \u2500\u2500\u2500\u2500 Pin 2" }),
-      echo: t({ en: "\u251c\u2500\u2500 ECHO \u2500\u2500\u2500\u2500 Pin 3", id: "\u251c\u2500\u2500 ECHO \u2500\u2500\u2500\u2500 Pin 3" }),
-      gnd: t({ en: "\u2514\u2500\u2500\u2500 GND \u2500\u2500\u2500\u2500 GND", id: "\u2514\u2500\u2500\u2500 GND \u2500\u2500\u2500 GND" }),
+      vcc: t({ en: "├── VCC ───── 5V", id: "├── VCC ───── 5V" }),
+      trig: t({ en: "├── TRIG ──── Pin 2", id: "├── TRIG ──── Pin 2" }),
+      echo: t({ en: "├── ECHO ──── Pin 3", id: "├── ECHO ──── Pin 3" }),
+      gnd: t({ en: "└─── GND ──── GND", id: "└─── GND ──── GND" }),
       keepPrev: t({ en: "(Keep previous LEDs/buzzer wired!)", id: "(Tetap simpan LED/buzzer sebelumnya!)" }),
-      week11: t({ en: "\U0001f504 Week 11 \u2014 Add Servo Motor", id: "\U0001f504 Minggu 11 \u2014 Tambah Motor Servo" }),
+      week11: t({ en: "🔄 Week 11 — Add Servo Motor", id: "🔄 Minggu 11 — Tambah Motor Servo" }),
       sg90: t({ en: "SG90 Servo", id: "Servo SG90" }),
-      redWire: t({ en: "\u251c\u2500\u2500 Red wire  \u2500\u2500\u2500\u2500 5V", id: "\u251c\u2500\u2500 Kabel Merah  \u2500\u2500\u2500\u2500 5V" }),
-      brownWire: t({ en: "\u251c\u2500\u2500 Brown wire \u2500\u2500\u2500\u2500 GND", id: "\u251c\u2500\u2500 Kabel Coklat \u2500\u2500\u2500\u2500 GND" }),
-      orangeWire: t({ en: "\u2514\u2500\u2500 Orange wire \u2500\u2500 Pin 9", id: "\u2514\u2500\u2500 Kabel Oranye \u2500\u2500 Pin 9" }),
+      redWire: t({ en: "├── Red wire  ──── 5V", id: "├── Kabel Merah  ──── 5V" }),
+      brownWire: t({ en: "├── Brown wire ──── GND", id: "├── Kabel Coklat ──── GND" }),
+      orangeWire: t({ en: "└── Orange wire ─── Pin 9", id: "└── Kabel Oranye ─── Pin 9" }),
       keepAll: t({ en: "(Keep ALL previous components wired!)", id: "(Tetap simpan SEMUA komponen sebelumnya!)" }),
       commonMistakes: t({ en: "Common Mistakes:", id: "Kesalahan Umum:" }),
       mistakesDesc: t({ en: "LED backwards (long leg = positive), loose breadboard connections, using charge-only USB cable (need data cable for Arduino).", id: "LED terbalik (kaki panjang = positif), koneksi breadboard longgar, pakai kabel USB charge-only (butuh kabel data untuk Arduino)." }),
+      componentsTitle: t({ en: "📦 What Each Component Does", id: "📦 Apa Fungsi Setiap Komponen" }),
+      wireLegendTitle: t({ en: "🎨 Wire Color Guide", id: "🎨 Panduan Warna Kabel" }),
+      wirePower: t({ en: "Power (5V)", id: "Daya (5V)" }),
+      wireGround: t({ en: "Ground (GND)", id: "Ground (GND)" }),
+      wireSignal: t({ en: "Signal / Data", id: "Sinyal / Data" }),
+      ledDesc: t({ en: "Light Emitting Diode — glows when electricity flows through it. Long leg = positive (+), short leg = negative (−).", id: "Light Emitting Diode — menyala saat listrik mengalir. Kaki panjang = positif (+), kaki pendek = negatif (−)." }),
+      resistorDesc: t({ en: "Limits current flow. Without it, the LED burns out! The 220Ω resistor is like a traffic cop — it slows down the electricity.", id: "Membatasi aliran listrik. Tanpa itu, LED terbakar! Resistor 220Ω seperti polisi lalu lintas — memperlambat listrik." }),
+      buzzerDesc: t({ en: "Makes sound when electricity reaches it. Pin HIGH = sound, Pin LOW = silent.", id: "Mengeluarkan suara saat listrik mencapainya. Pin HIGH = bunyi, Pin LOW = senyap." }),
+      sensorDesc: t({ en: "Sends a sound pulse and measures how long it takes to bounce back. Short time = close object, long time = far away.", id: "Mengirim pulsa suara dan mengukur waktu pantulan. Waktu singkat = objek dekat, waktu lama = jauh." }),
+      servoDesc: t({ en: "A motor that turns to a specific angle (0–180°). Like a clock hand you can control with code.", id: "Motor yang berputar ke sudut tertentu (0–180°). Seperti jarum jam yang bisa dikontrol dengan kode." }),
     },
     debug: {
-      debugChecklist: t({ en: "\U0001f41b Debugging Checklist", id: "\U0001f41b Daftar Periksa Debug" }),
-      firstError: t({ en: "Read the <strong>first</strong> error \u2014 don't skip ahead", id: "Baca error <strong>pertama</strong> \u2014 jangan loncat" }),
+      debugChecklist: t({ en: "🐛 Debugging Checklist", id: "🐛 Daftar Periksa Debug" }),
+      firstError: t({ en: "Read the <strong>first</strong> error — don't skip ahead", id: "Baca error <strong>pertama</strong> — jangan loncat" }),
       lineNum: t({ en: "Find the <strong>line number</strong> mentioned", id: "Temukan <strong>nomor baris</strong> yang disebut" }),
       lookFor: t({ en: "Look for: missing <code>;</code> / wrong <code>type</code> / <code>typo</code>", id: "Cari: <code>;</code> hilang / <code>tipe</code> salah / <code>typo</code>" }),
       oneThing: t({ en: "Fix <strong>one thing at a time</strong>", id: "Perbaiki <strong>satu hal per satu waktu</strong>" }),
-      runAgain: t({ en: "Run again \u2014 fixing one error may reveal the next", id: "Jalankan lagi \u2014 perbaiki satu error bisa membuka error berikutnya" }),
+      runAgain: t({ en: "Run again — fixing one error may reveal the next", id: "Jalankan lagi — perbaiki satu error bisa membuka error berikutnya" }),
       askCompiler: t({ en: "Ask: <em>\"What is the compiler telling me?\"</em>", id: "Tanyakan: <em>\"Apa yang diberitahu compiler?\"</em>" }),
       errorTypes: t({ en: "Common Error Types", id: "Jenis Error Umum" }),
       missingSemi: t({ en: "Missing semicolon", id: "Titik koma hilang" }),
@@ -144,21 +150,55 @@ Views.showLabSection = (section, btn) => {
       mismatchedBraces: t({ en: "Mismatched braces", id: "Kurung kurawal tidak cocok" }),
       mismatchedBracesDesc: t({ en: "Every <code>{</code> needs a matching <code>}</code>. Count them!", id: "Setiap <code>{</code> butuh <code>}</code> pasangan. Hitung!" }),
       remember: t({ en: "Remember:", id: "Ingat:" }),
-      rememberDesc: t({ en: "Errors are the compiler HELPING you. It's not mad \u2014 it's giving you clues. Every bug you fix makes you a better thinker.", id: "Error adalah compiler MEMBANTU kamu. Ia tidak marah \u2014 ia memberi petunjuk. Setiap bug yang diperbaiki membuatmu pemikir lebih baik." }),
+      rememberDesc: t({ en: "Errors are the compiler HELPING you. It's not mad — it's giving you clues. Every bug you fix makes you a better thinker.", id: "Error adalah compiler MEMBANTU kamu. Ia tidak marah — ia memberi petunjuk. Setiap bug yang diperbaiki membuatmu pemikir lebih baik." }),
+      beforeAfter: t({ en: "Before & After", id: "Sebelum & Sesudah" }),
+      fixed: t({ en: "✅ Fixed", id: "✅ Diperbaiki" }),
+      wrong: t({ en: "❌ Wrong", id: "❌ Salah" }),
+      whyBroke: t({ en: "Why it broke:", id: "Kenapa rusak:" }),
+      spotBug: t({ en: "🔍 Spot the Bug", id: "🔍 Temukan Bug" }),
+      spotBugDesc: t({ en: "Can you find the error in each snippet? Think before scrolling to the answer!", id: "Bisa temukan error di setiap potongan kode? Pikirkan sebelum scroll ke jawaban!" }),
     },
     terms: {
-      glossary: t({ en: "\U0001f4d6 Rust Glossary", id: "\U0001f4d6 Glosarium Rust" }),
+      glossary: t({ en: "📖 Rust Glossary", id: "📖 Glosarium Rust" }),
+      exampleLabel: t({ en: "Example:", id: "Contoh:" }),
+    },
+    analogies: {
+      title: t({ en: "🌍 Real-World Analogies", id: "🌍 Analogi Dunia Nyata" }),
+      desc: t({ en: "Programming concepts explained through things you already know.", id: "Konsep pemrograman dijelaskan melalui hal-hal yang sudah kamu ketahui." }),
+    },
+    mistakes: {
+      title: t({ en: "⚠️ Common Mistakes Gallery", id: "⚠️ Galeri Kesalahan Umum" }),
+      desc: t({ en: "Learn from mistakes others have made. Click any mistake to see why it happens and how to fix it.", id: "Belajar dari kesalahan orang lain. Klik kesalahan untuk melihat kenapa terjadi dan cara memperbaikinya." }),
+      wrong: t({ en: "❌ Wrong", id: "❌ Salah" }),
+      fixed: t({ en: "✅ Fixed", id: "✅ Diperbaiki" }),
     }
   };
-
-  if (btn) {
-    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-  }
 
   const sections = {
     cheatsheet: `
       <div class="lab-section">
+        <!-- Visual: How Memory Works -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--info);">${tr.cheatsheet.memoryTitle}</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:12px;">${tr.cheatsheet.memoryDesc}</p>
+          <div class="lab-diagram"><strong>let</strong> robot_hp <strong>=</strong> 100;
+<span class="dim">┌─────────────────────────────────┐</span>
+<span class="dim">│</span>  <span class="highlight">robot_hp</span>  <span class="dim">│</span>  <strong>100</strong>            <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">(label)</span>   <span class="dim">│</span>  <span class="highlight">(value)</span>        <span class="dim">│</span>
+<span class="dim">└─────────────────────────────────┘</span>
+
+<span class="dim">let</span> name <span class="dim">=</span> <span class="highlight">"Sparky"</span>;
+<span class="dim">┌─────────────────────────────────┐</span>
+<span class="dim">│</span>  <span class="highlight">name</span>      <span class="dim">│</span>  <strong>"Sparky"</strong>      <span class="dim">│</span>
+<span class="dim">└─────────────────────────────────┘</span>
+
+<span class="dim">let</span> is_active <span class="dim">=</span> <span class="highlight">true</span>;
+<span class="dim">┌─────────────────────────────────┐</span>
+<span class="dim">│</span>  <span class="highlight">is_active</span> <span class="dim">│</span>  <strong>true</strong>           <span class="dim">│</span>
+<span class="dim">└─────────────────────────────────┘</span></div>
+        </div>
+
+        <!-- Variables & Types -->
         <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--accent-light);">${tr.cheatsheet.varsTypes}</h3>
           <div class="code-block" style="margin:0;">
@@ -171,6 +211,7 @@ let mut inventory = vec![]; // ${tr.cheatsheet.mutVec}</code></div>
           </div>
         </div>
 
+        <!-- Conditionals -->
         <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--success);">${tr.cheatsheet.conditionals}</h3>
           <div class="code-block" style="margin:0;">
@@ -185,6 +226,7 @@ let mut inventory = vec![]; // ${tr.cheatsheet.mutVec}</code></div>
           </div>
         </div>
 
+        <!-- Loops -->
         <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--warning);">${tr.cheatsheet.loops}</h3>
           <div class="code-block" style="margin:0;">
@@ -202,8 +244,17 @@ while health > 0 {
 ${tr.cheatsheet.rangeIncl}
 ${tr.cheatsheet.rangeExcl}</code></div>
           </div>
+          <div class="lab-diagram" style="margin-top:12px;"><strong>for</strong> loop flow:
+<span class="dim">┌──────┐</span>    <span class="dim">┌──────────┐</span>    <span class="dim">┌──────┐</span>
+<span class="dim">│</span> <strong>start</strong> <span class="dim">│───▶│</span> <span class="highlight">run code</span> <span class="dim">│───▶│</span> <strong>next</strong> <span class="dim">│</span>
+<span class="dim">└──────┘</span>    <span class="dim">└──────────┘</span>    <span class="dim">└──┬───┘</span>
+                         <span class="dim">│</span>
+                    <span class="dim">more? ──▶</span> <strong>yes</strong> → back to run code
+                         <span class="dim">│</span>
+                         <span class="dim">└──</span> <strong>no</strong> → <span class="highlight">done!</span></div>
         </div>
 
+        <!-- Functions -->
         <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--info);">${tr.cheatsheet.functions}</h3>
           <div class="code-block" style="margin:0;">
@@ -216,9 +267,17 @@ ${tr.cheatsheet.callIt}
 let message = greet("Luna");
 println!("{}", message);</code></div>
           </div>
+          <div class="lab-diagram" style="margin-top:12px;"><strong>Function = Vending Machine</strong>
+<span class="dim">┌──────────────────────────────────┐</span>
+<span class="dim">│</span>  <span class="highlight">INPUT</span>      <span class="dim">│</span>  <strong>PROCESS</strong>       <span class="dim">│</span>  <span class="highlight">OUTPUT</span>    <span class="dim">│</span>
+<span class="dim">│</span>  <strong>"Luna"</strong>    <span class="dim">│</span>  greet() runs   <span class="dim">│</span>  <strong>"Halo,   </span> <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">(param)</span>    <span class="dim">│</span>  <span class="dim">format!()</span>      <span class="dim">│</span>  <strong> Luna!"</strong>  <span class="dim">│</span>
+<span class="dim">│</span>             <span class="dim">│</span>                  <span class="dim">│</span>  <span class="dim">(return)</span> <span class="dim">│</span>
+<span class="dim">└──────────────────────────────────┘</span></div>
         </div>
 
-        <div class="card">
+        <!-- Structs -->
+        <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--f15bb5,#f15bb5);">${tr.cheatsheet.structs}</h3>
           <div class="code-block" style="margin:0;">
             <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
@@ -239,17 +298,124 @@ let cadet = Cadet {
 };
 cadet.introduce();</code></div>
           </div>
+          <div class="lab-diagram" style="margin-top:12px;"><strong>Struct = Character Sheet</strong>
+<span class="dim">┌─────────────────────┐</span>
+<span class="dim">│</span>  <strong>Cadet</strong>              <span class="dim">│</span>
+<span class="dim">│</span>  ─────────────────  <span class="dim">│</span>
+<span class="dim">│</span>  name: <span class="highlight">"Zyx"</span>        <span class="dim">│</span>
+<span class="dim">│</span>  hp:   <span class="highlight">100</span>          <span class="dim">│</span>
+<span class="dim">│</span>  ─────────────────  <span class="dim">│</span>
+<span class="dim">│</span>  <strong>Methods:</strong>           <span class="dim">│</span>
+<span class="dim">│</span>  introduce()         <span class="dim">│</span>
+<span class="dim">│</span>  is_fresh()          <span class="dim">│</span>
+<span class="dim">└─────────────────────┘</span></div>
+        </div>
+
+        <!-- Vectors -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--success);">${tr.cheatsheet.vectors}</h3>
+          <div class="code-block" style="margin:0;">
+            <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+            <div class="code-body"><code>let mut items = vec![];
+items.push(String::from("Energy Cell"));  // add
+items.push(String::from("Repair Kit"));
+items.remove(0);                          // remove first
+println!("Count: {}", items.len());       // size
+
+for (i, item) in items.iter().enumerate() {
+    println!("{}. {}", i + 1, item);
+}</code></div>
+          </div>
+          <div class="lab-diagram" style="margin-top:12px;"><strong>Vector = Shopping List</strong>
+<span class="dim">┌───┬──────────────────┐</span>
+<span class="dim">│</span> <strong>0</strong> <span class="dim">│</span> <span class="highlight">"Energy Cell"</span>    <span class="dim">│</span>  ← push() adds here
+<span class="dim">├───┼──────────────────┤</span>
+<span class="dim">│</span> <strong>1</strong> <span class="dim">│</span> <span class="highlight">"Repair Kit"</span>     <span class="dim">│</span>
+<span class="dim">├───┼──────────────────┤</span>
+<span class="dim">│</span> <strong>2</strong> <span class="dim">│</span> <span class="highlight">"Data Chip"</span>      <span class="dim">│</span>  ← remove(0) deletes index 0
+<span class="dim">└───┴──────────────────┘</span>
+<span class="dim">len()</span> = <strong>3</strong> items total</div>
+        </div>
+
+        <!-- Methods -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--warning);">${tr.cheatsheet.methods}</h3>
+          <div class="code-block" style="margin:0;">
+            <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+            <div class="code-body"><code>impl Cadet {
+    // &self = reference to THIS cadet
+    fn introduce(&self) {
+        println!("I am {}", self.name);
+    }
+
+    // &mut self = can change this cadet
+    fn damage(&mut self, amount: u32) {
+        self.hp -= amount;
+    }
+}
+
+let mut zyx = Cad { name: "Zyx", hp: 100 };
+zyx.damage(20);  // hp is now 80</code></div>
+          </div>
+        </div>
+
+        <!-- Cargo Commands -->
+        <div class="card">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--info);">${tr.cheatsheet.cargo}</h3>
+          <div class="code-block" style="margin:0;">
+            <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Terminal</span></div>
+            <div class="code-body"><code>cargo new my-project     # create new project
+cargo run                # build + run
+cargo check              # check for errors (faster)
+cargo build              # build without running</code></div>
+          </div>
         </div>
       </div>
     `,
 
-wiring: `
+    wiring: `
       <div class="lab-section">
         <div class="info-box warning" style="margin-bottom:20px;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           <div><strong>${tr.wiring.warningTitle}</strong> ${tr.wiring.warningDesc}</div>
         </div>
 
+        <!-- Wire Color Legend -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;">${tr.wiring.wireLegendTitle}</h3>
+          <div class="lab-wire-legend">
+            <div class="lab-wire-item"><div class="lab-wire-dot" style="background:#e53170;"></div> ${tr.wiring.wirePower}</div>
+            <div class="lab-wire-item"><div class="lab-wire-dot" style="background:#6b6d82;"></div> ${tr.wiring.wireGround}</div>
+            <div class="lab-wire-item"><div class="lab-wire-dot" style="background:#ff8906;"></div> ${tr.wiring.wireSignal}</div>
+          </div>
+        </div>
+
+        <!-- Component Descriptions -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;">${tr.wiring.componentsTitle}</h3>
+          <div class="lab-component">
+            <div class="lab-component-name">💡 LED</div>
+            <div class="lab-component-desc">${tr.wiring.ledDesc}</div>
+          </div>
+          <div class="lab-component">
+            <div class="lab-component-name">⚡ Resistor (220Ω)</div>
+            <div class="lab-component-desc">${tr.wiring.resistorDesc}</div>
+          </div>
+          <div class="lab-component">
+            <div class="lab-component-name">🔊 Buzzer</div>
+            <div class="lab-component-desc">${tr.wiring.buzzerDesc}</div>
+          </div>
+          <div class="lab-component">
+            <div class="lab-component-name">👁️ Ultrasonic Sensor (HC-SR04)</div>
+            <div class="lab-component-desc">${tr.wiring.sensorDesc}</div>
+          </div>
+          <div class="lab-component">
+            <div class="lab-component-name">🔄 Servo Motor (SG90)</div>
+            <div class="lab-component-desc">${tr.wiring.servoDesc}</div>
+          </div>
+        </div>
+
+        <!-- Week 9 Wiring -->
         <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;">${tr.wiring.week9}</h3>
           <div class="code-block" style="margin:0;">
@@ -264,6 +430,7 @@ wiring: `
           </div>
         </div>
 
+        <!-- Week 10 Wiring -->
         <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;">${tr.wiring.week10}</h3>
           <div class="code-block" style="margin:0;">
@@ -279,6 +446,7 @@ wiring: `
           </div>
         </div>
 
+        <!-- Week 11 Wiring -->
         <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;">${tr.wiring.week11}</h3>
           <div class="code-block" style="margin:0;">
@@ -302,6 +470,7 @@ wiring: `
 
     debug: `
       <div class="lab-section">
+        <!-- Debugging Checklist -->
         <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;">${tr.debug.debugChecklist}</h3>
           <ul class="checklist">
@@ -314,25 +483,166 @@ wiring: `
           </ul>
         </div>
 
+        <!-- Error Types with Before/After -->
         <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;">${tr.debug.errorTypes}</h3>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--error);">
+
+          <!-- Missing Semicolon -->
+          <div style="margin-bottom:20px;">
+            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--error);margin-bottom:8px;">
               <strong style="color:var(--error);">${tr.debug.missingSemi}</strong>
               <p style="font-size:0.875rem;color:var(--text-secondary);margin-top:4px;">${tr.debug.missingSemiDesc}</p>
             </div>
-            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--warning);">
+            <div class="lab-before-after">
+              <div class="lab-code-wrong">
+                <div class="lab-code-label">${tr.debug.wrong}</div>
+                <div class="code-block">
+                  <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                  <div class="code-body"><code><span style="color:var(--error);">let greeting = "Hello!"</span>
+println!("{}", greeting);</code></div>
+                </div>
+              </div>
+              <div class="lab-code-fixed">
+                <div class="lab-code-label">${tr.debug.fixed}</div>
+                <div class="code-block">
+                  <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                  <div class="code-body"><code><span style="color:var(--success);">let greeting = "Hello!";</span>
+println!("{}", greeting);</code></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Type Mismatch -->
+          <div style="margin-bottom:20px;">
+            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--warning);margin-bottom:8px;">
               <strong style="color:var(--warning);">${tr.debug.typeMismatch}</strong>
               <p style="font-size:0.875rem;color:var(--text-secondary);margin-top:4px;">${tr.debug.typeMismatchDesc}</p>
             </div>
-            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--info);">
+            <div class="lab-before-after">
+              <div class="lab-code-wrong">
+                <div class="lab-code-label">${tr.debug.wrong}</div>
+                <div class="code-block">
+                  <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                  <div class="code-body"><code><span style="color:var(--error);">let age: u32 = "five";</span></code></div>
+                </div>
+              </div>
+              <div class="lab-code-fixed">
+                <div class="lab-code-label">${tr.debug.fixed}</div>
+                <div class="code-block">
+                  <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                  <div class="code-body"><code><span style="color:var(--success);">let age: u32 = 5;</span></code></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Unused Variable -->
+          <div style="margin-bottom:20px;">
+            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--info);margin-bottom:8px;">
               <strong style="color:var(--info);">${tr.debug.unusedVar}</strong>
               <p style="font-size:0.875rem;color:var(--text-secondary);margin-top:4px;">${tr.debug.unusedVarDesc}</p>
             </div>
-            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--accent);">
+            <div class="lab-before-after">
+              <div class="lab-code-wrong">
+                <div class="lab-code-label">${tr.debug.wrong}</div>
+                <div class="code-block">
+                  <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                  <div class="code-body"><code>fn main() {
+    <span style="color:var(--error);">let mission_code = 42;</span>
+    println!("Ready!");
+}</code></div>
+                </div>
+              </div>
+              <div class="lab-code-fixed">
+                <div class="lab-code-label">${tr.debug.fixed}</div>
+                <div class="code-block">
+                  <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                  <div class="code-body"><code>fn main() {
+    <span style="color:var(--success);">let mission_code = 42;</span>
+    <span style="color:var(--success);">println!("Code: {}", mission_code);</span>
+}</code></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mismatched Braces -->
+          <div>
+            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--accent);margin-bottom:8px;">
               <strong style="color:var(--accent-light);">${tr.debug.mismatchedBraces}</strong>
               <p style="font-size:0.875rem;color:var(--text-secondary);margin-top:4px;">${tr.debug.mismatchedBracesDesc}</p>
             </div>
+            <div class="lab-before-after">
+              <div class="lab-code-wrong">
+                <div class="lab-code-label">${tr.debug.wrong}</div>
+                <div class="code-block">
+                  <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                  <div class="code-body"><code>fn main() {
+    println!("Hi");
+<span style="color:var(--error);">// missing closing }</span></code></div>
+                </div>
+              </div>
+              <div class="lab-code-fixed">
+                <div class="lab-code-label">${tr.debug.fixed}</div>
+                <div class="code-block">
+                  <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                  <div class="code-body"><code>fn main() {
+    println!("Hi");
+<span style="color:var(--success);">}</span></code></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spot the Bug -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;">${tr.debug.spotBug}</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:16px;">${tr.debug.spotBugDesc}</p>
+
+          <div style="margin-bottom:16px;">
+            <p style="font-size:0.875rem;color:var(--text-primary);font-weight:600;margin-bottom:8px;">Bug #1:</p>
+            <div class="code-block" style="margin:0;">
+              <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+              <div class="code-body"><code>let x = 5
+let y = 10;
+println!("{}", x + y);</code></div>
+            </div>
+            <details style="margin-top:8px;">
+              <summary style="font-size:0.875rem;color:var(--accent-light);cursor:pointer;">${t({ en: "Reveal answer", id: "Tampilkan jawaban" })}</summary>
+              <p style="font-size:0.875rem;color:var(--text-secondary);margin-top:8px;">${t({ en: "Missing semicolon after <code>let x = 5</code>. Add <code>;</code> at the end.", id: "Titik koma hilang setelah <code>let x = 5</code>. Tambah <code>;</code> di akhir." })}</p>
+            </details>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <p style="font-size:0.875rem;color:var(--text-primary);font-weight:600;margin-bottom:8px;">Bug #2:</p>
+            <div class="code-block" style="margin:0;">
+              <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+              <div class="code-body"><code>let count: i32 = "three";
+println!("Count: {}", count);</code></div>
+            </div>
+            <details style="margin-top:8px;">
+              <summary style="font-size:0.875rem;color:var(--accent-light);cursor:pointer;">${t({ en: "Reveal answer", id: "Tampilkan jawaban" })}</summary>
+              <p style="font-size:0.875rem;color:var(--text-secondary);margin-top:8px;">${t({ en: "Type mismatch! <code>i32</code> expects a number, but you gave text. Change to <code>let count: i32 = 3;</code>", id: "Tipe tidak cocok! <code>i32</code> butuh angka, tapi kamu kasih teks. Ganti ke <code>let count: i32 = 3;</code>" })}</p>
+            </details>
+          </div>
+
+          <div>
+            <p style="font-size:0.875rem;color:var(--text-primary);font-weight:600;margin-bottom:8px;">Bug #3:</p>
+            <div class="code-block" style="margin:0;">
+              <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+              <div class="code-body"><code>fn main() {
+    let items = vec!["a", "b", "c"];
+    for item in items {
+        println(item);
+    }
+}</code></div>
+            </div>
+            <details style="margin-top:8px;">
+              <summary style="font-size:0.875rem;color:var(--accent-light);cursor:pointer;">${t({ en: "Reveal answer", id: "Tampilkan jawaban" })}</summary>
+              <p style="font-size:0.875rem;color:var(--text-secondary);margin-top:8px;">${t({ en: "<code>println</code> is missing the <code>!</code>. It should be <code>println!(\"{}\", item);</code>", id: "<code>println</code> kehilangan <code>!</code>. Seharusnya <code>println!(\"{}\", item);</code>" })}</p>
+            </details>
           </div>
         </div>
 
@@ -349,29 +659,233 @@ wiring: `
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;">${tr.terms.glossary}</h3>
           <div style="display:grid;gap:12px;">
             ${[
-              { term: "Variable", def: "A named box that holds a value. Created with let.", def_id: "Kotak bernama yang menyimpan nilai. Dibuat dengan let." },
-              { term: "Mutable (mut)", def: "Can be changed after creation. Add mut before the name.", def_id: "Bisa diubah setelah dibuat. Tambah mut sebelum nama." },
-              { term: "Function (fn)", def: "A reusable block of code. You call it by name.", def_id: "Blok kode yang bisa dipakai ulang. Dipanggil lewat nama." },
-              { term: "Parameter", def: "Input values a function accepts. Shown inside parentheses.", def_id: "Nilai masukan fungsi. Ditampilkan di dalam tanda kurung." },
-              { term: "Return value", def: "What a function gives back. Shown with -> Type.", def_id: "Apa yang dikembalikan fungsi. Ditampilkan dengan -> Type." },
-              { term: "Struct", def: "A custom data type that groups related values together.", def_id: "Tipe data kustom yang mengelompokkan nilai terkait." },
-              { term: "Method", def: "A function that belongs to a struct. Uses &self.", def_id: "Fungsi yang milik struct. Pakai &self." },
-              { term: "Vector (Vec)", def: "An ordered list that can grow and shrink.", def_id: "Daftar berurutan yang bisa bertambah dan berkurang." },
-              { term: "Loop", def: "Repeats code. for = known times, while = until condition.", def_id: "Mengulang kode. for = jumlah diketahui, while = sampai kondisi." },
-              { term: "Conditional", def: "if/else lets code make decisions based on true/false.", def_id: "if/else biarkan kode memutuskan berdasarkan true/false." },
-              { term: "Compile", def: "Turn code into a program the computer can run.", def_id: "Ubah kode jadi program yang bisa dijalanin komputer." },
-              { term: "Borrow Checker", def: "Rust's rule-enforcer. Makes sure data ownership is correct.", def_id: "Penegak aturan Rust. Pastikan kepemilikan data benar." },
-              { term: "Cargo", def: "Rust's project manager. Handles building and dependencies.", def_id: "Manajer proyek Rust. Urus build dan dependensi." },
-              { term: "println!", def: "Prints text to the screen with placeholders {}.", def_id: "Cetak teks ke layar dengan placeholder {}." },
-              { term: "format!", def: "Creates a string from a template (like println but saves it).", def_id: "Bikin string dari template (seperti println tapi disimpan)." },
+              { term: "Variable", def: "A named box that holds a value. Created with let.", def_id: "Kotak bernama yang menyimpan nilai. Dibuat dengan let.", example: 'let hp = 100;' },
+              { term: "Mutable (mut)", def: "Can be changed after creation. Add mut before the name.", def_id: "Bisa diubah setelah dibuat. Tambah mut sebelum nama.", example: 'let mut hp = 100;\nhp = 80; // OK!' },
+              { term: "Function (fn)", def: "A reusable block of code. You call it by name.", def_id: "Blok kode yang bisa dipakai ulang. Dipanggil lewat nama.", example: 'fn greet() {\n    println!("Hi!");\n}\ngreet();' },
+              { term: "Parameter", def: "Input values a function accepts. Shown inside parentheses.", def_id: "Nilai masukan fungsi. Ditampilkan di dalam tanda kurung.", example: 'fn add(a: i32, b: i32) {\n    println!("{}", a + b);\n}' },
+              { term: "Return value", def: "What a function gives back. Shown with -> Type.", def_id: "Apa yang dikembalikan fungsi. Ditampilkan dengan -> Type.", example: 'fn double(x: i32) -> i32 {\n    x * 2\n}' },
+              { term: "Struct", def: "A custom data type that groups related values together.", def_id: "Tipe data kustom yang mengelompokkan nilai terkait.", example: 'struct Robot {\n    name: String,\n    hp: u32,\n}' },
+              { term: "Method", def: "A function that belongs to a struct. Uses &self.", def_id: "Fungsi yang milik struct. Pakai &self.", example: 'impl Robot {\n    fn introduce(&self) {\n        println!("{}", self.name);\n    }\n}' },
+              { term: "Vector (Vec)", def: "An ordered list that can grow and shrink.", def_id: "Daftar berurutan yang bisa bertambah dan berkurang.", example: 'let mut v = vec![1, 2, 3];\nv.push(4);\nv.remove(0);' },
+              { term: "Loop", def: "Repeats code. for = known times, while = until condition.", def_id: "Mengulang kode. for = jumlah diketahui, while = sampai kondisi.", example: 'for i in 1..=5 {\n    println!("{}", i);\n}' },
+              { term: "Conditional", def: "if/else lets code make decisions based on true/false.", def_id: "if/else biarkan kode memutuskan berdasarkan true/false.", example: 'if hp > 50 {\n    println!("Healthy!");\n} else {\n    println!("Low HP!");\n}' },
+              { term: "Compile", def: "Turn code into a program the computer can run.", def_id: "Ubah kode jadi program yang bisa dijalanin komputer.", example: '// Terminal:\n// rustc main.rs\n// ./main' },
+              { term: "Borrow Checker", def: "Rust's rule-enforcer. Makes sure data ownership is correct.", def_id: "Penegak aturan Rust. Pastikan kepemilikan data benar.", example: 'let s1 = String::from("hi");\nlet s2 = &s1; // borrow, don\'t move' },
+              { term: "Cargo", def: "Rust's project manager. Handles building and dependencies.", def_id: "Manajer proyek Rust. Urus build dan dependensi.", example: '// Terminal:\n// cargo new my-project\n// cargo run' },
+              { term: "println!", def: "Prints text to the screen with placeholders {}.", def_id: "Cetak teks ke layar dengan placeholder {}.", example: 'let name = "Luna";\nprintln!("Hi, {}!", name);' },
+              { term: "format!", def: "Creates a string from a template (like println but saves it).", def_id: "Bikin string dari template (seperti println tapi disimpan).", example: 'let msg = format!("Hi, {}!", "Luna");\n// msg = "Hi, Luna!"' },
+              { term: "String vs &str", def: "String = owned text you can change. &str = borrowed text you can read.", def_id: "String = teks milik yang bisa diubah. &str = teks pinjaman yang bisa dibaca.", example: 'let owned = String::from("hello");\nlet borrowed: &str = "world";' },
+              { term: "enum", def: "A type that can be one of several variants.", def_id: "Tipe yang bisa salah satu dari beberapa varian.", example: 'enum State {\n    Scanning,\n    Alarm,\n}' },
+              { term: "match", def: "Like if/else but for enums and patterns. Exhaustive checking.", def_id: "Seperti if/else tapi untuk enum dan pola. Pemeriksaan menyeluruh.", example: 'match state {\n    State::Scanning => scan(),\n    State::Alarm => alert(),\n}' },
+              { term: "clone()", def: "Creates an exact copy of data. Use when you need your own copy.", def_id: "Membuat salinan tepat dari data. Pakai saat butuh salinan sendiri.", example: 'let a = String::from("hi");\nlet b = a.clone(); // b is independent' },
+              { term: "enumerate()", def: "Adds a counter to each item in a loop: (0, item), (1, item)...", def_id: "Menambah penghitung ke setiap item di loop: (0, item), (1, item)...", example: 'for (i, name) in names.iter().enumerate() {\n    println!("{}. {}", i+1, name);\n}' },
             ].map(item => `
               <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;">
                 <strong style="color:var(--accent-light);">${t({ en: item.term, id: item.term })}</strong>
                 <p style="font-size:0.875rem;color:var(--text-secondary);margin-top:4px;">${t({ en: item.def, id: item.def_id })}</p>
+                <div class="lab-term-example">${tr.terms.exampleLabel} <code>${item.example}</code></div>
               </div>
             `).join('')}
           </div>
         </div>
+      </div>
+    `,
+
+    analogies: `
+      <div class="lab-section">
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:8px;">${tr.analogies.title}</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:16px;">${tr.analogies.desc}</p>
+
+          <div style="display:grid;gap:12px;">
+            ${[
+              {
+                emoji: "📦",
+                concept: { en: "Variable", id: "Variabel" },
+                analogy: { en: "A labeled pocket in your backpack. The label (name) stays the same, but you can swap what's inside.", id: "Kantong berlabel di ranselmu. Label (nama) tetap sama, tapi kamu bisa ganti isinya." },
+                code: 'let hp = 100;\n// Pocket labeled "hp" contains 100',
+              },
+              {
+                emoji: "✏️",
+                concept: { en: "mut (Mutable)", id: "mut (Mutable)" },
+                analogy: { en: "Pencil vs. pen. With mut, it's pencil — you can erase and rewrite. Without mut, it's pen — permanent!", id: "Pensil vs. pulpen. Dengan mut, itu pensil — bisa dihapus dan ditulis ulang. Tanpa mut, itu pulpen — permanen!" },
+                code: 'let mut hp = 100; // pencil\nhp = 80;          // erased & rewritten\n\nlet hp = 100;     // pen\n// hp = 80;       // ERROR! permanent',
+              },
+              {
+                emoji: "🔀",
+                concept: { en: "if / else (Conditionals)", id: "if/else (Kondisional)" },
+                analogy: { en: "A fork in the road. IF the sign says 'left', go left. ELSE, go right. Only one path is taken.", id: "Percabangan jalan. Kalau papan tanda bilang 'kiri', belok kiri. Kalau tidak, belok kanan. Hanya satu jalan yang dilewati." },
+                code: 'if choice == "left" {\n    // left path\n} else {\n    // right path\n}',
+              },
+              {
+                emoji: "🔁",
+                concept: { en: "for loop", id: "for loop" },
+                analogy: { en: "Knocking on doors. You know there are 10 rooms. Knock on door 1, then 2, then 3... until you've knocked on all 10.", id: "Mengetuk pintu. Kamu tahu ada 10 ruangan. Ketuk pintu 1, lalu 2, lalu 3... sampai semua pintu diketuk." },
+                code: 'for room in 1..=10 {\n    println!("Knock knock on room {}!", room);\n}',
+              },
+              {
+                emoji: "🔃",
+                concept: { en: "while loop", id: "while loop" },
+                analogy: { en: "Waiting at a traffic light. WHILE it's red, you wait. The moment it turns green, you go! You don't know how long you'll wait.", id: "Menunggu lampu lalu lintas. SELAMA merah, kamu tunggu. Begitu hijau, kamu jalan! Kamu tidak tahu berapa lama menunggu." },
+                code: 'while light == "red" {\n    wait();\n}\ngo();',
+              },
+              {
+                emoji: "⚗️",
+                concept: { en: "Function", id: "Fungsi" },
+                analogy: { en: "A vending machine. Put coins in (parameters), press a button (call), get a snack out (return value). Same machine, different coins, different snacks.", id: "Mesin jual otomatis. Masukkan koin (parameter), tekan tombol (panggil), dapat camilan (nilai kembali). Mesin yang sama, koin berbeda, camilan berbeda." },
+                code: 'fn vending(coin: i32) -> String {\n    if coin >= 5 {\n        format!("Got a snack!")\n    } else {\n        format!("Not enough coins!")\n    }\n}',
+              },
+              {
+                emoji: "🏗️",
+                concept: { en: "Struct", id: "Struct" },
+                analogy: { en: "A character sheet in a board game. It groups your name, HP, speed, and abilities into one card. Every character uses the same template but has different values.", id: "Lembar karakter di papan permainan. Mengelompokkan nama, HP, kecepatan, dan kemampuan dalam satu kartu. Setiap karakter pakai template yang sama tapi nilai berbeda." },
+                code: 'struct Cadet {\n    name: String,\n    hp: u32,\n    speed: u32,\n}',
+              },
+              {
+                emoji: "📋",
+                concept: { en: "Vector (Vec)", id: "Vector (Vec)" },
+                analogy: { en: "A grocery list on a whiteboard. You can add items (push), erase items (remove), and count how many items you have (len). The list grows and shrinks.", id: "Daftar belanja di papan tulis. Bisa tambah item (push), hapus item (remove), dan hitung jumlah item (len). Daftar memuai dan menyusut." },
+                code: 'let mut list = vec![];\nlist.push("milk");\nlist.push("eggs");\nlist.remove(0);',
+              },
+              {
+                emoji: "🐛",
+                concept: { en: "Debugging", id: "Debugging" },
+                analogy: { en: "Being a detective. The error message is a clue. The line number is the crime scene. You investigate, find the suspect (bug), and fix the case.", id: "Menjadi detektif. Pesan error adalah petunjuk. Nomor baris adalah lokasi kejadian. Kamu menyelidiki, menemukan tersangka (bug), dan menyelesaikan kasus." },
+                code: '// Error: missing `;` at line 3\n// Detective: check line 3\n// Found: let x = 5  (missing ;)',
+              },
+              {
+                emoji: "🏗️",
+                concept: { en: "Borrow Checker", id: "Borrow Checker" },
+                analogy: { en: "Library book rules. You can READ a book anytime (immutable borrow). But only ONE person can WRITE in it at a time (mutable borrow). And you can't write while others are reading.", id: "Aturan buku perpustakaan. Bisa BACA buku kapan saja (pinjaman tidak berubah). Tapi hanya SATU orang yang bisa MENULIS di dalamnya pada satu waktu (pinjaman berubah). Dan tidak bisa menulis sementara orang lain sedang membaca." },
+                code: 'let book = String::from("Rust 101");\nlet reader1 = &book;  // can read\nlet reader2 = &book;  // can also read\n// let writer = &mut book; // ERROR if readers exist!',
+              },
+              {
+                emoji: "🔧",
+                concept: { en: "Cargo", id: "Cargo" },
+                analogy: { en: "A workshop organizer. It builds the shelves (folder structure), keeps the instruction manual (Cargo.toml), and hands you tools when you ask (dependencies).", id: "Pengorganisir bengkel. Membuat rak (struktur folder), menyimpan buku panduan (Cargo.toml), dan memberikan alat saat diminta (dependensi)." },
+                code: '// cargo new my-project\n// Creates: my-project/\n//          ├── Cargo.toml\n//          └── src/main.rs',
+              },
+              {
+                emoji: "⚡",
+                concept: { en: "Method (&self)", id: "Method (&self)" },
+                analogy: { en: "A button on a remote control. Each button belongs to YOUR remote (&self). When you press 'volume up', it changes YOUR TV, not someone else's.", id: "Tombol di remote. Setiap tombol milik remote-MU (&self). Saat tekan 'volume naik', itu mengubah TV-MU, bukan milik orang lain." },
+                code: 'impl Robot {\n    fn repair(&mut self) {\n        self.hp = 100; // YOUR robot\n    }\n}',
+              },
+            ].map(item => `
+              <div class="lab-analogy">
+                <div class="lab-analogy-title">${item.emoji} ${t(item.concept)}</div>
+                <p>${t(item.analogy)}</p>
+                <div class="lab-term-example" style="margin-top:8px;"><code>${item.code}</code></div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `,
+
+    mistakes: `
+      <div class="lab-section">
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:8px;">${tr.mistakes.title}</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:16px;">${tr.mistakes.desc}</p>
+        </div>
+
+        ${[
+          {
+            title: { en: "🔴 Forgetting quotes around strings", id: "🔴 Lupa tanda kutip untuk string" },
+            wrong: 'let name = Sparky;',
+            fixed: 'let name = "Sparky";',
+            why: { en: "Rust thinks Sparky is a variable name. Text must wear quotes to be a string.", id: "Rust mengira Sparky adalah nama variabel. Teks harus pakai tanda kutip agar jadi string." },
+            topic: "Variables",
+          },
+          {
+            title: { en: "🔴 Missing semicolon", id: "🔴 Titik koma hilang" },
+            wrong: 'let hp = 100\nprintln!("{}", hp);',
+            fixed: 'let hp = 100;\nprintln!("{}", hp);',
+            why: { en: "Every statement in Rust must end with ;. It's like a period at the end of a sentence.", id: "Setiap pernyataan dalam Rust harus diakhiri dengan ;. Seperti tanda titik di akhir kalimat." },
+            topic: "Variables",
+          },
+          {
+            title: { en: "🔴 Using = instead of == in conditions", id: "🔴 Pakai = bukan == di kondisi" },
+            wrong: 'if choice = "left" {\n    println!("Going left!");\n}',
+            fixed: 'if choice == "left" {\n    println!("Going left!");\n}',
+            why: { en: "\"=\" means 'assign a value'. \"==\" means 'compare values'. In if conditions, you want to COMPARE, not assign.", id: "\"=\" artinya 'memberi nilai'. \"==\" artinya 'membandingkan nilai'. Di if, kamu ingin MEMBANDINGKAN, bukan memberi nilai." },
+            topic: "Conditionals",
+          },
+          {
+            title: { en: "🔴 Off-by-one in range", id: "🔴 Salah satu di range" },
+            wrong: 'for i in 1..5 {\n    println!("{}", i);\n}\n// Prints 1, 2, 3, 4 — NOT 5!',
+            fixed: 'for i in 1..=5 {\n    println!("{}", i);\n}\n// Prints 1, 2, 3, 4, 5 ✓',
+            why: { en: "1..5 stops BEFORE 5 (exclusive). Use 1..=5 to INCLUDE 5 (inclusive). The = means 'include the end'.", id: "1..5 berhenti SEBELUM 5 (eksklusif). Pakai 1..=5 untuk MEMASUKKAN 5 (inklusif). Tanda = artinya 'masukkan angka akhir'." },
+            topic: "Loops",
+          },
+          {
+            title: { en: "🔴 Infinite loop", id: "🔴 Loop tak terbatas" },
+            wrong: 'let mut x = 0;\nwhile x < 10 {\n    println!("{}", x);\n    // Forgot x += 1!\n}',
+            fixed: 'let mut x = 0;\nwhile x < 10 {\n    println!("{}", x);\n    x += 1; // Don\'t forget!\n}',
+            why: { en: "x never changes, so x < 10 is always true. The loop runs forever! Always make sure your while condition can become false.", id: "x tidak pernah berubah, jadi x < 10 selalu true. Loop jalan terus! Selalu pastikan kondisi while bisa jadi false." },
+            topic: "Loops",
+          },
+          {
+            title: { en: "🔴 Wrong function arguments", id: "🔴 Argumen fungsi salah" },
+            wrong: 'fn greet(name: &str) {\n    println!("Hi, {}!", name);\n}\n\ngreet("Luna"); // WRONG!',
+            fixed: 'fn greet(name: &str) {\n    println!("Hi, {}!", name);\n}\n\ngreet("Luna"); // OK!',
+            why: { en: "Wait — this looks the same! The real mistake: greet(5) would fail because 5 is not a &str. Types must match the parameter.", id: "Tunggu — ini sama! Kesalahan nyata: greet(5) gagal karena 5 bukan &str. Tipe harus cocok dengan parameter." },
+            topic: "Functions",
+          },
+          {
+            title: { en: "🔴 Mutating an immutable variable", id: "🔴 Mengubah variabel immutable" },
+            wrong: 'let items = vec!["a", "b"];\nitems.push("c"); // ERROR!',
+            fixed: 'let mut items = vec!["a", "b"];\nitems.push("c"); // OK!',
+            why: { en: "Without mut, the variable is frozen. You can READ it, but not CHANGE it. Add mut if you need to modify.", id: "Tanpa mut, variabel dibekukan. Bisa DIBACA, tapi tidak DIUBAH. Tambah mut jika perlu mengubah." },
+            topic: "Variables",
+          },
+          {
+            title: { en: "🔴 Using . (dot) instead of :: (double colon)", id: "🔴 Pakai . (dot) bukan :: (dua titik dua)" },
+            wrong: 'let name = String.from("Hi");',
+            fixed: 'let name = String::from("Hi");',
+            why: { en: ":: is for things that belong to a TYPE (like String::from). . is for things that belong to a VALUE (like name.len()).", id: ":: untuk hal yang milik TIPE (seperti String::from). . untuk hal yang milik NILAI (seperti name.len())." },
+            topic: "Functions",
+          },
+          {
+            title: { en: "🔴 Forgetting & in println! for variables", id: "🔴 Lupa & di println! untuk variabel" },
+            wrong: 'let s = String::from("hello");\nprintln!("{}", s); // might error\nprintln!("{}", &s); // safer',
+            fixed: 'let s = String::from("hello");\nprintln!("{}", s); // actually OK here\n// But in functions, &s avoids moving:',
+            why: { en: "println! borrows automatically, so this usually works. But passing a String to a function without & MOVES it — you can't use it after!", id: "println! meminjam otomatis, jadi biasanya berhasil. Tapi memberikan String ke fungsi tanpa & MEMINDAHKannya — tidak bisa dipakai lagi!" },
+            topic: "Variables",
+          },
+          {
+            title: { en: "🔴 Not handling Option/Result", id: "🔴 Tidak menangani Option/Result" },
+            wrong: 'let first = names[0]; // panics if empty!',
+            fixed: 'let first = names.first(); // returns Option\nmatch first {\n    Some(name) => println!("{}", name),\n    None => println!("No names!"),\n}',
+            why: { en: "Accessing [0] on an empty vector crashes! .first() returns Option — it might have a value or it might be None. Always check!", id: "Mengakses [0] pada vector kosong crash! .first() mengembalikan Option — mungkin ada nilai atau None. Selalu periksa!" },
+            topic: "Vectors",
+          },
+        ].map(m => `
+          <div class="lab-mistake">
+            <div class="lab-mistake-title">${t(m.title)}</div>
+            <div class="lab-before-after">
+              <div class="lab-code-wrong">
+                <div class="lab-code-label">${tr.mistakes.wrong}</div>
+                <div class="code-block">
+                  <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                  <div class="code-body"><code>${m.wrong}</code></div>
+                </div>
+              </div>
+              <div class="lab-code-fixed">
+                <div class="lab-code-label">${tr.mistakes.fixed}</div>
+                <div class="code-block">
+                  <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                  <div class="code-body"><code>${m.fixed}</code></div>
+                </div>
+              </div>
+            </div>
+            <div class="lab-mistake-fix">
+              <strong>${tr.debug.whyBroke}</strong>
+              <p>${t(m.why)}</p>
+            </div>
+          </div>
+        `).join('')}
       </div>
     `,
   };

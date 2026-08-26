@@ -1381,6 +1381,221 @@ a {
   gap: var(--space-2);
 }
 
+/* Lab — Analogy Cards */
+.lab-analogy {
+  padding: var(--space-4);
+  background: rgba(127, 90, 240, 0.08);
+  border: 1px solid rgba(127, 90, 240, 0.2);
+  border-radius: var(--radius-md);
+  margin: var(--space-3) 0;
+}
+
+.lab-analogy-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.lab-analogy p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Lab — Visual Diagrams */
+.lab-diagram {
+  background: var(--bg-code);
+  border: 1px solid rgba(127, 90, 240, 0.15);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin: var(--space-3) 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  overflow-x: auto;
+}
+
+.lab-diagram strong {
+  color: var(--accent-light);
+}
+
+.lab-diagram .highlight {
+  color: var(--success);
+}
+
+.lab-diagram .dim {
+  color: var(--text-muted);
+}
+
+/* Lab — Before/After Code Blocks */
+.lab-before-after {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin: var(--space-3) 0;
+}
+
+.lab-code-wrong,
+.lab-code-fixed {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.lab-code-wrong .lab-code-label,
+.lab-code-fixed .lab-code-label {
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.lab-code-wrong .lab-code-label {
+  background: rgba(229, 49, 112, 0.2);
+  color: var(--error);
+}
+
+.lab-code-fixed .lab-code-label {
+  background: rgba(44, 182, 125, 0.2);
+  color: var(--success);
+}
+
+.lab-code-wrong .code-block,
+.lab-code-fixed .code-block {
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+
+.lab-code-wrong {
+  border: 1px solid rgba(229, 49, 112, 0.3);
+}
+
+.lab-code-fixed {
+  border: 1px solid rgba(44, 182, 125, 0.3);
+}
+
+/* Lab — Mistake Gallery Items */
+.lab-mistake {
+  padding: var(--space-4);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  margin: var(--space-3) 0;
+  border-left: 3px solid var(--error);
+}
+
+.lab-mistake-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--error);
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.lab-mistake-fix {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  background: rgba(44, 182, 125, 0.08);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--success);
+}
+
+.lab-mistake-fix strong {
+  color: var(--success);
+  font-size: 0.875rem;
+}
+
+.lab-mistake-fix p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: var(--space-1) 0 0;
+}
+
+/* Lab — Component Info Cards */
+.lab-component {
+  padding: var(--space-4);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  margin: var(--space-3) 0;
+  border: 1px solid rgba(127, 90, 240, 0.1);
+}
+
+.lab-component-name {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.lab-component-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Lab — Wire Color Legend */
+.lab-wire-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+
+.lab-wire-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.lab-wire-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+/* Lab — Term Example */
+.lab-term-example {
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-code);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--accent-light);
+}
+
+/* Lab — Tab Pills overflow */
+.pills {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.pills::-webkit-scrollbar {
+  display: none;
+}
+
+/* Lab — Responsive */
+@media (max-width: 600px) {
+  .lab-before-after {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ====================================
    PROFILE VIEW
    ==================================== */
