@@ -36,6 +36,9 @@ class ProgressTracker {
       if (!Number.isInteger(p.checkpoint)) p.checkpoint = 0;
       if (!Number.isInteger(p.streak)) p.streak = 0;
       if (!Number.isInteger(p.totalStars)) p.totalStars = 0;
+      if (!p.license || typeof p.license !== "object") {
+        p.license = { key: null, tier: "explorer", activatedAt: null };
+      }
     }
   }
 
@@ -57,7 +60,20 @@ class ProgressTracker {
     this._save();
   }
 
-  ensurePilot(name) {
+  getCurrentPilotData() {
+    const name = this.getCurrentPilot();
+    if (!name) return null;
+    return this.data.pilots[name] || null;
+  }
+
+  updatePilotLicense(license) {
+    const pilot = this._getCurrentData();
+    if (!pilot) return;
+    pilot.license = license;
+    this._save();
+  }
+
+  ensurePilot(name, license = null) {
     if (!this.data.pilots[name]) {
       this.data.pilots[name] = {
         name,
@@ -70,6 +86,7 @@ class ProgressTracker {
         quizzes: {},     // week -> { score, total, at }
         reflections: {}, // week -> [answers]
         createdAt: Date.now(),
+        license: license || { key: null, tier: "explorer", activatedAt: null },
       };
       this._save();
     }
@@ -255,6 +272,9 @@ class ProgressTracker {
         reflections: p.reflections && typeof p.reflections === "object" && !Array.isArray(p.reflections)
           ? p.reflections
           : {},
+        license: p.license && typeof p.license === "object" && !Array.isArray(p.license)
+          ? { key: p.license.key || null, tier: p.license.tier || "explorer", activatedAt: p.license.activatedAt || null }
+          : { key: null, tier: "explorer", activatedAt: null },
       };
     }
     const current = typeof data.currentPilot === "string" && pilots[data.currentPilot]
