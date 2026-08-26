@@ -74,7 +74,13 @@ const Router = {
     };
 
     const renderFn = viewMap[this.currentView] || Views.welcome;
-    renderFn(this.params);
+    
+    // Pass params to views that support them (about, playground, etc.)
+    if (['about', 'playground', 'week'].includes(this.currentView)) {
+      renderFn(this.params);
+    } else {
+      renderFn();
+    }
 
     // Update nav state
     document.getElementById("btnBack").hidden =
