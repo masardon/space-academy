@@ -254,6 +254,28 @@ const I18N = {
 
       // Lab bug labels
       lab_bug_n: "Bug #{n}:",
+
+      // License
+      ps_license_key: "License Key",
+      ps_license_optional: "Leave empty for Explorer (Free)",
+      ps_license_invalid: "Invalid license key. Please check and try again.",
+      ps_license_validated: "License validated!",
+      tier_explorer: "Explorer",
+      tier_engineer: "Engineer",
+      tier_commander: "Commander",
+      upgrade_required: "Upgrade Required",
+      upgrade_required_desc: "This feature requires a higher license tier.",
+      upgrade_current_tier: "Current tier: {tier}",
+      settings_license: "License",
+      settings_license_key: "License Key",
+      settings_change_license: "Change License",
+      settings_license_updated: "License updated to {tier}!",
+      settings_license_invalid: "Invalid license key.",
+      settings_license_active: "Active",
+      settings_license_tier: "Tier",
+      settings_license_enter_key: "Enter new license key",
+      settings_license_update_btn: "Validate & Update",
+      lab_tab_locked: "Requires {tier} tier",
     },
     id: {
       // Navigation
@@ -491,6 +513,28 @@ const I18N = {
 
       // Lab bug labels
       lab_bug_n: "Bug #{n}:",
+
+      // License
+      ps_license_key: "Kunci Lisensi",
+      ps_license_optional: "Kosongkan untuk Explorer (Gratis)",
+      ps_license_invalid: "Kunci lisensi tidak valid. Silakan periksa dan coba lagi.",
+      ps_license_validated: "Lisensi terverifikasi!",
+      tier_explorer: "Explorer",
+      tier_engineer: "Engineer",
+      tier_commander: "Commander",
+      upgrade_required: "Upgrade Diperlukan",
+      upgrade_required_desc: "Fitur ini membutuhkan tier lisensi yang lebih tinggi.",
+      upgrade_current_tier: "Tier saat ini: {tier}",
+      settings_license: "Lisensi",
+      settings_license_key: "Kunci Lisensi",
+      settings_change_license: "Ubah Lisensi",
+      settings_license_updated: "Lisensi diupdate ke {tier}!",
+      settings_license_invalid: "Kunci lisensi tidak valid.",
+      settings_license_active: "Aktif",
+      settings_license_tier: "Tier",
+      settings_license_enter_key: "Masukkan kunci lisensi baru",
+      settings_license_update_btn: "Verifikasi & Update",
+      lab_tab_locked: "Membutuhkan tier {tier}",
     },
   },
 };
