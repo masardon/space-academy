@@ -17,6 +17,32 @@ Views.weekDetail = (params) => {
     return;
   }
 
+  // Gate: check if pilot's license tier allows this week
+  if (typeof License !== "undefined" && !License.canAccessWeek(weekNum)) {
+    const t = I18N.t.bind(I18N);
+    const ui = I18N.ui[I18N.lang()];
+    const uiEn = I18N.ui.en;
+    const color = getWeekColor(weekNum);
+    const arc = getWeekArc(weekNum);
+    main.innerHTML = `
+      <div class="view slide-in">
+        <div class="week-hero" style="--week-glow:${color}33;">
+          <div class="week-arc-badge">
+            <span>${arc?.emoji || "🚀"}</span>
+            <span>${arc?.name || t({ en: uiEn.wd_arc_label, id: ui.wd_arc_label })}</span>
+          </div>
+          <div style="font-size:3rem;margin-bottom:8px;">${week.emoji}</div>
+          <h1 class="week-hero-title" style="--week-color:${color};">
+            ${t({ en: uiEn.week_label, id: ui.week_label }).replace('{num}', String(week.week).padStart(2, '0'))}: ${week.title}
+          </h1>
+          <p class="week-hero-desc">${week.mission}</p>
+        </div>
+        ${Views.upgradeRequired("week")}
+      </div>
+    `;
+    return;
+  }
+
   const lesson = (typeof LESSONS !== "undefined") ? LESSONS[weekNum] : null;
   const t = (x) => I18N.t(x);
   const color = getWeekColor(weekNum);
