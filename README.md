@@ -4,7 +4,7 @@ A beautiful, tablet-friendly web elearning platform for teaching computational t
 
 ## What This Is
 
-A **12-week curriculum** delivered as a progressive web app that runs directly in any browser — no server, no build step, no install required. Designed for Android tablets and Chromebooks.
+A **12-week curriculum** delivered as a progressive web app that runs directly in any browser — no build step, no install required. Designed for Android tablets and Chromebooks.
 
 ## Quick Start
 
@@ -34,58 +34,134 @@ Upload the entire `space-academy/` folder to any static host:
 
 The app is fully offline-capable once loaded (service worker caches all assets).
 
+## License System
+
+Space Academy uses a **per-pilot license tier system**. Each pilot has their own license key that determines access to content.
+
+| Feature | Explorer (Free) | Engineer | Commander |
+|---------|:---:|:---:|:---:|
+| Weeks | 1–2 | 1–8 | 1–12 |
+| Lab: Cheat Sheet & Terms | ✅ | ✅ | ✅ |
+| Lab: Wiring, Debug, Analogies, Mistakes | 🔒 | ✅ | ✅ |
+| Playground | 🔒 | 🔒 | ✅ |
+
+- **Explorer** — Free tier, limited to weeks 1–2 and basic Lab content
+- **Engineer** — Full Lab access, weeks 1–8
+- **Commander** — Full access to everything including Playground
+
+### License Server
+
+A headless Express API for license validation. Deploy to [Zeabur](https://zeabur.com) or any Node.js host.
+
+```bash
+cd server
+npm install
+ADMIN_API_KEY=your-secret-key PORT=3000 node index.js
+```
+
+Set `LICENSE_SERVER_URL` in `index.html` to your deployed server URL.
+
+### License CLI Tool
+
+Generate, list, revoke, and validate licenses. Zero npm dependencies.
+
+```bash
+# Generate a license
+node tools/license.js generate --name Luna --tier engineer
+
+# List all licenses
+node tools/license.js list
+
+# Revoke a license
+node tools/license.js revoke --key SA-EN-xxxx-xxxx
+
+# Validate a license
+node tools/license.js validate --key SA-EN-xxxx-xxxx --name Luna
+```
+
+### Key Format
+```
+SA-{tier_code}-{name_base64}-{hmac_truncated}
+Example: SA-EN-RGVtbw-1721550a6afa9077
+```
+
 ## Project Structure
 
 ```
 space-academy/
-├── index.html              # App shell (entry point)
-├── manifest.json           # PWA manifest (with icons — installable)
-├── sw.js                   # Service worker (offline support)
-├── icons/                  # App icons (SVG + PNG, incl. maskable)
-│   ├── icon.svg
-│   ├── icon-192.png
-│   ├── icon-512.png
-│   └── icon-maskable-512.png
+├── index.html                  # App shell (entry point)
+├── manifest.json               # PWA manifest (with icons — installable)
+├── sw.js                       # Service worker (offline support)
+├── icons/                      # App icons (SVG + PNG, incl. maskable)
 ├── css/
-│   └── styles.css          # Complete design system (~1800 lines)
+│   └── styles.css              # Complete design system
+├── server/                     # License validation server
+│   ├── index.js                # Express API (validate, generate, revoke)
+│   ├── licenses.json           # License database
+│   ├── package.json
+│   └── .gitignore
+├── tools/
+│   └── license.js              # CLI tool for license management
 └── js/
-    ├── data.js             # Full 12-week curriculum content
-    ├── progress.js         # localStorage progress tracking
-    ├── router.js           # Client-side hash router
-    ├── app.js              # App initialization
-    ├── sw-register.js      # Service worker registration
-    ├── i18n.js             # Bilingual (EN/ID) helpers
-    ├── content/            # Guided lesson content (12 weeks)
-    │   ├── week01.js … week12.js
+    ├── data.js                 # Full 12-week curriculum content
+    ├── progress.js             # localStorage progress tracking
+    ├── license.js              # Client-side license validation & gating
+    ├── router.js               # Client-side hash router
+    ├── app.js                  # App initialization
+    ├── sw-register.js          # Service worker registration
+    ├── i18n.js                 # Bilingual (EN/ID) helpers
+    ├── content/                # Guided lesson content (12 weeks)
+    │   └── week01.js … week12.js
     └── views/
-        ├── welcome.js      # Landing screen
-        ├── pilot-select.js # Choose/create pilot
-        ├── missions.js     # Week selection grid
-        ├── week-detail.js  # Individual week guided lesson
-        ├── lab.js          # Reference materials (cheat sheets, wiring diagrams)
-        ├── profile.js      # Pilot stats, Quiz Stars, Flight Log
-        └── settings.js     # Export/import/reset data, language toggle
+        ├── welcome.js          # Landing screen
+        ├── pilot-select.js     # Choose/create pilot (with license key input)
+        ├── missions.js         # Week selection grid
+        ├── week-detail.js      # Individual week guided lesson
+        ├── lab.js              # Reference materials (tier-gated tabs)
+        ├── playground.js       # Code Playground (Commander tier)
+        ├── profile.js          # Pilot stats, Quiz Stars, Flight Log
+        ├── settings.js         # Pilot management, license, export/import
+        └── about.js            # About & How to Use tabs
 ```
 
 ## Features
 
+### Content
 - **12 complete weeks** of Rust curriculum covering variables → structs → hardware
-- **Guided Lesson System** — 11-section lessons per week: Big Idea, Word Wall, Thinking Skill, Code Walkthrough, Predictions, Challenges, Bug Hunt, Quiz, Reflection, Parent Corner
-- **Interactive Quizzes** — instant feedback, stars awarded for improvement, bilingual (EN/ID)
+- **Guided Lesson System** — 11-section lessons per week
+- **Interactive Quizzes** — instant feedback, stars awarded for improvement
 - **Reflection Journal ("Flight Log")** — kids save written reflections per week
-- **Quiz Stars display** — visual 0-3 star rating per completed quiz
-- **Bilingual** — full English + Bahasa Indonesia content, UI language toggle
+- **Quiz Stars display** — visual 0–3 star rating per completed quiz
 - **Space Academy narrative** — each week is a mission story
-- **Progress tracking** — per-pilot completion, stars, ranks, checkpoint
-- **Multi-pilot support** — each child gets their own saved profile
 - **Copy-to-clipboard** for all code examples
 - **Syntax highlighting** for Rust code blocks
-- **Lab reference section** with cheat sheets, wiring diagrams, and debugging guides
-- **Glossary** of Rust terms
-- **Export/Import** progress as JSON
-- **Offline-ready** via service worker (v3 caches all lesson files)
-- **Installable PWA** — add to home screen on Android tablets (icons included)
-- **Tablet-optimized** — large touch targets (44px+), responsive layout, safe-area support
+
+### Lab & Playground
+- **Lab Reference** — cheat sheets, wiring diagrams, debug tips, glossary, analogies, common mistakes
+- **Tier-gated tabs** — Explorer gets Cheat Sheet & Terms, Engineer+ gets all tabs
+- **Code Playground** — write and run Rust in browser (Commander tier only)
+- **Starter templates** — pre-loaded code for each week
+
+### License & Access Control
+- **Per-pilot licensing** — each pilot has their own tier
+- **Online validation** — licenses verified against server on pilot selection
+- **Tier-based content gating** — weeks, Lab tabs, and Playground locked by tier
+- **Upgrade prompts** — clear notifications when accessing locked content
+- **License management** — change license from Settings per pilot
+- **Downgrade prevention** — cannot lower a pilot's tier
+- **Name uniqueness** — case-insensitive pilot name check
+
+### Multi-Pilot & Progress
+- **Multi-pilot support** — each child gets their own saved profile
+- **Progress tracking** — per-pilot completion, stars, ranks, checkpoint
+- **Export/Import** — backup and restore progress as JSON
+- **Bilingual** — full English + Bahasa Indonesia content, UI language toggle
+
+### Technical
+- **Zero dependencies** — vanilla JavaScript, no frameworks, no build step
+- **Offline-ready** via service worker
+- **Installable PWA** — add to home screen on Android tablets
+- **Tablet-optimized** — large touch targets (44px+), responsive layout
 - **Dark space theme** — easy on the eyes, no glare on tablets
 
 ## Design System
@@ -143,4 +219,4 @@ For the best experience:
 
 ## License
 
-Free for personal and educational use. Build something awesome! 🚀
+Per-pilot license tiers. Explorer tier is free for personal and educational use. Engineer and Commander tiers unlock additional content. Contact your administrator for a license key.
