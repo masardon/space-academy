@@ -8,6 +8,19 @@ Views.playground = (params) => {
   const weekParam = params?.week;
   const t = (x) => I18N.t(x);
 
+  // Commander tier only — defensive check
+  if (typeof License !== "undefined" && !License.canAccessPlayground()) {
+    main.innerHTML = `
+      <div class="view">
+        <div class="section-header">
+          <h2>🧪 ${t({ en: "Code Playground", id: "Taman Kode" })}</h2>
+        </div>
+        ${Views.upgradeRequired("playground")}
+      </div>
+    `;
+    return;
+  }
+
   main.innerHTML = `
     <div class="view">
       <div class="section-header">
