@@ -102,7 +102,7 @@ Views.about = (params) => {
       </div>
 
       <div class="card" style="margin-bottom:16px;">
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--success);">${t({ en: "Code Playground", id: "Taman Kode" })}</h3>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--success);">${t({ en: "Code Playground", id: "Playground" })}</h3>
         <p style="font-size:0.875rem;line-height:1.6;color:var(--text-secondary);margin-bottom:12px;">${t({ en: "Your interactive Rust lab — write, run, and experiment with code:", id: "Laboratorium Rust interaktifmu — tulis, jalankan, dan bereksperimen dengan kode:" })}</p>
         <ul style="display:grid;gap:8px;color:var(--text-secondary);font-size:0.875rem;line-height:1.6;">
           <li>${t({ en: "Commander tier — full access to Playground", id: "Tier Commander — akses penuh ke Playground" })}</li>
