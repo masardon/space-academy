@@ -72,6 +72,29 @@ Views.pilotSelect = async () => {
         </div>
       </div>
     </div>
+
+    <!-- Update License Confirmation modal -->
+    <div id="confirmUpdateLicenseModal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)Views.closeConfirmUpdateLicense()">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>🔄 ${t({ en: uiEn.ps_update_license_title, id: ui.ps_update_license_title })}</h3>
+          <button class="btn-icon" onclick="Views.closeConfirmUpdateLicense()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="confirmUpdateLicenseMsg" style="font-size:0.9375rem;color:var(--text-secondary);margin-bottom:16px;"></p>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-ghost btn-full" onclick="Views.closeConfirmUpdateLicense()">
+              ${t({ en: "Cancel", id: "Batal" })}
+            </button>
+            <button class="btn btn-primary btn-full" onclick="Views.confirmUpdateLicense()">
+              ${t({ en: "Update License", id: "Update Lisensi" })}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   `;
 
   main.querySelectorAll(".pilot-card[data-pilot]").forEach(card => {
@@ -130,10 +153,52 @@ Views.createPilot = async () => {
     errEl.style.display = "none";
   }
 
+  // Check if pilot already exists with different tier
+  const pilots = progress.getPilots();
+  const existingPilot = pilots[name];
+  if (existingPilot && licenseKey) {
+    const currentTier = existingPilot.license?.tier || "explorer";
+    const tierOrder = { explorer: 0, engineer: 1, commander: 2 };
+    if (tierOrder[license.tier] !== tierOrder[currentTier]) {
+      // Show confirmation modal
+      const lang = I18N.lang();
+      const currentLabel = License.tierLabel(currentTier);
+      const newLabel = License.tierLabel(license.tier);
+      const msg = lang === "id"
+        ? `Pilot "${name}" sudah ada dengan tier ${currentLabel}. Update lisensi ke ${newLabel}?`
+        : `Pilot "${name}" already exists with ${currentLabel} tier. Update license to ${newLabel}?`;
+      document.getElementById("confirmUpdateLicenseMsg").textContent = msg;
+      Views._pendingPilotData = { name, license };
+      document.getElementById("confirmUpdateLicenseModal").style.display = "flex";
+      return;
+    }
+  }
+
   progress.ensurePilot(name, license);
   progress.setCurrentPilot(name);
   document.getElementById("newPilotModal").style.display = "none";
   await License.init();
   Router.navigate("missions");
   showToast(t({ en: uiEn.ps_welcome_toast, id: ui.ps_welcome_toast }).replace("{name}", name), "success");
+};
+
+Views.closeConfirmUpdateLicense = () => {
+  document.getElementById("confirmUpdateLicenseModal").style.display = "none";
+  Views._pendingPilotData = null;
+};
+
+Views.confirmUpdateLicense = async () => {
+  const t = I18N.t.bind(I18N);
+  const uiEn = I18N.ui.en;
+  const data = Views._pendingPilotData;
+  if (!data) return;
+
+  progress.updatePilotLicenseByName(data.name, data.license);
+  progress.setCurrentPilot(data.name);
+  document.getElementById("confirmUpdateLicenseModal").style.display = "none";
+  document.getElementById("newPilotModal").style.display = "none";
+  Views._pendingPilotData = null;
+  await License.init();
+  Router.navigate("missions");
+  showToast(t({ en: uiEn.ps_welcome_toast, id: ui.ps_welcome_toast }).replace("{name}", data.name), "success");
 };

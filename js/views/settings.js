@@ -318,6 +318,20 @@ Views.submitChangeLicense = async () => {
     errEl.style.display = "block";
     return;
   }
+  // Prevent downgrade
+  const currentTier = pilot.license?.tier || "explorer";
+  const tierOrder = { explorer: 0, engineer: 1, commander: 2 };
+  if (tierOrder[result.tier] < tierOrder[currentTier]) {
+    const lang = I18N.lang();
+    const currentLabel = License.tierLabel(currentTier);
+    const newLabel = License.tierLabel(result.tier);
+    const msg = lang === "id"
+      ? `Tidak dapat downgrade dari ${currentLabel} ke ${newLabel}.`
+      : `Cannot downgrade from ${currentLabel} to ${newLabel}.`;
+    errEl.textContent = msg;
+    errEl.style.display = "block";
+    return;
+  }
   // Save the license to this specific pilot
   progress.updatePilotLicenseByName(pilotName, { key, tier: result.tier, activatedAt: Date.now() });
   // If this is the current pilot, update License tier
