@@ -22,7 +22,7 @@ const Router = {
     this._handleRoute();
   },
 
-  _handleRoute() {
+  async _handleRoute() {
     const hash = location.hash.slice(1) || "";
     const parts = hash.split("/");
     const view = parts[0] || "welcome";
@@ -37,7 +37,7 @@ const Router = {
       }
     }
     this.currentView = view;
-    this._render();
+    await this._render();
   },
 
   navigate(view, params = {}) {
@@ -60,7 +60,7 @@ const Router = {
     history.back();
   },
 
-  _render() {
+  async _render() {
     const viewMap = {
       "welcome": Views.welcome,
       "pilot-select": Views.pilotSelect,
@@ -74,15 +74,28 @@ const Router = {
     };
 
     const renderFn = viewMap[this.currentView] || Views.welcome;
-    
-    // Pass params to views that support them (about, playground, etc.)
-    if (['about', 'playground', 'week'].includes(this.currentView)) {
-      renderFn(this.params);
-    } else {
-      renderFn();
+
+    // Gate lab and playground by license tier
+    if (["lab", "playground"].includes(this.currentView)) {
+      if (typeof License !== "undefined" && !License.canAccessView(this.currentView)) {
+        // Show upgrade prompt, then update nav/header as usual
+        Views.upgradeRequired(this.currentView);
+        this._updateNav();
+        return;
+      }
     }
 
-    // Update nav state
+    // Pass params to views that support them (about, playground, etc.)
+    if (['about', 'playground', 'week'].includes(this.currentView)) {
+      await renderFn(this.params);
+    } else {
+      await renderFn();
+    }
+
+    this._updateNav();
+  },
+
+  _updateNav() {
     document.getElementById("btnBack").hidden =
       !["week", "settings"].includes(this.currentView);
 
