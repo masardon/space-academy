@@ -141,6 +141,18 @@ Views.createPilot = async () => {
   let license = { key: null, tier: "explorer", activatedAt: null };
 
   if (licenseKey) {
+    // Check if this license key is already used by another pilot
+    const pilots = progress.getPilots();
+    const keyUsedBy = Object.values(pilots).find(
+      p => p.license?.key && p.license.key.toLowerCase() === licenseKey.toLowerCase() && p.name.toLowerCase() !== name.toLowerCase()
+    );
+    if (keyUsedBy) {
+      errEl.textContent = t({ en: uiEn.ps_license_already_used, id: ui.ps_license_already_used }).replace("{name}", keyUsedBy.name);
+      errEl.style.display = "block";
+      licenseInput.style.borderColor = "var(--error)";
+      return;
+    }
+
     // Validate license with server
     const result = await License.validate(licenseKey, name);
     if (!result.valid) {
@@ -153,12 +165,25 @@ Views.createPilot = async () => {
     errEl.style.display = "none";
   }
 
-  // Check if pilot already exists with different tier
+  // Check if pilot already exists
   const pilots = progress.getPilots();
   const existingPilot = pilots[name];
   if (existingPilot && licenseKey) {
     const currentTier = existingPilot.license?.tier || "explorer";
     const tierOrder = { explorer: 0, engineer: 1, commander: 2 };
+    // Prevent downgrade
+    if (tierOrder[license.tier] < tierOrder[currentTier]) {
+      const lang = I18N.lang();
+      const currentLabel = License.tierLabel(currentTier);
+      const newLabel = License.tierLabel(license.tier);
+      const msg = lang === "id"
+        ? `Tidak dapat downgrade ${name} dari ${currentLabel} ke ${newLabel}.`
+        : `Cannot downgrade ${name} from ${currentLabel} to ${newLabel}.`;
+      errEl.textContent = msg;
+      errEl.style.display = "block";
+      return;
+    }
+    // Different tier — show confirmation
     if (tierOrder[license.tier] !== tierOrder[currentTier]) {
       // Show confirmation modal
       const lang = I18N.lang();
