@@ -107,6 +107,24 @@ Views.settings = () => {
 
       <div style="height:24px;"></div>
     </div>
+
+    <!-- Import modal -->
+    <div id="importModal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)Views.importDataPrompt()">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>${t({ en: "Import Progress", id: "Impor Kemajuan" })}</h3>
+          <button class="btn-icon" onclick="Views.importDataPrompt()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:0.9375rem;color:var(--text-secondary);margin-bottom:16px;">${t({ en: "Paste your exported JSON data below:", id: "Tempel data JSON ekspor di bawah:" })}</p>
+          <textarea id="importData" rows="6" placeholder='{"pilots":...}'
+            style="width:100%;padding:12px 16px;border-radius:12px;border:1px solid rgba(127,90,240,0.2);background:var(--bg-elevated);color:var(--text-primary);font-family:monospace;font-size:0.8125rem;resize:vertical;outline:none;"></textarea>
+          <button class="btn btn-primary btn-full" style="margin-top:12px;" onclick="Views.importData()">${t({ en: "Import", id: "Impor" })}</button>
+        </div>
+      </div>
+    </div>
   `;
 
   main.querySelectorAll(".settings-item[data-pilot]").forEach(item => {
