@@ -162,6 +162,29 @@ Views.settings = () => {
         </div>
       </div>
     </div>
+
+    <!-- Reset Data modal -->
+    <div id="resetModal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)Views.closeResetModal()">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 style="color:var(--error);">🗑️ ${t({ en: "Reset All Data", id: "Reset Semua Data" })}</h3>
+          <button class="btn-icon" onclick="Views.closeResetModal()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:0.9375rem;color:var(--text-secondary);margin-bottom:16px;" id="resetModalMsg"></p>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-ghost btn-full" onclick="Views.closeResetModal()">
+              ${t({ en: "Cancel", id: "Batal" })}
+            </button>
+            <button class="btn btn-full" style="background:var(--error);color:white;" onclick="Views.confirmResetData()">
+              ${t({ en: "Reset", id: "Reset" })}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   `;
 
   main.querySelectorAll(".settings-item[data-pilot]").forEach(item => {
@@ -235,13 +258,24 @@ Views.importData = () => {
 };
 
 Views.resetAllData = () => {
-  if (confirm(I18N.t({ en: I18N.ui.en.set_confirm_reset, id: I18N.ui.id.set_confirm_reset }))) {
-    if (confirm(I18N.t({ en: I18N.ui.en.set_confirm_really, id: I18N.ui.id.set_confirm_really }))) {
-      progress.resetAll();
-      showToast(I18N.t({ en: I18N.ui.en.set_reset_done, id: I18N.ui.id.set_reset_done }), "success");
-      Router.navigate("welcome");
-    }
-  }
+  const lang = I18N.lang();
+  const pilot = progress.getCurrentPilot();
+  const msg = lang === "id"
+    ? `Ini akan menghapus semua data pilot, kemajuan, dan lisensi di perangkat ini. Tindakan ini tidak dapat dibatalkan.`
+    : `This will delete all pilot data, progress, and licenses on this device. This action cannot be undone.`;
+  document.getElementById("resetModalMsg").textContent = msg;
+  document.getElementById("resetModal").style.display = "flex";
+};
+
+Views.closeResetModal = () => {
+  document.getElementById("resetModal").style.display = "none";
+};
+
+Views.confirmResetData = () => {
+  progress.resetAll();
+  Views.closeResetModal();
+  showToast(I18N.t({ en: I18N.ui.en.set_reset_done, id: I18N.ui.id.set_reset_done }), "success");
+  Router.navigate("welcome");
 };
 
 Views.showChangeLicense = (pilotName) => {
