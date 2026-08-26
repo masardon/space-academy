@@ -10,6 +10,13 @@ Views.playground = (params) => {
 
   // Commander tier only — defensive check
   if (typeof License !== "undefined" && !License.canAccessPlayground()) {
+    const lang = I18N.lang();
+    const currentTier = License.tier();
+    const currentLabel = License.tierLabel(currentTier);
+    const msg = lang === "id"
+      ? `Playground membutuhkan tier Commander. Tier Anda: ${currentLabel}.`
+      : `Playground requires Commander tier. Your tier: ${currentLabel}.`;
+    showToast(msg, "warning");
     main.innerHTML = `
       <div class="view">
         <div class="section-header">

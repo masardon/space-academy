@@ -75,16 +75,6 @@ const Router = {
 
     const renderFn = viewMap[this.currentView] || Views.welcome;
 
-    // Gate lab and playground by license tier
-    if (["lab", "playground"].includes(this.currentView)) {
-      if (typeof License !== "undefined" && !License.canAccessView(this.currentView)) {
-        // Show upgrade prompt, then update nav/header as usual
-        Views.upgradeRequired(this.currentView);
-        this._updateNav();
-        return;
-      }
-    }
-
     // Pass params to views that support them (about, playground, etc.)
     if (['about', 'playground', 'week'].includes(this.currentView)) {
       await renderFn(this.params);

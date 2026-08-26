@@ -93,17 +93,20 @@ Views.missions = () => {
 
 Views.showLockedWeekToast = (weekNum) => {
   const lang = I18N.lang();
-  const pilot = progress.getCurrentPilot();
-  const pilotData = progress.getPilots()[pilot];
-  const checkpoint = Math.max(0, ...(pilotData?.weeksCompleted || []));
 
   // Check license tier first
   if (typeof License !== "undefined" && !License.canAccessWeek(weekNum)) {
     const currentTier = License.tier();
     const currentLabel = License.tierLabel(currentTier);
+    let requiredTier;
+    if (weekNum >= 9) {
+      requiredTier = "Commander";
+    } else {
+      requiredTier = "Engineer";
+    }
     const msg = lang === "id"
-      ? `Minggu ${weekNum} membutuhkan tier Engineer atau lebih tinggi. Tier Anda: ${currentLabel}.`
-      : `Week ${weekNum} requires Engineer tier or above. Your tier: ${currentLabel}.`;
+      ? `Minggu ${weekNum} membutuhkan tier ${requiredTier}. Tier Anda: ${currentLabel}.`
+      : `Week ${weekNum} requires ${requiredTier} tier. Your tier: ${currentLabel}.`;
     showToast(msg, "warning");
     return;
   }
