@@ -64,7 +64,15 @@ Views.about = (params) => {
 
       <div class="card" style="margin-bottom:16px;">
         <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--f15bb5,#f15bb5);">${t({ en: "License", id: "Lisensi" })}</h3>
-        <p style="font-size:0.875rem;color:var(--text-secondary);">${t({ en: "Free for personal and educational use. Build something awesome!", id: "Gratis untuk penggunaan pribadi dan pendidikan. Bangun hal yang menakjubkan!" })}</p>
+        <p style="font-size:0.875rem;color:var(--text-secondary);">${t({
+          en: "Space Academy uses a per-pilot license tier system. Explorer tier is free and gives access to weeks 1–2 plus the Lab cheat sheet and glossary. Engineer and Commander tiers unlock more content. Contact your administrator for a license key.",
+          id: "Space Academy menggunakan sistem lisensi per-pilot. Tier Explorer gratis dan memberikan akses ke minggu 1–2 plus catatan cepat dan daftar istilah Lab. Tier Engineer dan Commander membuka konten lebih banyak. Hubungi administrator untuk mendapatkan kunci lisensi."
+        })}</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+          <span class="tier-badge" style="background:#9b59b6;font-size:0.75rem;padding:3px 10px;">Explorer — Free</span>
+          <span class="tier-badge" style="background:#3498db;font-size:0.75rem;padding:3px 10px;">Engineer</span>
+          <span class="tier-badge" style="background:#e67e22;font-size:0.75rem;padding:3px 10px;">Commander</span>
+        </div>
       </div>
       ` : `
       <!-- HOW TO USE TAB -->
