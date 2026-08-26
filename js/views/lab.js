@@ -131,6 +131,67 @@ Views.showLabSection = (section, btn) => {
       buzzerDesc: t({ en: "Makes sound when electricity reaches it. Pin HIGH = sound, Pin LOW = silent.", id: "Mengeluarkan suara saat listrik mencapainya. Pin HIGH = bunyi, Pin LOW = senyap." }),
       sensorDesc: t({ en: "Sends a sound pulse and measures how long it takes to bounce back. Short time = close object, long time = far away.", id: "Mengirim pulsa suara dan mengukur waktu pantulan. Waktu singkat = objek dekat, waktu lama = jauh." }),
       servoDesc: t({ en: "A motor that turns to a specific angle (0–180°). Like a clock hand you can control with code.", id: "Motor yang berputar ke sudut tertentu (0–180°). Seperti jarum jam yang bisa dikontrol dengan kode." }),
+      boardTitle: t({ en: "🔌 Arduino UNO Board", id: "🔌 Papan Arduino UNO" }),
+      boardDesc: t({ en: "The Arduino UNO is a tiny computer that reads sensors and controls things like LEDs, motors, and buzzers. It has 14 digital pins and 6 analog pins.", id: "Arduino UNO adalah komputer kecil yang membaca sensor dan mengontrol hal seperti LED, motor, dan buzzer. Punya 14 pin digital dan 6 pin analog." }),
+      coreFunctionsTitle: t({ en: "⚡ Arduino Core Functions", id: "⚡ Fungsi Inti Arduino" }),
+      coreFunctionsDesc: t({ en: "These are the building blocks of every Arduino program. Learn these and you can build anything!", id: "Ini adalah blok bangunan setiap program Arduino. Pelajari ini dan kamu bisa membuat apa pun!" }),
+      pinTypesTitle: t({ en: "📌 Pin Types & Signals", id: "📌 Tipe Pin & Sinyal" }),
+      pinTypesDesc: t({ en: "Every pin on the Arduino is either INPUT (listens) or OUTPUT (speaks). Understanding this is the key to hardware.", id: "Setiap pin di Arduino adalah INPUT (mendengar) atau OUTPUT (berbicara). Memahami ini adalah kunci hardware." }),
+      senseDecideActTitle: t({ en: "🔄 Sense → Decide → Act", id: "🔄 Rasa → Pikir → Bertindak" }),
+      senseDecideActDesc: t({ en: "The fundamental pattern in robotics. Every robot — from a blinking LED to a self-driving car — follows this loop.", id: "Pola dasar dalam robotika. Setiap robot — dari LED berkedip hingga mobil self-driving — mengikuti loop ini." }),
+      arduinoVsRustTitle: t({ en: "🔀 Arduino vs Rust — Side by Side", id: "🔀 Arduino vs Rust — Berdampingan" }),
+      arduinoVsRustDesc: t({ en: "The thinking is identical — only the syntax changes. You already know the patterns from weeks 1–8!", id: "Polanya identik — hanya sintaks yang berubah. Kamu sudah tahu polanya dari minggu 1–8!" }),
+      arduinoDebugTitle: t({ en: "🔧 Arduino Debugging", id: "🔧 Debug Arduino" }),
+      arduinoDebugDesc: t({ en: "Hardware bugs are different from code bugs — you can't always see the error. Here's how to track them down.", id: "Bug hardware berbeda dari bug kode — kamu tidak selalu bisa melihat error-nya. Ini cara menemukannya." }),
+      // Arduino core functions
+      fnSetup: t({ en: "setup()", id: "setup()" }),
+      fnSetupDesc: t({ en: "Runs ONCE when the board powers on. Put all your pin declarations here.", id: "Berjalan SEKALI saat papan dinyalakan. Taruh semua deklarasi pin di sini." }),
+      fnLoop: t({ en: "loop()", id: "loop()" }),
+      fnLoopDesc: t({ en: "Runs FOREVER after setup. This is where your robot lives — it repeats everything inside.", id: "Berjalan SELAMANYA setelah setup. Di sinilah robot hidup — mengulang semua di dalamnya." }),
+      fnPinMode: t({ en: "pinMode(pin, mode)", id: "pinMode(pin, mode)" }),
+      fnPinModeDesc: t({ en: "Declares a pin as OUTPUT (speaks) or INPUT (listens). Do this in setup().", id: "Menyatakan pin sebagai OUTPUT (berbicara) atau INPUT (mendengar). Lakukan di setup()." }),
+      fnDigitalWrite: t({ en: "digitalWrite(pin, HIGH/LOW)", id: "digitalWrite(pin, HIGH/LOW)" }),
+      fnDigitalWriteDesc: t({ en: "Switches a pin ON (HIGH = 5V) or OFF (LOW = 0V). Like flipping a light switch.", id: "Mengaktifkan pin (HIGH = 5V) atau mematikan (LOW = 0V). Seperti membalik saklar lampu." }),
+      fnDigitalRead: t({ en: "digitalRead(pin)", id: "digitalRead(pin)" }),
+      fnDigitalReadDesc: t({ en: "Reads a pin: returns HIGH or LOW. Use with buttons and switches.", id: "Membaca pin: mengembalikan HIGH atau LOW. Dipakai untuk tombol dan saklar." }),
+      fnAnalogRead: t({ en: "analogRead(pin)", id: "analogRead(pin)" }),
+      fnAnalogReadDesc: t({ en: "Reads a pin between 0–5V as a number 0–1023. Use with sensors like potentiometers.", id: "Membaca pin 0–5V sebagai angka 0–1023. Dipakai untuk sensor seperti potentiometer." }),
+      fnDelay: t({ en: "delay(ms)", id: "delay(ms)" }),
+      fnDelayDesc: t({ en: "Pauses the program. 1000 ms = 1 second. WARNING: the robot can't do anything while waiting!", id: "Menghentikan program sejenak. 1000 ms = 1 detik. PERINGATAN: robot tidak bisa melakukan apa pun saat menunggu!" }),
+      fnPulseIn: t({ en: "pulseIn(pin, HIGH)", id: "pulseIn(pin, HIGH)" }),
+      fnPulseInDesc: t({ en: "Measures how long a pin stays HIGH in microseconds. Used by ultrasonic sensors.", id: "Mengukur berapa lama pin bertahan HIGH dalam mikrodetik. Dipakai sensor ultrasonik." }),
+      fnSerialBegin: t({ en: "Serial.begin(9600)", id: "Serial.begin(9600)" }),
+      fnSerialBeginDesc: t({ en: "Opens communication with the computer. The Serial Monitor shows what you print.", id: "Membuka komunikasi dengan komputer. Serial Monitor menampilkan apa yang kamu cetak." }),
+      fnSerialPrint: t({ en: "Serial.println(data)", id: "Serial.println(data)" }),
+      fnSerialPrintDesc: t({ en: "Sends text or numbers to the Serial Monitor. Your debugging eye into the robot's brain.", id: "Mengirim teks atau angka ke Serial Monitor. Mata debugging ke otak robot." }),
+      // Pin types
+      pinOutput: t({ en: "OUTPUT — The pin SPEAKS (sends electricity out)", id: "OUTPUT — Pin BERBICARA (mengirim listrik keluar)" }),
+      pinInput: t({ en: "INPUT — The pin LISTENS (reads electricity in)", id: "INPUT — Pin MENDENGAR (membaca listrik masuk)" }),
+      pinHigh: t({ en: "HIGH = ON = 5 volts flowing", id: "HIGH = NYALA = 5 volt mengalir" }),
+      pinLow: t({ en: "LOW = OFF = 0 volts (ground)", id: "LOW = MATI = 0 volt (ground)" }),
+      pinDigital: t({ en: "Digital pins (0–13)", id: "Pin digital (0–13)" }),
+      pinAnalog: t({ en: "Analog pins (A0–A5)", id: "Pin analog (A0–A5)" }),
+      pinDigitalDesc: t({ en: "Read or write HIGH/LOW only. Perfect for LEDs, buttons, buzzers.", id: "Hanya membaca atau menulis HIGH/LOW. Cocok untuk LED, tombol, buzzer." }),
+      pinAnalogDesc: t({ en: "Read a range of values (0–1023). Perfect for sensors that give smooth numbers.", id: "Membaca rentang nilai (0–1023). Cocok untuk sensor yang memberikan angka halus." }),
+      // Sense-Decide-Act
+      sdaSense: t({ en: "SENSE — Read a sensor (ultrasonic, button, light)", id: "RASA — Baca sensor (ultrasonik, tombol, cahaya)" }),
+      sdaDecide: t({ en: "DECIDE — Compare the reading to a threshold (if/else)", id: "PIKIR — Bandingkan pembacaan dengan ambang batas (if/else)" }),
+      sdaAct: t({ en: "ACT — Turn on LEDs, buzzers, or motors", id: "BERTINDAK — Nyalakan LED, buzzer, atau motor" }),
+      sdaRepeat: t({ en: "REPEAT — loop() sends you back to SENSE forever", id: "ULANGI — loop() mengembalikanmu ke RASA selamanya" }),
+      // Arduino vs Rust
+      avrVar: t({ en: "Variables", id: "Variabel" }),
+      avrIf: t({ en: "Conditionals", id: "Kondisional" }),
+      avrLoop: t({ en: "Loops", id: "Loop" }),
+      avrFn: t({ en: "Functions", id: "Fungsi" }),
+      // Arduino debug
+      debugUpload: t({ en: "Upload failed", id: "Unggah gagal" }),
+      debugUploadDesc: t({ en: "Check: Tools → Board = Arduino Uno, Tools → Port = correct COM port. Still fails? You might need a DATA cable, not a charge-only cable.", id: "Periksa: Tools → Board = Arduino Uno, Tools → Port = port COM yang benar. Masih gagal? Mungkin butuh kabel DATA, bukan kabel cas-only." }),
+      debugNoSerial: t({ en: "Serial Monitor shows nothing", id: "Serial Monitor tidak menampilkan apa pun" }),
+      debugNoSerialDesc: t({ en: "Make sure Serial.begin(9600) is in setup() AND the baud rate in Serial Monitor matches (9600). Also check the USB cable is data-capable.", id: "Pastikan Serial.begin(9600) ada di setup() DAN baud rate di Serial Monitor cocok (9600). Juga periksa kabel USB mendukung data." }),
+      debugLedOff: t({ en: "LED doesn't light up", id: "LED tidak menyala" }),
+      debugLedOffDesc: t({ en: "Check polarity: long leg goes toward the pin (positive), short leg to GND. Also check the LED is in the right breadboard row and the resistor is connected.", id: "Cek polaritas: kaki panjang ke arah pin (positif), kaki pendek ke GND. Juga periksa LED di baris breadboard yang benar dan resistor tersambung." }),
+      debugServoJitter: t({ en: "Servo twitches or won't move", id: "Servo bergetar atau tidak bergerak" }),
+      debugServoJitterDesc: t({ en: "Servos need their OWN power. If it jitters, it's probably not getting enough current from the Arduino alone. Use external 5V power for the servo's red wire.", id: "Servo butuh DAYANYA SENDIRI. Kalau bergetar, mungkin tidak mendapat arus cukup dari Arduino saja. Pakai daya 5V eksternal untuk kabel merah servo." }),
     },
     debug: {
       debugChecklist: t({ en: "🐛 Debugging Checklist", id: "🐛 Daftar Periksa Debug" }),
@@ -380,6 +441,109 @@ cargo build              # build without running</code></div>
           <div><strong>${tr.wiring.warningTitle}</strong> ${tr.wiring.warningDesc}</div>
         </div>
 
+        <!-- Arduino Board Overview -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--info);">${tr.wiring.boardTitle}</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:12px;">${tr.wiring.boardDesc}</p>
+          <div class="lab-diagram"><strong>Arduino UNO — Top View</strong>
+<span class="dim">┌──────────────────────────────────────┐</span>
+<span class="dim">│</span>  <strong>DIGITAL</strong> (PWM~)                    <span class="dim">│</span>
+<span class="dim">│</span>  <span class="highlight">~13  ~12  ~11  ~10  ~9   8   7   6</span>   <span class="dim">│</span>
+<span class="dim">│</span>  <span class="highlight"> 5    4    3    2   1   0</span>            <span class="dim">│</span>
+<span class="dim">│</span>                                      <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">┌──────────┐</span>    <span class="dim">┌────────────────┐</span> <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">│</span> <strong>USB</strong>      <span class="dim">│</span>    <span class="dim">│</span>  <strong>ANALOG</strong>        <span class="dim">│</span> <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">│</span> <span class="dim">(power +</span> <span class="dim">│</span>    <span class="dim">│</span>  <span class="highlight">A0  A1  A2</span>     <span class="dim">│</span> <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">│</span> <span class="dim"> program)</span> <span class="dim">│</span>    <span class="dim">│</span>  <span class="highlight">A3  A4  A5</span>     <span class="dim">│</span> <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">└──────────┘</span>    <span class="dim">└────────────────┘</span> <span class="dim">│</span>
+<span class="dim">│</span>       <span class="dim">↓</span>                                     <span class="dim">│</span>
+<span class="dim">│</span>  <strong>POWER:</strong> <span class="highlight">5V</span>  <span class="highlight">3.3V</span>  <span class="highlight">GND</span>  <span class="highlight">GND</span>  <strong>RESET</strong>   <span class="dim">│</span>
+<span class="dim">└──────────────────────────────────────┘</span></div>
+        </div>
+
+        <!-- Arduino Core Functions -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--warning);">${tr.wiring.coreFunctionsTitle}</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:12px;">${tr.wiring.coreFunctionsDesc}</p>
+
+          <div style="display:grid;gap:8px;">
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--info);">
+              <strong style="color:var(--info);font-family:var(--font-mono);font-size:0.875rem;">${tr.wiring.fnSetup}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.fnSetupDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--info);">
+              <strong style="color:var(--info);font-family:var(--font-mono);font-size:0.875rem;">${tr.wiring.fnLoop}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.fnLoopDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--success);">
+              <strong style="color:var(--success);font-family:var(--font-mono);font-size:0.875rem;">${tr.wiring.fnPinMode}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.fnPinModeDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--success);">
+              <strong style="color:var(--success);font-family:var(--font-mono);font-size:0.875rem;">${tr.wiring.fnDigitalWrite}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.fnDigitalWriteDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--warning);">
+              <strong style="color:var(--warning);font-family:var(--font-mono);font-size:0.875rem;">${tr.wiring.fnDigitalRead}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.fnDigitalReadDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--warning);">
+              <strong style="color:var(--warning);font-family:var(--font-mono);font-size:0.875rem;">${tr.wiring.fnAnalogRead}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.fnAnalogReadDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--accent-light);">
+              <strong style="color:var(--accent-light);font-family:var(--font-mono);font-size:0.875rem;">${tr.wiring.fnDelay}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.fnDelayDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--accent-light);">
+              <strong style="color:var(--accent-light);font-family:var(--font-mono);font-size:0.875rem;">${tr.wiring.fnPulseIn}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.fnPulseInDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--f15bb5,#f15bb5);">
+              <strong style="color:var(--f15bb5,#f15bb5);font-family:var(--font-mono);font-size:0.875rem;">${tr.wiring.fnSerialBegin}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.fnSerialBeginDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--f15bb5,#f15bb5);">
+              <strong style="color:var(--f15bb5,#f15bb5);font-family:var(--font-mono);font-size:0.875rem;">${tr.wiring.fnSerialPrint}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.fnSerialPrintDesc}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pin Types & Signals -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--success);">${tr.wiring.pinTypesTitle}</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:12px;">${tr.wiring.pinTypesDesc}</p>
+          <div class="lab-diagram"><strong>INPUT vs OUTPUT</strong>
+
+<span class="highlight">OUTPUT (speak)</span>          <span class="highlight">INPUT (listen)</span>
+┌──────────────┐          ┌──────────────┐
+│ Arduino says  │          │ Arduino hears │
+│ "HEY LED, ON!"│          │ "Is the button│
+│              │          │  pressed?"    │
+│ Pin sends out │          │ Pin reads in  │
+│ 5V or 0V     │          │ HIGH or LOW   │
+└──────────────┘          └──────────────┘
+
+<span class="highlight">HIGH vs LOW</span>
+
+  <strong>HIGH = ON</strong>              <strong>LOW = OFF</strong>
+  ┌─────────┐            ┌─────────┐
+  │ 5 volts │            │ 0 volts │
+  │ 💡 ON   │            │ 💡 OFF  │
+  │ 🔊 BEEP │            │ 🔊 quiet│
+  └─────────┘            └─────────┘
+
+<span class="highlight">Digital vs Analog Pins</span>
+
+  Digital (0-13)         Analog (A0-A5)
+  ┌──────────────┐      ┌──────────────┐
+  │ Only HIGH/LOW│      │ 0 to 1023    │
+  │ on or off    │      │ smooth range │
+  │ LED, button  │      │ light sensor │
+  └──────────────┘      └──────────────┘</div>
+        </div>
+
         <!-- Wire Color Legend -->
         <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;">${tr.wiring.wireLegendTitle}</h3>
@@ -458,6 +622,155 @@ cargo build              # build without running</code></div>
  ${tr.wiring.orangeWire}
  <strong>(${tr.wiring.keepAll})</strong>
             </code></div>
+          </div>
+        </div>
+
+        <!-- Sense → Decide → Act -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--warning);">${tr.wiring.senseDecideActTitle}</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:12px;">${tr.wiring.senseDecideActDesc}</p>
+          <div class="lab-diagram"><span class="highlight">🔄 The Robotics Loop</span>
+
+<span class="dim">┌──────────┐</span>     <span class="dim">┌──────────┐</span>     <span class="dim">┌──────────┐</span>     <span class="dim">┌──────────┐</span>
+<span class="dim">│</span>  <strong>SENS</strong><span class="dim">E</span>     <span class="dim">│</span>────▶<span class="dim">│</span>  <strong>DEC</strong><span class="dim">IDE</span>    <span class="dim">│</span>────▶<span class="dim">│</span>  <strong>AC</strong><span class="dim">T</span>      <span class="dim">│</span>────▶<span class="dim">│</span>  <strong>REPE</strong><span class="dim">AT</span>   <span class="dim">│</span>
+<span class="dim">│</span> <span class="highlight">Read sensor</span> <span class="dim">│</span>     <span class="dim">│</span> <span class="highlight">if/else</span>   <span class="dim">│</span>     <span class="dim">│</span> <span class="highlight">LED, buzzer</span> <span class="dim">│</span>     <span class="dim">│</span> <span class="highlight">loop()</span>    <span class="dim">│</span>
+<span class="dim">│</span> <span class="dim">distance</span>   <span class="dim">│</span>     <span class="dim">│</span> <span class="dim">&lt; 10 cm?</span>  <span class="dim">│</span>     <span class="dim">│</span> <span class="dim">turn on</span>   <span class="dim">│</span>     <span class="dim">│</span> <span class="dim">back to</span>  <span class="dim">│</span>
+<span class="dim">│</span> <span class="dim">button</span>     <span class="dim">│</span>     <span class="dim">│</span> <span class="dim">pressed?</span>   <span class="dim">│</span>     <span class="dim">│</span> <span class="dim">motor</span>     <span class="dim">│</span>     <span class="dim">│</span> <span class="highlight">SENSE</span>    <span class="dim">│</span>
+<span class="dim">└──────────┘</span>     <span class="dim">└──────────┘</span>     <span class="dim">└──────────┘</span>     <span class="dim">└────┬─────┘</span>
+                              <span class="dim">│</span>
+                              <span class="dim">└──────── loop() runs ~10x/sec ────────┘</span></div>
+        </div>
+
+        <!-- Arduino vs Rust -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--accent-light);">${tr.wiring.arduinoVsRustTitle}</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:12px;">${tr.wiring.arduinoVsRustDesc}</p>
+
+          <div style="display:grid;gap:12px;">
+            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;">
+              <strong style="color:var(--text-primary);font-size:0.875rem;">${tr.wiring.avrVar}</strong>
+              <div class="lab-before-after" style="margin-top:8px;">
+                <div class="lab-code-wrong">
+                  <div class="lab-code-label" style="font-size:0.6875rem;">Arduino</div>
+                  <div class="code-block" style="margin:0;"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">C++</span></div>
+                    <div class="code-body"><code><span style="font-size:0.8125rem;">int hp = 100;
+String name = "Sparky";</span></code></div>
+                  </div>
+                </div>
+                <div class="lab-code-fixed">
+                  <div class="lab-code-label" style="font-size:0.6875rem;">Rust</div>
+                  <div class="code-block" style="margin:0;"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                    <div class="code-body"><code><span style="font-size:0.8125rem;">let hp = 100;
+let name = "Sparky";</span></code></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;">
+              <strong style="color:var(--text-primary);font-size:0.875rem;">${tr.wiring.avrIf}</strong>
+              <div class="lab-before-after" style="margin-top:8px;">
+                <div class="lab-code-wrong">
+                  <div class="lab-code-label" style="font-size:0.6875rem;">Arduino</div>
+                  <div class="code-block" style="margin:0;"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">C++</span></div>
+                    <div class="code-body"><code><span style="font-size:0.8125rem;">if (distance < 10) {
+  digitalWrite(13, HIGH);
+} else {
+  digitalWrite(13, LOW);
+}</span></code></div>
+                  </div>
+                </div>
+                <div class="lab-code-fixed">
+                  <div class="lab-code-label" style="font-size:0.6875rem;">Rust</div>
+                  <div class="code-block" style="margin:0;"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                    <div class="code-body"><code><span style="font-size:0.8125rem;">if distance < 10 {
+    led.turn_on();
+} else {
+    led.turn_off();
+}</span></code></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;">
+              <strong style="color:var(--text-primary);font-size:0.875rem;">${tr.wiring.avrLoop}</strong>
+              <div class="lab-before-after" style="margin-top:8px;">
+                <div class="lab-code-wrong">
+                  <div class="lab-code-label" style="font-size:0.6875rem;">Arduino</div>
+                  <div class="code-block" style="margin:0;"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">C++</span></div>
+                    <div class="code-body"><code><span style="font-size:0.8125rem;">void loop() {
+  // repeats forever
+}</span></code></div>
+                  </div>
+                </div>
+                <div class="lab-code-fixed">
+                  <div class="lab-code-label" style="font-size:0.6875rem;">Rust</div>
+                  <div class="code-block" style="margin:0;"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                    <div class="code-body"><code><span style="font-size:0.8125rem;">loop {
+    // repeats forever
+}</span></code></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;">
+              <strong style="color:var(--text-primary);font-size:0.875rem;">${tr.wiring.avrFn}</strong>
+              <div class="lab-before-after" style="margin-top:8px;">
+                <div class="lab-code-wrong">
+                  <div class="lab-code-label" style="font-size:0.6875rem;">Arduino</div>
+                  <div class="code-block" style="margin:0;"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">C++</span></div>
+                    <div class="code-body"><code><span style="font-size:0.8125rem;">void blink(int times) {
+  for (int i = 0; i < times; i++) {
+    digitalWrite(13, HIGH);
+    delay(200);
+    digitalWrite(13, LOW);
+    delay(200);
+  }
+}</span></code></div>
+                  </div>
+                </div>
+                <div class="lab-code-fixed">
+                  <div class="lab-code-label" style="font-size:0.6875rem;">Rust</div>
+                  <div class="code-block" style="margin:0;"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
+                    <div class="code-body"><code><span style="font-size:0.8125rem;">fn blink(times: u32) {
+    for _ in 0..times {
+        led.turn_on();
+        thread::sleep(Duration::from_millis(200));
+        led.turn_off();
+        thread::sleep(Duration::from_millis(200));
+    }
+}</span></code></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arduino Debugging Tips -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--error);">${tr.wiring.arduinoDebugTitle}</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:12px;">${tr.wiring.arduinoDebugDesc}</p>
+
+          <div style="display:grid;gap:8px;">
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--error);">
+              <strong style="color:var(--error);font-size:0.875rem;">❌ ${tr.wiring.debugUpload}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.debugUploadDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--warning);">
+              <strong style="color:var(--warning);font-size:0.875rem;">⚠️ ${tr.wiring.debugNoSerial}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.debugNoSerialDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--warning);">
+              <strong style="color:var(--warning);font-size:0.875rem;">💡 ${tr.wiring.debugLedOff}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.debugLedOffDesc}</p>
+            </div>
+            <div style="padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid var(--info);">
+              <strong style="color:var(--info);font-size:0.875rem;">🔄 ${tr.wiring.debugServoJitter}</strong>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:2px;">${tr.wiring.debugServoJitterDesc}</p>
+            </div>
           </div>
         </div>
 
