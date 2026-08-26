@@ -6,6 +6,22 @@ window.Views = window.Views || {};
 Views.lab = () => {
   const main = document.getElementById("mainContent");
   const t = (x) => I18N.t(x);
+  const lang = I18N.lang();
+  const uiEn = I18N.ui.en;
+  const ui = I18N.ui[lang];
+
+  // Data-driven tabs with tier requirements
+  const labTabs = [
+    { id: "cheatsheet", label_en: "Cheat Sheet", label_id: "Catatan Cepat", minTier: "explorer" },
+    { id: "wiring", label_en: "Wiring Guide", label_id: "Panduan Wiring", minTier: "engineer" },
+    { id: "debug", label_en: "Debug Guide", label_id: "Panduan Debug", minTier: "engineer" },
+    { id: "terms", label_en: "Rust Terms", label_id: "Istilah Rust", minTier: "explorer" },
+    { id: "analogies", label_en: "Analogies", label_id: "Analogi", minTier: "engineer" },
+    { id: "mistakes", label_en: "Common Mistakes", label_id: "Kesalahan Umum", minTier: "engineer" },
+  ];
+
+  const tierOrder = { explorer: 0, engineer: 1, commander: 2 };
+  const currentTier = (typeof License !== "undefined") ? License.tier() : "explorer";
 
   main.innerHTML = `
     <div class="view">
@@ -23,12 +39,14 @@ Views.lab = () => {
 
       <!-- Quick Reference Tabs -->
       <div class="pills">
-        <button class="pill active" onclick="Views.showLabSection('cheatsheet', this)">${t({ en: "Cheat Sheet", id: "Catatan Cepat" })}</button>
-        <button class="pill" onclick="Views.showLabSection('wiring', this)">${t({ en: "Wiring Guide", id: "Panduan Wiring" })}</button>
-        <button class="pill" onclick="Views.showLabSection('debug', this)">${t({ en: "Debug Guide", id: "Panduan Debug" })}</button>
-        <button class="pill" onclick="Views.showLabSection('terms', this)">${t({ en: "Rust Terms", id: "Istilah Rust" })}</button>
-        <button class="pill" onclick="Views.showLabSection('analogies', this)">${t({ en: "Analogies", id: "Analogi" })}</button>
-        <button class="pill" onclick="Views.showLabSection('mistakes', this)">${t({ en: "Common Mistakes", id: "Kesalahan Umum" })}</button>
+        ${labTabs.map(tab => {
+          const locked = tierOrder[currentTier] < tierOrder[tab.minTier];
+          const label = t({ en: tab.label_en, id: tab.label_id });
+          if (locked) {
+            return `<button class="pill pill-locked" onclick="Views.upgradeRequired('lab')" title="${t({ en: uiEn.settings_license_tier, id: ui.settings_license_tier })}">${label} 🔒</button>`;
+          }
+          return `<button class="pill${tab.id === 'cheatsheet' ? ' active' : ''}" onclick="Views.showLabSection('${tab.id}', this)">${label}</button>`;
+        }).join("")}
       </div>
 
       <!-- Lab Content Area -->
