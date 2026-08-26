@@ -63,6 +63,10 @@ const License = {
   },
 
   // --- Accessors ---
+  tier() {
+    return this._tier;
+  },
+
   getTier() {
     return this._tier;
   },
