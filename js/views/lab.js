@@ -1100,6 +1100,66 @@ println!("Count: {}", count);</code></div>
                 analogy: { en: "A button on a remote control. Each button belongs to YOUR remote (&self). When you press 'volume up', it changes YOUR TV, not someone else's.", id: "Tombol di remote. Setiap tombol milik remote-MU (&self). Saat tekan 'volume naik', itu mengubah TV-MU, bukan milik orang lain." },
                 code: 'impl Robot {\n    fn repair(&mut self) {\n        self.hp = 100; // YOUR robot\n    }\n}',
               },
+              {
+                emoji: "🏷️",
+                concept: { en: "String vs &str", id: "String vs &str" },
+                analogy: { en: "Your own name badge vs. reading someone else's name tag. String = you OWN the badge and can change it. &str = you're just READING it — it belongs to someone else.", id: "Lencana namamu sendiri vs membaca name tag orang lain. String = kamu MEMILIKI lencana dan bisa mengubahnya. &str = kamu hanya MEMBACANYA — itu milik orang lain." },
+                code: 'let owned = String::from("Luna");\nlet borrowed: &str = &owned;\n// owned can change, borrowed cannot',
+              },
+              {
+                emoji: "🏠",
+                concept: { en: "Ownership", id: "Ownership" },
+                analogy: { en: "Only one person can hold the TV remote at a time. When you hand it to someone else, YOU no longer have it. That's a 'move' in Rust.", id: "Hanya satu orang yang bisa memegang remote TV pada satu waktu. Saat kamu menyerahkannya ke orang lain, KAMU tidak memilikinya lagi. Itulah 'move' dalam Rust." },
+                code: 'let remote = String::from("remote");\nlet sibling = remote;\n// YOU lost the remote!',
+              },
+              {
+                emoji: "👀",
+                concept: { en: "Reference (&)", id: "Reference (&)" },
+                analogy: { en: "Looking at someone's food without eating it. You can see it, describe it, but you don't own it. When you walk away, the food is still there.", id: "Melihat makanan orang lain tanpa memakannya. Kamu bisa melihat, mendeskripsikan, tapi tidak memilikinya. Saat kamu pergi, makanannya masih di sana." },
+                code: 'let food = String::from("pizza");\nlet look = &food;\nprintln!("I see {}", look);\nprintln!("{}", food); // still there!',
+              },
+              {
+                emoji: "🎁",
+                concept: { en: "Option", id: "Option" },
+                analogy: { en: "A gift box that might be empty. You won't know until you open it. Some(x) = there's a gift inside. None = it's empty. You must check before using the gift.", id: "Kotak hadiah yang mungkin kosong. Kamu tidak tahu sampai membukanya. Some(x) = ada hadiah di dalam. None = kosong. Kamu harus memeriksa sebelum memakai hadiah." },
+                code: 'let gift: Option<i32> = Some(42);\nlet empty: Option<i32> = None;\n\nmatch gift {\n    Some(val) => println!("Got {}!", val),\n    None => println!("Empty box"),\n}',
+              },
+              {
+                emoji: "📝",
+                concept: { en: "Result", id: "Result" },
+                analogy: { en: "A test score. You might pass (Ok) or fail (Err). Either way, you get a result with a reason. You have to handle both outcomes.", id: "Nilai ujian. Kamu mungkin lulus (Ok) atau gagal (Err). Dua-duanya memberikan hasil dengan alasan. Kamu harus menangani kedua hasil." },
+                code: 'fn divide(a: i32, b: i32) -> Result<i32, String> {\n    if b == 0 {\n        Err("Cannot divide by zero!".into())\n    } else {\n        Ok(a / b)\n    }\n}',
+              },
+              {
+                emoji: "📋",
+                concept: { en: "Trait", id: "Trait" },
+                analogy: { en: "A job description. 'Waiter' is a trait: any restaurant worker who serves food and takes orders implements the Waiter trait. Different people, same job contract.", id: "Deskripsi pekerjaan. 'Pelayan' adalah trait: setiap pekerja restoran yang menyajikan makanan dan menerima pesanan mengimplementasikan trait Pelayan. Orang berbeda, kontrak pekerjaan sama." },
+                code: 'trait CanFly {\n    fn fly(&self);\n}\n\nstruct Bird;\nstruct Plane;\n\nimpl CanFly for Bird { ... }\nimpl CanFly for Plane { ... }',
+              },
+              {
+                emoji: "🎰",
+                concept: { en: "match", id: "match" },
+                analogy: { en: "A vending machine with specific buttons. Press 'A1' → get chips. Press 'B3' → get soda. Press anything else → error. Every possible input must have an answer.", id: "Mesin jual otomatis dengan tombol spesifik. Tekan 'A1' → dapat keripik. Tekan 'B3' → dapat soda. Tekan selain itu → error. Setiap input harus punya jawaban." },
+                code: 'match choice {\n    "A1" => "Got chips!",\n    "B3" => "Got soda!",\n    _    => "Invalid choice",\n}',
+              },
+              {
+                emoji: "💡",
+                concept: { en: "enum", id: "enum" },
+                analogy: { en: "A light switch with multiple positions. It can only be ONE position at a time: Off, Low, Medium, or High. Never two at once.", id: "Saklar lampu dengan beberapa posisi. Hanya bisa SATU posisi pada satu waktu: Mati, Rendah, Sedang, atau Tinggi. Tidak pernah dua sekaligus." },
+                code: 'enum Light {\n    Off,\n    Low,\n    Medium,\n    High,\n}',
+              },
+              {
+                emoji: "📖",
+                concept: { en: "Slice", id: "Slice" },
+                analogy: { en: "Reading pages 10–20 of a book without copying them. You're looking at a WINDOW into the original book. The book stays on the shelf — you're just borrowing a view.", id: "Membaca halaman 10–20 buku tanpa menyalinnya. Kamu melihat JENDELA ke buku asli. Buku tetap di rak — kamu hanya meminjam tampilan." },
+                code: 'let sentence = "Hello, world!";\nlet hello = &sentence[0..5];\n// hello = "Hello" — a slice of the original',
+              },
+              {
+                emoji: "💓",
+                concept: { en: "Arduino loop()", id: "Arduino loop()" },
+                analogy: { en: "Your heart beating. It beats once (setup), then loops forever — boom-boom, boom-boom — without you telling it to. The Arduino's loop() is its heartbeat.", id: "Jantungmu berdetak. Detak sekali (setup), lalu loop selamanya — boom-boom, boom-boom — tanpa kamu menyuruhnya. loop() Arduino adalah detak jantungnya." },
+                code: '// Heartbeat pattern:\nvoid setup() {\n    // one-time init\n}\nvoid loop() {\n    // boom-boom forever\n}',
+              },
             ].map(item => `
               <div class="lab-analogy">
                 <div class="lab-analogy-title">${item.emoji} ${t(item.concept)}</div>
