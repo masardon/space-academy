@@ -137,12 +137,22 @@ Views.createPilot = async () => {
   }
   nameInput.style.borderColor = "";
 
+  // Check for case-insensitive duplicate name
+  const pilots = progress.getPilots();
+  const existingByName = Object.values(pilots).find(p => p.name.toLowerCase() === name.toLowerCase());
+  if (existingByName && existingByName.name !== name) {
+    errEl.textContent = t({ en: uiEn.ps_name_taken, id: ui.ps_name_taken }).replace("{name}", existingByName.name);
+    errEl.style.display = "block";
+    nameInput.style.borderColor = "var(--error)";
+    return;
+  }
+  errEl.style.display = "none";
+
   const licenseKey = licenseInput.value.trim();
   let license = { key: null, tier: "explorer", activatedAt: null };
 
   if (licenseKey) {
     // Check if this license key is already used by another pilot
-    const pilots = progress.getPilots();
     const keyUsedBy = Object.values(pilots).find(
       p => p.license?.key && p.license.key.toLowerCase() === licenseKey.toLowerCase() && p.name.toLowerCase() !== name.toLowerCase()
     );
@@ -165,9 +175,8 @@ Views.createPilot = async () => {
     errEl.style.display = "none";
   }
 
-  // Check if pilot already exists
-  const pilots = progress.getPilots();
-  const existingPilot = pilots[name];
+  // Check if pilot already exists (case-insensitive)
+  const existingPilot = Object.values(pilots).find(p => p.name.toLowerCase() === name.toLowerCase());
   if (existingPilot && licenseKey) {
     const currentTier = existingPilot.license?.tier || "explorer";
     const tierOrder = { explorer: 0, engineer: 1, commander: 2 };
