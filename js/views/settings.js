@@ -121,11 +121,11 @@ Views.settings = () => {
     </div>
 
     <!-- Import modal -->
-    <div id="importModal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)Views.importDataPrompt()">
+    <div id="importModal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)Views.closeImportModal()">
       <div class="modal">
         <div class="modal-header">
           <h3>${t({ en: "Import Progress", id: "Impor Kemajuan" })}</h3>
-          <button class="btn-icon" onclick="Views.importDataPrompt()">
+          <button class="btn-icon" onclick="Views.closeImportModal()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
         </div>
@@ -218,11 +218,15 @@ Views.importDataPrompt = () => {
   document.getElementById("importModal").style.display = "flex";
 };
 
+Views.closeImportModal = () => {
+  document.getElementById("importModal").style.display = "none";
+};
+
 Views.importData = () => {
   try {
     const text = document.getElementById("importData").value.trim();
     progress.importData(JSON.parse(text));
-    document.getElementById("importModal").style.display = "none";
+    Views.closeImportModal();
     showToast(I18N.t({ en: I18N.ui.en.set_imported, id: I18N.ui.id.set_imported }), "success");
     Router.navigate("missions");
   } catch (e) {
