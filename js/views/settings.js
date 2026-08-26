@@ -8,18 +8,30 @@ Views.settings = () => {
   const main = document.getElementById("mainContent");
   const t = (x) => I18N.t(x);
 
-  const pilotItems = Object.values(pilots).map(p => `
+  const pilotItems = Object.values(pilots).map(p => {
+    const tier = p.license?.tier || "explorer";
+    const tierLabel = License.tierLabel(tier);
+    const tierColor = License.tierColor(tier);
+    return `
     <div class="settings-item" role="button" tabindex="0" data-pilot="${escapeHtml(p.name)}">
       <div class="settings-item-left">
         <div class="settings-item-icon">${p.avatar}</div>
         <div class="settings-item-text">
           <h4>${escapeHtml(p.name)}</h4>
           <p>${p.rank} · ${p.weeksCompleted.length} ${t({ en: "missions", id: "misi" })}</p>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+            <span class="tier-badge" style="background:${tierColor};font-size:0.6875rem;padding:2px 8px;border-radius:99px;color:white;">${tierLabel}</span>
+          </div>
         </div>
       </div>
-      <svg class="settings-item-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="btn btn-ghost" style="font-size:0.75rem;padding:4px 10px;white-space:nowrap;" onclick="event.stopPropagation();Views.showChangeLicense('${escapeHtml(p.name)}')">
+          ${t({ en: I18N.ui.en.settings_change_license, id: I18N.ui.id.settings_change_license })}
+        </button>
+        <svg class="settings-item-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
     </div>
-  `).join('');
+  `}).join('');
 
   main.innerHTML = `
     <div class="view">
@@ -40,38 +52,6 @@ Views.settings = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="settings-group" style="padding-top:0;">
-        <div class="settings-group-title">${t({ en: I18N.ui.en.settings_license, id: I18N.ui.id.settings_license })}</div>
-        ${(() => {
-          const pilot = progress.getCurrentPilotData();
-          if (!pilot) return `<div class="settings-item"><p style="color:var(--text-muted);">No pilot selected</p></div>`;
-          const tier = pilot.license?.tier || "explorer";
-          const tierLabel = License.tierLabel(tier);
-          const tierColor = License.tierColor(tier);
-          const key = pilot.license?.key;
-          const maskedKey = key ? key.slice(0, 8) + "****" + key.slice(-4) : "—";
-          return `
-            <div class="settings-item" style="flex-direction:column;align-items:flex-start;gap:12px;">
-              <div style="display:flex;align-items:center;gap:12px;width:100%;">
-                <div class="settings-item-left">
-                  <div class="settings-item-text">
-                    <h4>${escapeHtml(pilot.name)}</h4>
-                    <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
-                      <span style="font-size:0.75rem;color:var(--text-muted);">${t({ en: I18N.ui.en.settings_license_tier, id: I18N.ui.id.settings_license_tier })}:</span>
-                      <span class="tier-badge" style="background:${tierColor};font-size:0.75rem;padding:2px 8px;border-radius:99px;color:white;">${tierLabel}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div style="width:100%;display:flex;justify-content:space-between;align-items:center;font-size:0.8125rem;">
-                <span style="color:var(--text-muted);font-family:monospace;">${maskedKey}</span>
-                <button class="btn btn-ghost" style="font-size:0.8125rem;padding:4px 12px;" onclick="Views.showChangeLicense()">${t({ en: I18N.ui.en.settings_change_license, id: I18N.ui.id.settings_change_license })}</button>
-              </div>
-            </div>
-          `;
-        })()}
       </div>
 
       <div class="settings-group" style="padding-top:0;">
@@ -260,9 +240,11 @@ Views.resetAllData = () => {
   }
 };
 
-Views.showChangeLicense = () => {
-  const pilot = progress.getCurrentPilotData();
+Views.showChangeLicense = (pilotName) => {
+  const pilots = progress.getPilots();
+  const pilot = pilots[pilotName];
   if (!pilot) return;
+  Views._changeLicensePilot = pilotName;
   const tier = pilot.license?.tier || "explorer";
   const tierLabel = License.tierLabel(tier);
   const tierColor = License.tierColor(tier);
@@ -280,7 +262,9 @@ Views.closeChangeLicense = () => {
 };
 
 Views.submitChangeLicense = async () => {
-  const pilot = progress.getCurrentPilotData();
+  const pilotName = Views._changeLicensePilot;
+  const pilots = progress.getPilots();
+  const pilot = pilots[pilotName];
   if (!pilot) return;
   const input = document.getElementById("changeLicenseInput");
   const errEl = document.getElementById("changeLicenseError");
@@ -296,8 +280,12 @@ Views.submitChangeLicense = async () => {
     errEl.style.display = "block";
     return;
   }
-  progress.updatePilotLicense({ key, tier: result.tier, activatedAt: Date.now() });
-  License._tier = result.tier;
+  // Save the license to this specific pilot
+  progress.updatePilotLicenseByName(pilotName, { key, tier: result.tier, activatedAt: Date.now() });
+  // If this is the current pilot, update License tier
+  if (progress.getCurrentPilot() === pilotName) {
+    License._tier = result.tier;
+  }
   document.getElementById("changeLicenseModal").style.display = "none";
   showToast(I18N.t({ en: I18N.ui.en.settings_license_updated, id: I18N.ui.id.settings_license_updated }).replace("{tier}", License.tierLabel(result.tier)), "success");
   Views.settings();

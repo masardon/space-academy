@@ -73,6 +73,13 @@ class ProgressTracker {
     this._save();
   }
 
+  updatePilotLicenseByName(name, license) {
+    const pilot = this.data.pilots[name];
+    if (!pilot) return;
+    pilot.license = license;
+    this._save();
+  }
+
   ensurePilot(name, license = null) {
     if (!this.data.pilots[name]) {
       this.data.pilots[name] = {
