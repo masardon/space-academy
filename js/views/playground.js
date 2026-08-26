@@ -20,7 +20,7 @@ Views.playground = (params) => {
     main.innerHTML = `
       <div class="view">
         <div class="section-header">
-          <h2>🧪 ${t({ en: "Code Playground", id: "Playground" })}</h2>
+          <h2>🧪 ${t({ en: "Playground", id: "Playground" })}</h2>
         </div>
         ${Views.upgradeRequired("playground")}
       </div>
@@ -31,7 +31,7 @@ Views.playground = (params) => {
   main.innerHTML = `
     <div class="view">
       <div class="section-header">
-        <h2>${t({ en: "🧪 Code Playground", id: "🧪 Playground" })}</h2>
+        <h2>${t({ en: "🧪 Playground", id: "🧪 Playground" })}</h2>
         <p>${t({ en: "Write, run, and experiment with Rust code — right here in your browser.", id: "Tulis, jalankan, dan bereksperimen dengan kode Rust — langsung di browser." })}</p>
       </div>
 

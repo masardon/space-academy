@@ -38,7 +38,7 @@ Views.about = (params) => {
           <li>${t({ en: "12 complete weeks of Rust curriculum", id: "12 minggu kurikulum Rust lengkap" })}</li>
           <li>${t({ en: "Guided lesson system with 11 sections per week", id: "Sistem pelajaran terpandu 11 bagian per minggu" })}</li>
           <li>${t({ en: "Interactive quizzes with instant feedback", id: "Kuis interaktif dengan umpan balik instan" })}</li>
-          <li>${t({ en: "Code Playground — write and run Rust in browser", id: "Code Playground — tulis dan jalankan Rust di browser" })}</li>
+          <li>${t({ en: "Playground — write and run Rust in browser", id: "Playground — tulis dan jalankan Rust di browser" })}</li>
           <li>${t({ en: "Lab — cheat sheets, wiring diagrams, debug tips, glossary", id: "Lab — catatan cepat, diagram wiring, tips debug, glosarium" })}</li>
           <li>${t({ en: "Per-pilot license tiers (Explorer / Engineer / Commander)", id: "Lisensi per-pilot bertingkat (Explorer / Engineer / Commander)" })}</li>
           <li>${t({ en: "Bilingual: English + Bahasa Indonesia", id: "Bilingual: English + Bahasa Indonesia" })}</li>
@@ -102,7 +102,7 @@ Views.about = (params) => {
       </div>
 
       <div class="card" style="margin-bottom:16px;">
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--success);">${t({ en: "Code Playground", id: "Playground" })}</h3>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--success);">${t({ en: "Playground", id: "Playground" })}</h3>
         <p style="font-size:0.875rem;line-height:1.6;color:var(--text-secondary);margin-bottom:12px;">${t({ en: "Your interactive Rust lab — write, run, and experiment with code:", id: "Laboratorium Rust interaktifmu — tulis, jalankan, dan bereksperimen dengan kode:" })}</p>
         <ul style="display:grid;gap:8px;color:var(--text-secondary);font-size:0.875rem;line-height:1.6;">
           <li>${t({ en: "Commander tier — full access to Playground", id: "Tier Commander — akses penuh ke Playground" })}</li>

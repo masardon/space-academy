@@ -92,7 +92,7 @@ const I18N = {
       lab_search_placeholder: "Search cheat sheets, wiring, debug tips, terms...",
 
       // Playground
-      pg_title: "Code Playground",
+      pg_title: "Playground",
       pg_subtitle: "Write, run, and experiment with Rust code — right here in your browser.",
       pg_editor: "Editor",
       pg_output: "Output",
@@ -134,7 +134,7 @@ const I18N = {
       howto_missions: "Missions & Weeks",
       howto_missions_desc: "Each week is a mission with a story, code walkthrough, challenges, quiz, and reflection:",
       howto_mission_structure: "Story → Learn → Code Walkthrough → Predictions → Challenges → Bug Hunt → Quiz → Reflection → Parent Corner",
-      howto_playground: "Code Playground",
+      howto_playground: "Playground",
       howto_playground_desc: "Your interactive Rust lab — write, run, and experiment with code:",
       howto_playground_editor: "Type or paste Rust code in the editor panel",
       howto_playground_templates: "Click 'Starter Templates' for ready-to-run examples",
