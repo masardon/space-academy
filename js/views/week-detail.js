@@ -515,7 +515,7 @@ function finishQuiz(weekNum, lesson, state) {
       (res.gained > 0 ? ` · ⭐ +${res.gained}` : "");
   }
   if (res.gained > 0) {
-    showToast(`⭐ +${res.gained} ${t(I18N.ui.starsToast)}`, "success");
+    showToast(`⭐ +${res.gained} ${I18N.t({ en: I18N.ui.en.starsToast, id: I18N.ui.id.starsToast })}`, "success");
   }
 }
 
@@ -523,7 +523,7 @@ Views.saveReflection = (weekNum) => {
   const boxes = document.querySelectorAll(`textarea[data-reflect="${weekNum}"]`);
   const answers = Array.from(boxes).map(b => b.value.trim()).filter(Boolean);
   progress.saveReflections(weekNum, answers);
-  showToast(I18N.t(I18N.ui.reflectSaved), "success");
+  showToast(I18N.t({ en: I18N.ui.en.reflectSaved, id: I18N.ui.id.reflectSaved }), "success");
 };
 
 Views.copyCode = (btn) => {
