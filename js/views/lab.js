@@ -43,7 +43,7 @@ Views.lab = () => {
           const locked = tierOrder[currentTier] < tierOrder[tab.minTier];
           const label = t({ en: tab.label_en, id: tab.label_id });
           if (locked) {
-            return `<button class="pill pill-locked" onclick="Views.upgradeRequired('lab')" title="${t({ en: uiEn.settings_license_tier, id: ui.settings_license_tier })}">${label} 🔒</button>`;
+            return `<button class="pill pill-locked" onclick="Views.showLockedToast('${tab.id}')" title="${t({ en: uiEn.settings_license_tier, id: ui.settings_license_tier })}">${label} 🔒</button>`;
           }
           return `<button class="pill${tab.id === 'cheatsheet' ? ' active' : ''}" onclick="Views.showLabSection('${tab.id}', this)">${label}</button>`;
         }).join("")}
@@ -73,6 +73,26 @@ Views.filterLab = (query) => {
     const text = el.textContent.toLowerCase();
     el.style.display = text.includes(q) ? '' : 'none';
   });
+};
+
+Views.showLockedToast = (tabId) => {
+  const lang = I18N.lang();
+  const currentTier = License.tier();
+  const currentLabel = License.tierLabel(currentTier);
+
+  const tabLabels = {
+    wiring: { en: "Wiring Guide", id: "Panduan Wiring" },
+    debug: { en: "Debug Guide", id: "Panduan Debug" },
+    analogies: { en: "Analogies", id: "Analogi" },
+    mistakes: { en: "Common Mistakes", id: "Kesalahan Umum" },
+  };
+  const tabLabel = tabLabels[tabId]?.[lang] || tabId;
+
+  const msg = lang === "id"
+    ? `"${tabLabel}" membutuhkan tier Engineer. Tier Anda: ${currentLabel}.`
+    : `"${tabLabel}" requires Engineer tier. Your tier: ${currentLabel}.`;
+
+  showToast(msg, "warning");
 };
 
 Views.showLabSection = (section, btn) => {

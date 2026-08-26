@@ -71,7 +71,7 @@ Views.missions = () => {
       html += `
         <div class="week-card ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}"
              style="--week-color:${color};--week-bg:${color}22;"
-             ${isLocked ? '' : `role="button" tabindex="0" aria-label="${t({ en: "Open Week", id: "Buka Minggu" })} ${week.week}: ${week.title}" onclick="Router.navigate('week',{id:'${week.week}'})"`}>
+             ${isLocked ? `role="button" tabindex="0" onclick="Views.showLockedWeekToast(${week.week})"` : `role="button" tabindex="0" aria-label="${t({ en: "Open Week", id: "Buka Minggu" })} ${week.week}: ${week.title}" onclick="Router.navigate('week',{id:'${week.week}'})"`}>
           <div class="week-number">${t({ en: "Week", id: "Minggu" })} ${String(week.week).padStart(2, '0')}</div>
           <div style="font-size:1.5rem;margin-bottom:4px;">${week.emoji}</div>
           <div class="week-title">${week.title}</div>
@@ -89,4 +89,28 @@ Views.missions = () => {
 
   html += `</div>`;
   main.innerHTML = html;
+};
+
+Views.showLockedWeekToast = (weekNum) => {
+  const lang = I18N.lang();
+  const pilot = progress.getCurrentPilot();
+  const pilotData = progress.getPilots()[pilot];
+  const checkpoint = Math.max(0, ...(pilotData?.weeksCompleted || []));
+
+  // Check license tier first
+  if (typeof License !== "undefined" && !License.canAccessWeek(weekNum)) {
+    const currentTier = License.tier();
+    const currentLabel = License.tierLabel(currentTier);
+    const msg = lang === "id"
+      ? `Minggu ${weekNum} membutuhkan tier Engineer atau lebih tinggi. Tier Anda: ${currentLabel}.`
+      : `Week ${weekNum} requires Engineer tier or above. Your tier: ${currentLabel}.`;
+    showToast(msg, "warning");
+    return;
+  }
+
+  // Progress lock
+  const msg = lang === "id"
+    ? `Selesaikan misi sebelumnya terlebih dahulu.`
+    : `Complete previous missions first.`;
+  showToast(msg, "warning");
 };
