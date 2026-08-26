@@ -2411,3 +2411,104 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================
+   TIER BADGES & UPGRADE PROMPTS
+   ============================================ */
+
+.pilot-tier-badge {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  color: white;
+  margin-top: 6px;
+}
+
+.pill-locked {
+  opacity: 0.5;
+  cursor: pointer;
+  border-style: dashed;
+}
+
+.pill-locked:hover {
+  opacity: 0.7;
+}
+
+.tier-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  color: white;
+}
+
+.upgrade-prompt {
+  text-align: center;
+  padding: 40px 24px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  border: 1px dashed rgba(127,90,240,0.3);
+  margin: 24px 0;
+}
+
+.upgrade-prompt h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.upgrade-prompt p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.upgrade-prompt .upgrade-features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.upgrade-prompt .upgrade-feature-tag {
+  font-size: 0.8125rem;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(127,90,240,0.1);
+  color: var(--accent);
+  border: 1px solid rgba(127,90,240,0.2);
+}
+
+.upgrade-prompt .upgrade-feature-tag.locked {
+  color: var(--text-muted);
+  border-color: var(--border-color);
+}
+
+.upgrade-prompt .btn-upgrade {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 99px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upgrade-prompt .btn-upgrade:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(127,90,240,0.3);
+}
