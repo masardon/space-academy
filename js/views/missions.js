@@ -64,8 +64,9 @@ Views.missions = () => {
     for (const week of arcWeeks) {
       const pilotData = progress.getPilots()[pilot];
       const isCompleted = pilotData?.weeksCompleted?.includes(week.week);
-      const isAccessible = week.week <= checkpoint + 1;
-      const isLocked = !isCompleted && !isAccessible;
+      const isProgressAccessible = week.week <= checkpoint + 1;
+      const isLicenseAccessible = typeof License === "undefined" || License.canAccessWeek(week.week);
+      const isLocked = !isCompleted && (!isProgressAccessible || !isLicenseAccessible);
       const color = getWeekColor(week.week);
 
       html += `
