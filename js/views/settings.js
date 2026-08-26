@@ -43,6 +43,38 @@ Views.settings = () => {
       </div>
 
       <div class="settings-group" style="padding-top:0;">
+        <div class="settings-group-title">${t({ en: I18N.ui.en.settings_license, id: I18N.ui.id.settings_license })}</div>
+        ${(() => {
+          const pilot = progress.getCurrentPilotData();
+          if (!pilot) return `<div class="settings-item"><p style="color:var(--text-muted);">No pilot selected</p></div>`;
+          const tier = pilot.license?.tier || "explorer";
+          const tierLabel = License.tierLabel(tier);
+          const tierColor = License.tierColor(tier);
+          const key = pilot.license?.key;
+          const maskedKey = key ? key.slice(0, 8) + "****" + key.slice(-4) : "—";
+          return `
+            <div class="settings-item" style="flex-direction:column;align-items:flex-start;gap:12px;">
+              <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                <div class="settings-item-left">
+                  <div class="settings-item-text">
+                    <h4>${escapeHtml(pilot.name)}</h4>
+                    <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+                      <span style="font-size:0.75rem;color:var(--text-muted);">${t({ en: I18N.ui.en.settings_license_tier, id: I18N.ui.id.settings_license_tier })}:</span>
+                      <span class="tier-badge" style="background:${tierColor};font-size:0.75rem;padding:2px 8px;border-radius:99px;color:white;">${tierLabel}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="width:100%;display:flex;justify-content:space-between;align-items:center;font-size:0.8125rem;">
+                <span style="color:var(--text-muted);font-family:monospace;">${maskedKey}</span>
+                <button class="btn btn-ghost" style="font-size:0.8125rem;padding:4px 12px;" onclick="Views.showChangeLicense()">${t({ en: I18N.ui.en.settings_change_license, id: I18N.ui.id.settings_change_license })}</button>
+              </div>
+            </div>
+          `;
+        })()}
+      </div>
+
+      <div class="settings-group" style="padding-top:0;">
         <div class="settings-group-title">${t({ en: "Data", id: "Data" })}</div>
         <div class="settings-item" onclick="Views.exportData()">
           <div class="settings-item-left">
@@ -125,6 +157,31 @@ Views.settings = () => {
         </div>
       </div>
     </div>
+
+    <!-- Change License modal -->
+    <div id="changeLicenseModal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)Views.closeChangeLicense()">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>${t({ en: I18N.ui.en.settings_change_license, id: I18N.ui.id.settings_change_license })}</h3>
+          <button class="btn-icon" onclick="Views.closeChangeLicense()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="changeLicenseCurrent" style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:16px;"></p>
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;">${t({ en: I18N.ui.en.settings_license_enter_key, id: I18N.ui.id.settings_license_enter_key })}</label>
+            <input type="text" id="changeLicenseInput" placeholder="SA-XX-XXXX-XXXX" maxlength="60"
+              style="width:100%;padding:12px 16px;border-radius:12px;border:1px solid rgba(127,90,240,0.2);background:var(--bg-elevated);color:var(--text-primary);font-size:0.875rem;font-family:monospace;outline:none;"
+              onkeydown="if(event.key==='Enter')Views.submitChangeLicense()">
+            <p id="changeLicenseError" style="font-size:0.75rem;color:var(--error);margin-top:6px;display:none;"></p>
+          </div>
+          <button class="btn btn-primary btn-full" onclick="Views.submitChangeLicense()">
+            ${t({ en: I18N.ui.en.settings_license_update_btn, id: I18N.ui.id.settings_license_update_btn })}
+          </button>
+        </div>
+      </div>
+    </div>
   `;
 
   main.querySelectorAll(".settings-item[data-pilot]").forEach(item => {
@@ -132,8 +189,9 @@ Views.settings = () => {
   });
 };
 
-Views.switchPilot = (name) => {
+Views.switchPilot = async (name) => {
   progress.setCurrentPilot(name);
+  await License.init();
   Router.navigate("missions");
 };
 
@@ -200,4 +258,47 @@ Views.resetAllData = () => {
       Router.navigate("welcome");
     }
   }
+};
+
+Views.showChangeLicense = () => {
+  const pilot = progress.getCurrentPilotData();
+  if (!pilot) return;
+  const tier = pilot.license?.tier || "explorer";
+  const tierLabel = License.tierLabel(tier);
+  const tierColor = License.tierColor(tier);
+  const lang = I18N.lang();
+  document.getElementById("changeLicenseCurrent").innerHTML =
+    `${lang === "id" ? "Tier saat ini:" : "Current tier:"} <span class="tier-badge" style="background:${tierColor};font-size:0.75rem;padding:2px 8px;border-radius:99px;color:white;">${tierLabel}</span>`;
+  document.getElementById("changeLicenseInput").value = "";
+  document.getElementById("changeLicenseError").style.display = "none";
+  document.getElementById("changeLicenseModal").style.display = "flex";
+  setTimeout(() => document.getElementById("changeLicenseInput").focus(), 100);
+};
+
+Views.closeChangeLicense = () => {
+  document.getElementById("changeLicenseModal").style.display = "none";
+};
+
+Views.submitChangeLicense = async () => {
+  const pilot = progress.getCurrentPilotData();
+  if (!pilot) return;
+  const input = document.getElementById("changeLicenseInput");
+  const errEl = document.getElementById("changeLicenseError");
+  const key = input.value.trim();
+  if (!key) {
+    input.style.borderColor = "var(--error)";
+    return;
+  }
+  input.style.borderColor = "";
+  const result = await License.validate(key, pilot.name);
+  if (!result.valid) {
+    errEl.textContent = I18N.t({ en: I18N.ui.en.settings_license_invalid, id: I18N.ui.id.settings_license_invalid });
+    errEl.style.display = "block";
+    return;
+  }
+  progress.updatePilotLicense({ key, tier: result.tier, activatedAt: Date.now() });
+  License._tier = result.tier;
+  document.getElementById("changeLicenseModal").style.display = "none";
+  showToast(I18N.t({ en: I18N.ui.en.settings_license_updated, id: I18N.ui.id.settings_license_updated }).replace("{tier}", License.tierLabel(result.tier)), "success");
+  Views.settings();
 };
