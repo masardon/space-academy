@@ -36,23 +36,23 @@ Views.weekDetail = (params) => {
     <div class="week-hero" style="--week-glow:${color}33;" id="sec-story">
       <div class="week-arc-badge">
         <span>${arc?.emoji || "🚀"}</span>
-        <span>${arc?.name || "Mission"}</span>
+        <span>${arc?.name || I18N.t({ en: I18N.ui.en.wd_arc_label, id: I18N.ui.id.wd_arc_label })}</span>
       </div>
       <div style="font-size:3rem;margin-bottom:8px;">${week.emoji}</div>
       <h1 class="week-hero-title" style="--week-color:${color};">
-        Week ${String(week.week).padStart(2, '0')}: ${week.title}
+        ${I18N.t({ en: I18N.ui.en.week_label, id: I18N.ui.id.week_label }).replace('{num}', String(week.week).padStart(2, '0'))}: ${week.title}
       </h1>
       <p class="week-hero-desc">${week.mission}</p>
       <div style="display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;">
         <span class="tag tag-concept">${week.badge}</span>
         <span class="tag tag-thinking">${week.thinking}</span>
         <span class="tag tag-output">⏱ ${week.time}</span>
-        ${isCompleted ? '<span class="tag" style="background:var(--success-bg);color:var(--success);border-color:rgba(44,182,125,0.3);">✓ Completed</span>' : ''}
+        ${isCompleted ? `<span class="tag" style="background:var(--success-bg);color:var(--success);border-color:rgba(44,182,125,0.3);">${I18N.t({ en: I18N.ui.en.wd_completed, id: I18N.ui.id.wd_completed })}</span>` : ''}
       </div>
     </div>
 
     <div class="mission-brief" style="--week-color:${color};--week-glow:${color}22;">
-      <div class="mission-brief-title">📋 Mission Briefing</div>
+      <div class="mission-brief-title">${I18N.t({ en: I18N.ui.en.wd_mission_briefing, id: I18N.ui.id.wd_mission_briefing })}</div>
       <div class="mission-brief-text">${week.hero}</div>
     </div>
   `;
@@ -140,7 +140,7 @@ Views.weekDetail = (params) => {
     // Legacy objectives while lesson content is being authored
     html += `
       <div style="padding:0 var(--space-6);">
-        <h3 style="font-size:1rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Learning Objectives</h3>
+        <h3 style="font-size:1rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">${I18N.t({ en: I18N.ui.en.wd_learning_objectives, id: I18N.ui.id.wd_learning_objectives })}</h3>
       </div>
       <div class="objectives-list" style="border-top:1px solid rgba(127,90,240,0.08);">
         ${week.objectives.map(o => `
@@ -238,7 +238,7 @@ Views.weekDetail = (params) => {
       <div style="padding:0 var(--space-6) var(--space-6);">
         <div class="info-box tip" style="border-color:${color}44;background:${color}11;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <div><strong>Next Mission:</strong> ${week.nextTease}</div>
+          <div><strong>${I18N.t({ en: I18N.ui.en.wd_next_mission, id: I18N.ui.id.wd_next_mission })}</strong> ${week.nextTease}</div>
         </div>
       </div>
     `;
@@ -250,11 +250,11 @@ Views.weekDetail = (params) => {
       <button class="btn btn-primary btn-large ${isCompleted ? '' : 'btn-complete'}"
               onclick="Views.completeWeek(${weekNum})"
               ${isCompleted ? 'disabled style="opacity:0.5;"' : ''}>
-        ${isCompleted ? '✓ Mission Complete' : '🏁 Complete Mission'}
+        ${isCompleted ? I18N.t({ en: I18N.ui.en.wd_mission_complete, id: I18N.ui.id.wd_mission_complete }) : I18N.t({ en: I18N.ui.en.wd_complete_mission, id: I18N.ui.id.wd_complete_mission })}
       </button>
       <div style="margin-top:16px;">
-        ${weekNum > 1 ? `<button class="btn btn-ghost" onclick="Router.navigate('week',{id:'${weekNum - 1}'})" style="font-size:0.875rem;">← Previous Week</button>` : ''}
-        ${weekNum < 12 ? `<button class="btn btn-ghost" onclick="Router.navigate('week',{id:'${weekNum + 1}'})" style="font-size:0.875rem;">Next Week →</button>` : ''}
+        ${weekNum > 1 ? `<button class="btn btn-ghost" onclick="Router.navigate('week',{id:'${weekNum - 1}'})" style="font-size:0.875rem;">${I18N.t({ en: I18N.ui.en.wd_prev_week, id: I18N.ui.id.wd_prev_week })}</button>` : ''}
+        ${weekNum < 12 ? `<button class="btn btn-ghost" onclick="Router.navigate('week',{id:'${weekNum + 1}'})" style="font-size:0.875rem;">${I18N.t({ en: I18N.ui.en.wd_next_week, id: I18N.ui.id.wd_next_week })}</button>` : ''}
       </div>
     </div>
     <div style="height:24px;"></div>
@@ -313,7 +313,7 @@ function codeBlockHtml(week) {
         <span class="code-lang">Rust</span>
         <button class="code-copy" onclick="Views.copyCode(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          Copy
+          ${I18N.t({ en: I18N.ui.en.wd_copy, id: I18N.ui.id.wd_copy })}
         </button>
       </div>
       <div class="code-body">
@@ -351,11 +351,11 @@ function challengesSection(week, weekNum, lesson) {
   return `
     <div class="lesson-section" id="sec-challenges" style="padding-top:var(--space-6);">
       <div class="lesson-title">🎯 ${t(I18N.ui.sec_challenges)}</div>
-      ${lesson ? "" : `<p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:16px;">Complete these to earn your mission star. Check each off as you go!</p>`}
+      ${lesson ? "" : `<p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:16px;">${I18N.t({ en: I18N.ui.en.wd_challenges_intro, id: I18N.ui.id.wd_challenges_intro })}</p>`}
       <ul class="checklist">${items}</ul>
       <div class="info-box hint" style="margin-top:12px;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        <div><strong>Pro Tip:</strong> ${week.hint}</div>
+        <div><strong>${I18N.t({ en: I18N.ui.en.wd_pro_tip, id: I18N.ui.id.wd_pro_tip })}</strong> ${week.hint}</div>
       </div>
     </div>
   `;
@@ -386,7 +386,7 @@ Views.toggleChallenge = (weekNum, index, checkbox) => {
   const allDone = week.challenges.every((_, i) => progress.getChecklist(weekNum)[i]);
   if (allDone && !progress.getProgress().weeksCompleted.includes(weekNum)) {
     setTimeout(() => {
-      showToast(`🎉 All challenges complete! Mission ${weekNum} unlocked!`, "success");
+      showToast(`${I18N.t({ en: I18N.ui.en.wd_all_challenges_toast, id: I18N.ui.id.wd_all_challenges_toast }).replace('{num}', weekNum)}`, "success");
     }, 300);
   }
 };
@@ -447,7 +447,7 @@ Views.celebrate = (type) => {
 
 Views.completeWeek = (weekNum) => {
   progress.completeWeek(weekNum);
-  showToast(`🏆 Mission ${weekNum} completed! +10 stars!`, "success");
+  showToast(`${I18N.t({ en: I18N.ui.en.wd_mission_complete_toast, id: I18N.ui.id.wd_mission_complete_toast }).replace('{num}', weekNum)}`, "success");
   // Refresh the view
   Views.weekDetail({ id: String(weekNum) });
 };
@@ -505,10 +505,10 @@ Views.copyCode = (btn) => {
   const text = codeBlock.textContent;
   navigator.clipboard.writeText(text).then(() => {
     btn.classList.add('copied');
-    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> ${I18N.t({ en: I18N.ui.en.wd_copied, id: I18N.ui.id.wd_copied })}`;
     setTimeout(() => {
       btn.classList.remove('copied');
-      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> ${I18N.t({ en: I18N.ui.en.wd_copy, id: I18N.ui.id.wd_copy })}`;
     }, 2000);
   });
 };

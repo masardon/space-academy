@@ -915,7 +915,7 @@ println!("{}", greeting);</code></div>
           <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:16px;">${tr.debug.spotBugDesc}</p>
 
           <div style="margin-bottom:16px;">
-            <p style="font-size:0.875rem;color:var(--text-primary);font-weight:600;margin-bottom:8px;">Bug #1:</p>
+            <p style="font-size:0.875rem;color:var(--text-primary);font-weight:600;margin-bottom:8px;">${t({ en: I18N.ui.en.lab_bug_n, id: I18N.ui.id.lab_bug_n }).replace('{n}', 1)}</p>
             <div class="code-block" style="margin:0;">
               <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
               <div class="code-body"><code>let x = 5
@@ -929,7 +929,7 @@ println!("{}", x + y);</code></div>
           </div>
 
           <div style="margin-bottom:16px;">
-            <p style="font-size:0.875rem;color:var(--text-primary);font-weight:600;margin-bottom:8px;">Bug #2:</p>
+            <p style="font-size:0.875rem;color:var(--text-primary);font-weight:600;margin-bottom:8px;">${t({ en: I18N.ui.en.lab_bug_n, id: I18N.ui.id.lab_bug_n }).replace('{n}', 2)}</p>
             <div class="code-block" style="margin:0;">
               <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
               <div class="code-body"><code>let count: i32 = "three";
@@ -942,7 +942,7 @@ println!("Count: {}", count);</code></div>
           </div>
 
           <div>
-            <p style="font-size:0.875rem;color:var(--text-primary);font-weight:600;margin-bottom:8px;">Bug #3:</p>
+            <p style="font-size:0.875rem;color:var(--text-primary);font-weight:600;margin-bottom:8px;">${t({ en: I18N.ui.en.lab_bug_n, id: I18N.ui.id.lab_bug_n }).replace('{n}', 3)}</p>
             <div class="code-block" style="margin:0;">
               <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Rust</span></div>
               <div class="code-body"><code>fn main() {

@@ -103,23 +103,25 @@ const Router = {
       progressBar.hidden = false;
       document.getElementById("progressFill").style.width = `${stats.percent}%`;
       document.getElementById("progressLabel").textContent =
-        `Week ${stats.checkpoint}/12 · ${stats.completed} missions done`;
+        I18N.t(I18N.ui[I18N.lang()].progress_label || I18N.ui.en.progress_label)
+          .replace("{checkpoint}", stats.checkpoint)
+          .replace("{completed}", stats.completed);
     } else {
       progressBar.hidden = true;
     }
 
     // Update header title
     const titles = {
-      "welcome": "Space Academy",
-      "pilot-select": "Choose Your Pilot",
-      "missions": "Missions",
-      "week": `Week ${this.params.id || ""}`,
-      "lab": "Lab",
-      "playground": "Playground",
-      "profile": "Pilot Profile",
-      "settings": "Settings",
-      "about": "About",
+      "welcome": I18N.ui[I18N.lang()].hdr_welcome,
+      "pilot-select": I18N.ui[I18N.lang()].hdr_pilot_select,
+      "missions": I18N.ui[I18N.lang()].hdr_missions,
+      "week": I18N.ui[I18N.lang()].hdr_week.replace("{num}", this.params.id || ""),
+      "lab": I18N.ui[I18N.lang()].hdr_lab,
+      "playground": I18N.ui[I18N.lang()].hdr_playground,
+      "profile": I18N.ui[I18N.lang()].hdr_profile,
+      "settings": I18N.ui[I18N.lang()].hdr_settings,
+      "about": I18N.ui[I18N.lang()].hdr_about,
     };
-    document.getElementById("headerTitle").textContent = titles[this.currentView] || "Space Academy";
+    document.getElementById("headerTitle").textContent = titles[this.currentView] || I18N.ui[I18N.lang()].hdr_welcome;
   },
 };

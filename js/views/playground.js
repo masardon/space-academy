@@ -456,7 +456,7 @@ Views.loadWeekStarter = (week) => {
     const editor = document.getElementById('codeEditor');
     if (editor) {
       editor.value = code;
-      Views.updateRunStatus(`Loaded Week ${week} starter`);
+      Views.updateRunStatus(I18N.t({ en: I18N.ui.en.pg_loaded_week, id: I18N.ui.id.pg_loaded_week }).replace('{num}', week));
     }
   }
 };
@@ -467,7 +467,7 @@ Views.loadTemplate = (id) => {
     const editor = document.getElementById('codeEditor');
     if (editor) {
       editor.value = code;
-      Views.updateRunStatus(`Loaded template: ${id}`);
+      Views.updateRunStatus(I18N.t({ en: I18N.ui.en.pg_loaded_template, id: I18N.ui.id.pg_loaded_template }).replace('{id}', id));
     }
   }
 };
@@ -480,7 +480,7 @@ Views.updateRunStatus = (msg) => {
 Views.clearEditor = () => {
   const editor = document.getElementById('codeEditor');
   if (editor) editor.value = '';
-  Views.updateRunStatus('Editor cleared');
+  Views.updateRunStatus(I18N.t({ en: I18N.ui.en.pg_editor_cleared, id: I18N.ui.id.pg_editor_cleared }));
 };
 
 Views.clearOutput = () => {

@@ -163,7 +163,7 @@ Views.setLanguage = (lang) => {
 Views.exportData = () => {
   const data = localStorage.getItem("space_academy_progress");
   if (!data) {
-    showToast("No progress data to export", "error");
+    showToast(I18N.t({ en: I18N.ui.en.set_no_data, id: I18N.ui.id.set_no_data }), "error");
     return;
   }
   const blob = new Blob([data], { type: "application/json" });
@@ -173,7 +173,7 @@ Views.exportData = () => {
   a.download = `space-academy-progress-${new Date().toISOString().slice(0,10)}.json`;
   a.click();
   URL.revokeObjectURL(url);
-  showToast("Progress exported!", "success");
+  showToast(I18N.t({ en: I18N.ui.en.set_exported, id: I18N.ui.id.set_exported }), "success");
 };
 
 Views.importDataPrompt = () => {
@@ -185,18 +185,18 @@ Views.importData = () => {
     const text = document.getElementById("importData").value.trim();
     progress.importData(JSON.parse(text));
     document.getElementById("importModal").style.display = "none";
-    showToast("Progress imported successfully!", "success");
+    showToast(I18N.t({ en: I18N.ui.en.set_imported, id: I18N.ui.id.set_imported }), "success");
     Router.navigate("missions");
   } catch (e) {
-    showToast("Invalid progress data", "error");
+    showToast(I18N.t({ en: I18N.ui.en.set_invalid, id: I18N.ui.id.set_invalid }), "error");
   }
 };
 
 Views.resetAllData = () => {
-  if (confirm("Are you sure? This will delete ALL pilot progress. This cannot be undone.")) {
-    if (confirm("Really? All missions, stars, and pilots will be erased.")) {
+  if (confirm(I18N.t({ en: I18N.ui.en.set_confirm_reset, id: I18N.ui.id.set_confirm_reset }))) {
+    if (confirm(I18N.t({ en: I18N.ui.en.set_confirm_really, id: I18N.ui.id.set_confirm_really }))) {
       progress.resetAll();
-      showToast("All data reset", "success");
+      showToast(I18N.t({ en: I18N.ui.en.set_reset_done, id: I18N.ui.id.set_reset_done }), "success");
       Router.navigate("welcome");
     }
   }

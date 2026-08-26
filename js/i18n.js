@@ -34,6 +34,15 @@ const I18N = {
       btn_settings: "Settings",
       progress_label: "Week {checkpoint}/12 · {completed} missions done",
       week_label: "Week {num}",
+      hdr_welcome: "Space Academy",
+      hdr_pilot_select: "Choose Your Pilot",
+      hdr_missions: "Missions",
+      hdr_week: "Week {num}",
+      hdr_lab: "Lab",
+      hdr_playground: "Playground",
+      hdr_profile: "Pilot Profile",
+      hdr_settings: "Settings",
+      hdr_about: "About",
 
       // Lesson sections
       sec_story: "Story",
@@ -185,12 +194,72 @@ const I18N = {
       toast_output_copied: "Output copied!",
       toast_editor_cleared: "Editor cleared",
       toast_output_cleared: "Output cleared",
+
+      // Pilot select
+      ps_choose_pilot: "Choose Your Pilot",
+      ps_select_cadet: "Select a cadet to continue their journey",
+      ps_new_cadet: "New Cadet",
+      ps_join_academy: "Join the Academy",
+      ps_cadet_name: "Cadet Name",
+      ps_enter_name: "Enter name...",
+      ps_join_btn: "🚀 Join Space Academy",
+      ps_welcome_toast: "Welcome to the Academy, Cadet {name}!",
+      ps_missions_suffix: "missions",
+
+      // Profile
+      prof_missions: "Missions",
+      prof_stars: "Stars",
+      prof_complete: "Complete",
+      prof_progress: "Progress",
+      prof_progress_of: "{n} of 12 missions",
+      prof_mission_map: "Mission Map",
+      prof_quiz_stars: "Quiz Stars",
+      prof_empty_quiz: "Complete quizzes in lessons to earn stars.",
+      prof_flight_log: "Flight Log",
+      prof_empty_reflections: "Your reflections will appear here after each lesson.",
+      prof_completed_missions: "Completed Missions",
+      prof_no_missions: "No missions completed yet. Start your first mission!",
+      prof_reflection_n: "Reflection {n}",
+
+      // Week detail
+      wd_completed: "✓ Completed",
+      wd_mission_briefing: "📋 Mission Briefing",
+      wd_learning_objectives: "Learning Objectives",
+      wd_next_mission: "Next Mission:",
+      wd_mission_complete: "✓ Mission Complete",
+      wd_complete_mission: "🏁 Complete Mission",
+      wd_prev_week: "← Previous Week",
+      wd_next_week: "Next Week →",
+      wd_copy: "Copy",
+      wd_copied: "Copied!",
+      wd_challenges_intro: "Complete these to earn your mission star. Check each off as you go!",
+      wd_pro_tip: "Pro Tip:",
+      wd_all_challenges_toast: "🎉 All challenges complete! Mission {num} unlocked!",
+      wd_mission_complete_toast: "🏆 Mission {num} completed! +10 stars!",
+      wd_arc_label: "Mission",
+
+      // Settings
+      set_no_data: "No progress data to export",
+      set_exported: "Progress exported!",
+      set_imported: "Progress imported successfully!",
+      set_invalid: "Invalid progress data",
+      set_confirm_reset: "Are you sure? This will delete ALL pilot progress. This cannot be undone.",
+      set_confirm_really: "Really? All missions, stars, and pilots will be erased.",
+      set_reset_done: "All data reset",
+
+      // Playground
+      pg_loaded_week: "Loaded Week {num} starter",
+      pg_loaded_template: "Loaded template: {id}",
+      pg_editor_cleared: "Editor cleared",
+
+      // Lab bug labels
+      lab_bug_n: "Bug #{n}:",
     },
     id: {
       // Navigation
       nav_missions: "Misi",
       nav_lab: "Lab",
-      nav_playground: "Taman Kode",
+      nav_playground: "Playground",
       nav_profile: "Pilot",
       nav_settings: "Pengaturan",
       nav_about: "Tentang",
@@ -202,6 +271,15 @@ const I18N = {
       btn_settings: "Pengaturan",
       progress_label: "Minggu {checkpoint}/12 · {completed} misi selesai",
       week_label: "Minggu {num}",
+      hdr_welcome: "Space Academy",
+      hdr_pilot_select: "Pilih Pilot",
+      hdr_missions: "Misi",
+      hdr_week: "Minggu {num}",
+      hdr_lab: "Lab",
+      hdr_playground: "Playground",
+      hdr_profile: "Profil Pilot",
+      hdr_settings: "Pengaturan",
+      hdr_about: "Tentang",
 
       // Lesson sections
       sec_story: "Cerita",
@@ -251,7 +329,7 @@ const I18N = {
       lab_search_placeholder: "Cari catatan cepat, wiring, debug, istilah...",
 
       // Playground
-      pg_title: "Taman Kode",
+      pg_title: "Playground",
       pg_subtitle: "Tulis, jalankan, dan bereksperimen dengan kode Rust — langsung di browser.",
       pg_editor: "Editor",
       pg_output: "Keluaran",
@@ -293,7 +371,7 @@ const I18N = {
       howto_missions: "Misi & Minggu",
       howto_missions_desc: "Setiap minggu adalah misi dengan cerita, walkthrough kode, tantangan, kuis, dan refleksi:",
       howto_mission_structure: "Cerita → Belajar → Walkthrough Kode → Prediksi → Tantangan → Berburu Bug → Kuis → Refleksi → Sudut Orang Tua",
-      howto_playground: "Taman Kode",
+      howto_playground: "Playground",
       howto_playground_desc: "Laboratorium Rust interaktifmu — tulis, jalankan, dan bereksperimen dengan kode:",
       howto_playground_editor: "Ketik atau tempel kode Rust di panel editor",
       howto_playground_templates: "Klik 'Template Starter' untuk contoh siap jalan",
@@ -353,6 +431,66 @@ const I18N = {
       toast_output_copied: "Keluaran disalin!",
       toast_editor_cleared: "Editor dibersihkan",
       toast_output_cleared: "Keluaran dibersihkan",
+
+      // Pilot select
+      ps_choose_pilot: "Pilih Pilot Anda",
+      ps_select_cadet: "Pilih seorang kadet untuk melanjutkan perjalannya",
+      ps_new_cadet: "Kadet Baru",
+      ps_join_academy: "Gabung Akademi",
+      ps_cadet_name: "Nama Kadet",
+      ps_enter_name: "Masukkan nama...",
+      ps_join_btn: "🚀 Gabung Space Academy",
+      ps_welcome_toast: "Selamat datang di Akademi, Kadet {name}!",
+      ps_missions_suffix: "misi",
+
+      // Profile
+      prof_missions: "Misi",
+      prof_stars: "Bintang",
+      prof_complete: "Selesai",
+      prof_progress: "Kemajuan",
+      prof_progress_of: "{n} dari 12 misi",
+      prof_mission_map: "Peta Misi",
+      prof_quiz_stars: "Bintang Kuis",
+      prof_empty_quiz: "Selesaikan kuis di pelajaran untuk dapat bintang.",
+      prof_flight_log: "Log Penerbangan",
+      prof_empty_reflections: "Refleksimu akan muncul di sini setelah setiap pelajaran.",
+      prof_completed_missions: "Misi yang Selesai",
+      prof_no_missions: "Belum ada misi selesai. Mulai misi pertamamu!",
+      prof_reflection_n: "Refleksi {n}",
+
+      // Week detail
+      wd_completed: "✓ Selesai",
+      wd_mission_briefing: "📋 Pengarahan Misi",
+      wd_learning_objectives: "Tujuan Belajar",
+      wd_next_mission: "Misi Selanjutnya:",
+      wd_mission_complete: "✓ Misi Selesai",
+      wd_complete_mission: "🏁 Selesaikan Misi",
+      wd_prev_week: "← Minggu Sebelumnya",
+      wd_next_week: "Minggu Berikutnya →",
+      wd_copy: "Salin",
+      wd_copied: "Tersalin!",
+      wd_challenges_intro: "Selesaikan ini untuk mendapatkan bintang misimu. Centang satu per satu!",
+      wd_pro_tip: "Tips Pro:",
+      wd_all_challenges_toast: "🎉 Semua tantangan selesai! Misi {num} terbuka!",
+      wd_mission_complete_toast: "🏆 Misi {num} selesai! +10 bintang!",
+      wd_arc_label: "Misi",
+
+      // Settings
+      set_no_data: "Tidak ada data kemajuan untuk diekspor",
+      set_exported: "Kemajuan diekspor!",
+      set_imported: "Kemajuan berhasil diimpor!",
+      set_invalid: "Data kemajuan tidak valid",
+      set_confirm_reset: "Yakin? Ini akan menghapus SEMUA kemajuan pilot. Tidak dapat dibatalkan.",
+      set_confirm_really: "Benar-benar? Semua misi, bintang, dan pilot akan dihapus.",
+      set_reset_done: "Semua data direset",
+
+      // Playground
+      pg_loaded_week: "Memuat starter Minggu {num}",
+      pg_loaded_template: "Memuat template: {id}",
+      pg_editor_cleared: "Editor dibersihkan",
+
+      // Lab bug labels
+      lab_bug_n: "Bug #{n}:",
     },
   },
 };
